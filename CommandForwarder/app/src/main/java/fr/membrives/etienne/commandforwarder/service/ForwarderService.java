@@ -1,77 +1,96 @@
 package fr.membrives.etienne.commandforwarder.service;
 
-import android.util.Pair;
-
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.ListenableFutureTask;
 import com.google.common.util.concurrent.MoreExecutors;
-
-import org.zeromq.ZMQ;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import fr.membrives.etienne.remote.RemoteProtos;
+import nanomsg.Message;
+import nanomsg.exceptions.IOException;
+import nanomsg.pair.PairSocket;
 
 /**
  * Main forwarding service.
  */
-public class ForwarderService {
-    private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(3));
+public class ForwarderService implements Runnable {
+    public static final AsyncFunction<RemoteProtos.Response, Boolean> RESPONSE_TO_FRONTEND_CONNECTED = new AsyncFunction<RemoteProtos.Response, Boolean>() {
+        @Override
+        public ListenableFuture<Boolean> apply(RemoteProtos.Response input) throws Exception {
+            return Futures.immediateCheckedFuture(input.getStatus().equals(RemoteProtos.Response.FrontendStatus.CONNECTED));
+        }
+    };
+    private boolean isStopped = true;
 
-    private ZMQ.Context mContext;
-    private ZMQ.Socket mSendingSocket;
-    private ZMQ.Socket mControlSocket;
+    private boolean isConnected = false;
 
-    public int ForwarderService() {
-        mContext = ZMQ.context(1);
-        mControlSocket = mContext.socket(ZMQ.REQ);
-        mControlSocket.bind("tcp://etienne.membrives.fr:6003");
+    private LinkedBlockingQueue<RemoteProtos.Response> responses;
+    private ExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(3));
 
-        mSendingSocket = mContext.socket(ZMQ.PUB);
-        mSendingSocket.bind("tcp://etienne.membrives.fr:6002");
+    private PairSocket socket;
+
+    public void stop() {
+        isStopped = true;
+        executor.shutdownNow();
     }
 
-    public void sendCommand(String command) {
-        executor.execute(getCommandSender(command));
+    public void start() {
+        if (!isConnected) {
+            executor.execute(this);
+        }
     }
 
-    /**
-     * @return the current status of (server, frontend)
-     */
-    public ListenableFuture<Pair<Boolean, Boolean>> getStatus() {
-        if (mControlSocket.)
-        ListenableFuture<RemoteProtos.Response> future = executor.submit(getStatusCallable());
-        Futures.transform(future, new AsyncFunction<RemoteProtos.Response, Pair<Boolean, Boolean>>() {
-            @Override
-            public ListenableFuture<Pair<Boolean, Boolean>> apply(RemoteProtos.Response input) throws Exception {
-                return Pair.of(true, input.getStatus().equals(RemoteProtos.Response.FrontendStatus.CONNECTED));
-            }
-        }, executor);
-    }
-
-    private Runnable getCommandSender(final String command) {
-        return new Runnable() {
-            @Override
-            public void run() {
-                RemoteProtos.Command commandProto = RemoteProtos.Command.newBuilder()
-                        .setSource("android").setType(RemoteProtos.Command.CommandType.COMMAND)
-                        .setCommand(command).build();
-                mSendingSocket.send(commandProto.toByteArray());
-            }
-        };
-    }
-
-    private Callable<RemoteProtos.Response> getStatusCallable() {
-        return new Callable<RemoteProtos.Response>() {
-            @Override
-            public RemoteProtos.Response call() throws Exception {
-                RemoteProtos.Command commandProto = RemoteProtos.Command.newBuilder()
-                        .setSource("android").setType(RemoteProtos.Command.CommandType.STATUS).build();
-                mControlSocket.send(commandProto.toByteArray());
+    @Override
+    public void run() {
+        try {
+            socket.connect("tcp://polaris.membrives.fr:6001");
+        } catch (IOException e) {
+            return;
+        }
+        isConnected = true;
+        while (!isStopped) {
+            try {
+                Message message = socket.recv();
+                RemoteProtos.Response response = RemoteProtos.Response.parseFrom(message.toBytes());
+                responses.offer(response);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            } catch (InvalidProtocolBufferException e) {
+                e.printStackTrace();
+                return;
             }
         }
+    }
+
+    public void submit(final RemoteProtos.Command message) throws IOException {
+        executor.submit(new Callable<Void>() {
+            @Override
+            public Void call() throws Exception {
+                socket.sendBytes(message.toByteArray());
+                return null;
+            }
+        });
+    }
+
+    public ListenableFuture<Boolean> isFrontendConnected() {
+        ListenableFuture<RemoteProtos.Response> msgFuture = ListenableFutureTask.create(new Callable<RemoteProtos.Response>() {
+            @Override
+            public RemoteProtos.Response call() throws Exception {
+                return responses.take();
+            }
+        });
+        return Futures.transform(msgFuture, RESPONSE_TO_FRONTEND_CONNECTED);
+    }
+
+    public boolean isConnected() {
+        return isConnected;
     }
 }

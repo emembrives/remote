@@ -61,9 +61,16 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 20, L preview Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="jeromq-0.3.4" level="project" />
     <orderEntry type="library" exported="" name="protobuf-java-2.5.0" level="project" />
+    <orderEntry type="library" exported="" name="xz-1.4" level="project" />
     <orderEntry type="library" exported="" name="guava-17.0" level="project" />
+    <orderEntry type="library" exported="" name="nippy-2.5.2" level="project" />
+    <orderEntry type="library" exported="" name="jna-4.0.0" level="project" />
+    <orderEntry type="library" exported="" name="snappy-0.3" level="project" />
+    <orderEntry type="library" exported="" name="core.async-0.1.267.0-0d7780-alpha" level="project" />
+    <orderEntry type="library" exported="" name="jnanomsg-0.3.1" level="project" />
+    <orderEntry type="library" exported="" name="tools.reader-0.7.10" level="project" />
+    <orderEntry type="library" exported="" name="clojure-1.5.1" level="project" />
   </component>
 </module>
 
