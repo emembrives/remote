@@ -11,13 +11,13 @@ public final class RemoteProtos {
   public interface CommandOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
 
-    // optional .remote.Command.CommandType type = 1;
+    // optional .proto.Command.CommandType type = 1;
     /**
-     * <code>optional .remote.Command.CommandType type = 1;</code>
+     * <code>optional .proto.Command.CommandType type = 1;</code>
      */
     boolean hasType();
     /**
-     * <code>optional .remote.Command.CommandType type = 1;</code>
+     * <code>optional .proto.Command.CommandType type = 1;</code>
      */
     fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType();
 
@@ -32,7 +32,7 @@ public final class RemoteProtos {
     int getCommand();
   }
   /**
-   * Protobuf type {@code remote.Command}
+   * Protobuf type {@code proto.Command}
    */
   public static final class Command extends
       com.google.protobuf.GeneratedMessage
@@ -112,12 +112,12 @@ public final class RemoteProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Command_descriptor;
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Command_fieldAccessorTable
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               fr.membrives.etienne.remote.RemoteProtos.Command.class, fr.membrives.etienne.remote.RemoteProtos.Command.Builder.class);
     }
@@ -138,7 +138,7 @@ public final class RemoteProtos {
     }
 
     /**
-     * Protobuf enum {@code remote.Command.CommandType}
+     * Protobuf enum {@code proto.Command.CommandType}
      */
     public enum CommandType
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -216,21 +216,21 @@ public final class RemoteProtos {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:remote.Command.CommandType)
+      // @@protoc_insertion_point(enum_scope:proto.Command.CommandType)
     }
 
     private int bitField0_;
-    // optional .remote.Command.CommandType type = 1;
+    // optional .proto.Command.CommandType type = 1;
     public static final int TYPE_FIELD_NUMBER = 1;
     private fr.membrives.etienne.remote.RemoteProtos.Command.CommandType type_;
     /**
-     * <code>optional .remote.Command.CommandType type = 1;</code>
+     * <code>optional .proto.Command.CommandType type = 1;</code>
      */
     public boolean hasType() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .remote.Command.CommandType type = 1;</code>
+     * <code>optional .proto.Command.CommandType type = 1;</code>
      */
     public fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType() {
       return type_;
@@ -370,19 +370,19 @@ public final class RemoteProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code remote.Command}
+     * Protobuf type {@code proto.Command}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements fr.membrives.etienne.remote.RemoteProtos.CommandOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Command_descriptor;
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Command_fieldAccessorTable
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 fr.membrives.etienne.remote.RemoteProtos.Command.class, fr.membrives.etienne.remote.RemoteProtos.Command.Builder.class);
       }
@@ -420,7 +420,7 @@ public final class RemoteProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Command_descriptor;
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_descriptor;
       }
 
       public fr.membrives.etienne.remote.RemoteProtos.Command getDefaultInstanceForType() {
@@ -496,22 +496,22 @@ public final class RemoteProtos {
       }
       private int bitField0_;
 
-      // optional .remote.Command.CommandType type = 1;
+      // optional .proto.Command.CommandType type = 1;
       private fr.membrives.etienne.remote.RemoteProtos.Command.CommandType type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
       /**
-       * <code>optional .remote.Command.CommandType type = 1;</code>
+       * <code>optional .proto.Command.CommandType type = 1;</code>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .remote.Command.CommandType type = 1;</code>
+       * <code>optional .proto.Command.CommandType type = 1;</code>
        */
       public fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType() {
         return type_;
       }
       /**
-       * <code>optional .remote.Command.CommandType type = 1;</code>
+       * <code>optional .proto.Command.CommandType type = 1;</code>
        */
       public Builder setType(fr.membrives.etienne.remote.RemoteProtos.Command.CommandType value) {
         if (value == null) {
@@ -523,7 +523,7 @@ public final class RemoteProtos {
         return this;
       }
       /**
-       * <code>optional .remote.Command.CommandType type = 1;</code>
+       * <code>optional .proto.Command.CommandType type = 1;</code>
        */
       public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000001);
@@ -565,7 +565,7 @@ public final class RemoteProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:remote.Command)
+      // @@protoc_insertion_point(builder_scope:proto.Command)
     }
 
     static {
@@ -573,7 +573,7 @@ public final class RemoteProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:remote.Command)
+    // @@protoc_insertion_point(class_scope:proto.Command)
   }
 
   public interface ResponseOrBuilder
@@ -590,7 +590,7 @@ public final class RemoteProtos {
     boolean getFrontendConnected();
   }
   /**
-   * Protobuf type {@code remote.Response}
+   * Protobuf type {@code proto.Response}
    */
   public static final class Response extends
       com.google.protobuf.GeneratedMessage
@@ -659,12 +659,12 @@ public final class RemoteProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Response_descriptor;
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Response_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Response_fieldAccessorTable
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Response_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               fr.membrives.etienne.remote.RemoteProtos.Response.class, fr.membrives.etienne.remote.RemoteProtos.Response.Builder.class);
     }
@@ -811,19 +811,19 @@ public final class RemoteProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code remote.Response}
+     * Protobuf type {@code proto.Response}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements fr.membrives.etienne.remote.RemoteProtos.ResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Response_descriptor;
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Response_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Response_fieldAccessorTable
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Response_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
                 fr.membrives.etienne.remote.RemoteProtos.Response.class, fr.membrives.etienne.remote.RemoteProtos.Response.Builder.class);
       }
@@ -859,7 +859,7 @@ public final class RemoteProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_remote_Response_descriptor;
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Response_descriptor;
       }
 
       public fr.membrives.etienne.remote.RemoteProtos.Response getDefaultInstanceForType() {
@@ -961,7 +961,7 @@ public final class RemoteProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:remote.Response)
+      // @@protoc_insertion_point(builder_scope:proto.Response)
     }
 
     static {
@@ -969,19 +969,19 @@ public final class RemoteProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:remote.Response)
+    // @@protoc_insertion_point(class_scope:proto.Response)
   }
 
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_remote_Command_descriptor;
+    internal_static_proto_Command_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_remote_Command_fieldAccessorTable;
+      internal_static_proto_Command_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_remote_Response_descriptor;
+    internal_static_proto_Response_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_remote_Response_fieldAccessorTable;
+      internal_static_proto_Response_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -991,29 +991,29 @@ public final class RemoteProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023proto/message.proto\022\006remote\"m\n\007Command" +
-      "\022)\n\004type\030\001 \001(\0162\033.remote.Command.CommandT" +
-      "ype\022\017\n\007command\030\002 \001(\005\"&\n\013CommandType\022\013\n\007C" +
-      "OMMAND\020\001\022\n\n\006STATUS\020\002\"&\n\010Response\022\032\n\022fron" +
-      "tend_connected\030\001 \001(\010B+\n\033fr.membrives.eti" +
-      "enne.remoteB\014RemoteProtos"
+      "\n\023proto/message.proto\022\005proto\"l\n\007Command\022" +
+      "(\n\004type\030\001 \001(\0162\032.proto.Command.CommandTyp" +
+      "e\022\017\n\007command\030\002 \001(\005\"&\n\013CommandType\022\013\n\007COM" +
+      "MAND\020\001\022\n\n\006STATUS\020\002\"&\n\010Response\022\032\n\022fronte" +
+      "nd_connected\030\001 \001(\010B+\n\033fr.membrives.etien" +
+      "ne.remoteB\014RemoteProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
         public com.google.protobuf.ExtensionRegistry assignDescriptors(
             com.google.protobuf.Descriptors.FileDescriptor root) {
           descriptor = root;
-          internal_static_remote_Command_descriptor =
+          internal_static_proto_Command_descriptor =
             getDescriptor().getMessageTypes().get(0);
-          internal_static_remote_Command_fieldAccessorTable = new
+          internal_static_proto_Command_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_remote_Command_descriptor,
+              internal_static_proto_Command_descriptor,
               new java.lang.String[] { "Type", "Command", });
-          internal_static_remote_Response_descriptor =
+          internal_static_proto_Response_descriptor =
             getDescriptor().getMessageTypes().get(1);
-          internal_static_remote_Response_fieldAccessorTable = new
+          internal_static_proto_Response_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_remote_Response_descriptor,
+              internal_static_proto_Response_descriptor,
               new java.lang.String[] { "FrontendConnected", });
           return null;
         }

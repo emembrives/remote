@@ -9,8 +9,13 @@ import (
 	"strings"
 	"time"
 
+	"github.com/sterops/tinkerings/android-remote/proto"
+
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
+
+	"bitbucket.org/gdamore/mangos"
+	"bitbucket.org/gdamore/mangos/protocol/pair"
 )
 
 var (
@@ -19,7 +24,7 @@ var (
 
 func main() {
 	commands = make(chan string)
-	go socketListen(commands)
+	go nanomsgListen(commands)
 	websocketListen(commands)
 }
 
@@ -56,43 +61,10 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func socketListen(output chan<- string) {
-	server, err := net.Listen("tcp", ":6002")
+func nanomsgListen(output chan<- string) {
+	pair, err := pair.NewSocket()
 	if err != nil {
 		panic(err)
 	}
-	defer server.Close()
-
-	for {
-		// Listen for an incoming connection.
-		conn, err := server.Accept()
-		if err != nil {
-			log.Println("Error accepting: ", err.Error())
-			continue
-		}
-		// Handle connections in a new goroutine.
-		go handleRequest(conn, output)
-	}
-}
-
-func handleRequest(conn net.Conn, output chan<- string) {
-	log.Print("New connection")
-	reader := bufio.NewReader(conn)
-	for {
-		message, err := readFromClient(reader)
-		if err == io.EOF {
-			log.Print("Connection interrupted")
-			return
-		} else if err != nil {
-			log.Print("Error while reading from socket: ", err)
-			return
-		}
-		output <- message
-	}
-}
-
-func readFromClient(reader *bufio.Reader) (string, error) {
-	data, err := reader.ReadSlice('\n')
-	message := strings.Trim(string(data), " \n")
-	return message, err
+	pair.Listen("tcp://0.0.0.0:6002")
 }

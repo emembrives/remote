@@ -51,7 +51,7 @@ public class ForwarderService implements Runnable {
     @Override
     public void run() {
         try {
-            socket.connect("tcp://polaris.membrives.fr:6001");
+            socket.connect("tcp://polaris.membrives.fr:6002");
         } catch (IOException e) {
             return;
         }
