@@ -1,0 +1,18 @@
+package remote;
+
+option java_package = "fr.membrives.etienne.remote";
+option java_outer_classname = "RemoteProtos";
+
+message Command {
+	enum CommandType {
+		COMMAND = 1;
+		STATUS = 2;
+	}
+	
+	optional CommandType type = 1;
+	optional int32 command = 2;
+}
+
+message Response {
+	optional bool frontend_connected = 1;
+}

@@ -4,6 +4,7 @@ import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListenableFutureTask;
+import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 import com.google.protobuf.InvalidProtocolBufferException;
 
@@ -24,7 +25,7 @@ public class ForwarderService implements Runnable {
     public static final AsyncFunction<RemoteProtos.Response, Boolean> RESPONSE_TO_FRONTEND_CONNECTED = new AsyncFunction<RemoteProtos.Response, Boolean>() {
         @Override
         public ListenableFuture<Boolean> apply(RemoteProtos.Response input) throws Exception {
-            return Futures.immediateCheckedFuture(input.getStatus().equals(RemoteProtos.Response.FrontendStatus.CONNECTED));
+            return Futures.immediateCheckedFuture(input.getFrontendConnected());
         }
     };
     private boolean isStopped = true;
@@ -32,7 +33,7 @@ public class ForwarderService implements Runnable {
     private boolean isConnected = false;
 
     private LinkedBlockingQueue<RemoteProtos.Response> responses;
-    private ExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(3));
+    private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(3));
 
     private PairSocket socket;
 
@@ -80,8 +81,10 @@ public class ForwarderService implements Runnable {
         });
     }
 
-    public ListenableFuture<Boolean> isFrontendConnected() {
-        ListenableFuture<RemoteProtos.Response> msgFuture = ListenableFutureTask.create(new Callable<RemoteProtos.Response>() {
+    public ListenableFuture<Boolean> isFrontendConnected() throws IOException {
+        RemoteProtos.Command.Builder builder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.STATUS);
+        submit(builder.build());
+        ListenableFuture<RemoteProtos.Response> msgFuture = executor.submit(new Callable<RemoteProtos.Response>() {
             @Override
             public RemoteProtos.Response call() throws Exception {
                 return responses.take();
