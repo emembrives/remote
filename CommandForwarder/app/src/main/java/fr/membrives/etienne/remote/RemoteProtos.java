@@ -21,15 +21,20 @@ public final class RemoteProtos {
      */
     fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType();
 
-    // optional int32 command = 2;
+    // optional string command = 2;
     /**
-     * <code>optional int32 command = 2;</code>
+     * <code>optional string command = 2;</code>
      */
     boolean hasCommand();
     /**
-     * <code>optional int32 command = 2;</code>
+     * <code>optional string command = 2;</code>
      */
-    int getCommand();
+    java.lang.String getCommand();
+    /**
+     * <code>optional string command = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getCommandBytes();
   }
   /**
    * Protobuf type {@code proto.Command}
@@ -93,9 +98,9 @@ public final class RemoteProtos {
               }
               break;
             }
-            case 16: {
+            case 18: {
               bitField0_ |= 0x00000002;
-              command_ = input.readInt32();
+              command_ = input.readBytes();
               break;
             }
           }
@@ -236,25 +241,52 @@ public final class RemoteProtos {
       return type_;
     }
 
-    // optional int32 command = 2;
+    // optional string command = 2;
     public static final int COMMAND_FIELD_NUMBER = 2;
-    private int command_;
+    private java.lang.Object command_;
     /**
-     * <code>optional int32 command = 2;</code>
+     * <code>optional string command = 2;</code>
      */
     public boolean hasCommand() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional int32 command = 2;</code>
+     * <code>optional string command = 2;</code>
      */
-    public int getCommand() {
-      return command_;
+    public java.lang.String getCommand() {
+      java.lang.Object ref = command_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          command_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string command = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCommandBytes() {
+      java.lang.Object ref = command_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        command_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
       type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
-      command_ = 0;
+      command_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -272,7 +304,7 @@ public final class RemoteProtos {
         output.writeEnum(1, type_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeInt32(2, command_);
+        output.writeBytes(2, getCommandBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -289,7 +321,7 @@ public final class RemoteProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, command_);
+          .computeBytesSize(2, getCommandBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -409,7 +441,7 @@ public final class RemoteProtos {
         super.clear();
         type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
         bitField0_ = (bitField0_ & ~0x00000001);
-        command_ = 0;
+        command_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -467,7 +499,9 @@ public final class RemoteProtos {
           setType(other.getType());
         }
         if (other.hasCommand()) {
-          setCommand(other.getCommand());
+          bitField0_ |= 0x00000002;
+          command_ = other.command_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -532,35 +566,76 @@ public final class RemoteProtos {
         return this;
       }
 
-      // optional int32 command = 2;
-      private int command_ ;
+      // optional string command = 2;
+      private java.lang.Object command_ = "";
       /**
-       * <code>optional int32 command = 2;</code>
+       * <code>optional string command = 2;</code>
        */
       public boolean hasCommand() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional int32 command = 2;</code>
+       * <code>optional string command = 2;</code>
        */
-      public int getCommand() {
-        return command_;
+      public java.lang.String getCommand() {
+        java.lang.Object ref = command_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          command_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
       }
       /**
-       * <code>optional int32 command = 2;</code>
+       * <code>optional string command = 2;</code>
        */
-      public Builder setCommand(int value) {
-        bitField0_ |= 0x00000002;
+      public com.google.protobuf.ByteString
+          getCommandBytes() {
+        java.lang.Object ref = command_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          command_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string command = 2;</code>
+       */
+      public Builder setCommand(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         command_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 command = 2;</code>
+       * <code>optional string command = 2;</code>
        */
       public Builder clearCommand() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        command_ = 0;
+        command_ = getDefaultInstance().getCommand();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string command = 2;</code>
+       */
+      public Builder setCommandBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        command_ = value;
         onChanged();
         return this;
       }
@@ -993,7 +1068,7 @@ public final class RemoteProtos {
     java.lang.String[] descriptorData = {
       "\n\023proto/message.proto\022\005proto\"l\n\007Command\022" +
       "(\n\004type\030\001 \001(\0162\032.proto.Command.CommandTyp" +
-      "e\022\017\n\007command\030\002 \001(\005\"&\n\013CommandType\022\013\n\007COM" +
+      "e\022\017\n\007command\030\002 \001(\t\"&\n\013CommandType\022\013\n\007COM" +
       "MAND\020\001\022\n\n\006STATUS\020\002\"&\n\010Response\022\032\n\022fronte" +
       "nd_connected\030\001 \001(\010B+\n\033fr.membrives.etien" +
       "ne.remoteB\014RemoteProtos"

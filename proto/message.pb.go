@@ -51,7 +51,7 @@ func (x *Command_CommandType) UnmarshalJSON(data []byte) error {
 
 type Command struct {
 	Type             *Command_CommandType `protobuf:"varint,1,opt,name=type,enum=proto.Command_CommandType" json:"type,omitempty"`
-	Command          *int32               `protobuf:"varint,2,opt,name=command" json:"command,omitempty"`
+	Command          *string              `protobuf:"bytes,2,opt,name=command" json:"command,omitempty"`
 	XXX_unrecognized []byte               `json:"-"`
 }
 
@@ -66,11 +66,11 @@ func (m *Command) GetType() Command_CommandType {
 	return 0
 }
 
-func (m *Command) GetCommand() int32 {
+func (m *Command) GetCommand() string {
 	if m != nil && m.Command != nil {
 		return *m.Command
 	}
-	return 0
+	return ""
 }
 
 type Response struct {

@@ -10,7 +10,7 @@ message Command {
 	}
 	
 	optional CommandType type = 1;
-	optional int32 command = 2;
+	optional string command = 2;
 }
 
 message Response {

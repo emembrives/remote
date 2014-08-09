@@ -11,20 +11,11 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 
-	"bitbucket.org/gdamore/mangos/protocol/pair"
-	transports "bitbucket.org/gdamore/mangos/transport/all"
-)
-
-var (
-	commands    chan string
-	hasFrontend bool
+	"github.com/streadway/amqp"
 )
 
 func main() {
-	hasFrontend = false
-	commands = make(chan string)
-	go nanomsgListen(commands)
-	websocketListen(commands)
+	websocketListen()
 }
 
 var upgrader = websocket.Upgrader{
@@ -33,7 +24,7 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin:     func(r *http.Request) bool { return true },
 }
 
-func websocketListen(input <-chan string) {
+func websocketListen() {
 	r := mux.NewRouter()
 	h := &http.Server{
 		Addr:           ":6001",
@@ -47,46 +38,58 @@ func websocketListen(input <-chan string) {
 }
 
 func websocketHandler(w http.ResponseWriter, r *http.Request) {
-	conn, err := upgrader.Upgrade(w, r, nil)
+	websocketConn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	} else {
+		defer websocketConn.Close()
 		log.Println("Upgrading connection to websocket")
 	}
-	for command := range commands {
-		log.Print("Sending command ", command)
-		conn.WriteJSON(command)
+	amqpConn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	if err != nil {
+		log.Println(err)
+		return
 	}
-}
+	defer amqpConn.Close()
 
-func nanomsgListen(output chan<- string) {
-	pair, err := pair.NewSocket()
+	ch, err := amqpConn.Channel()
 	if err != nil {
-		panic(err)
+		log.Println(err)
+		return
 	}
-	transports.AddTransports(pair)
-	err = pair.Listen("tcp://0.0.0.0:6002")
+
+	defer ch.Close()
+
+	q, err := ch.QueueDeclare(
+		"websocket", // name
+		false,  // durable
+		false,    // delete when usused
+		false,    // exclusive
+		false,    // noWait
+		nil,      // arguments
+	)
 	if err != nil {
-		panic(err)
+		log.Println(err)
+		return
 	}
-	for {
-		msg, err := pair.Recv()
-		if err != nil {
-			panic(err)
-		}
+
+	msgs, err := ch.Consume(q.Name, "", true,
+		true,
+		false,
+		false,
+		nil)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	for d := range msgs {
+		log.Printf("Received a message: %s", d.Body)
 		cmd := new(proto.Command)
-		protobuf.Unmarshal(msg, cmd)
-		if *cmd.Type == proto.Command_STATUS {
-			response := new(proto.Response)
-			response.FrontendConnected = protobuf.Bool(hasFrontend)
-			data, err := protobuf.Marshal(response)
-			if err != nil {
-				panic(err)
-			}
-			if err = pair.Send(data); err != nil {
-				panic(err)
-			}
+		protobuf.Unmarshal(d.Body, cmd)
+		if *cmd.Type == proto.Command_COMMAND {
+			websocketConn.WriteJSON(*cmd.Command)
 		}
 	}
 }
