@@ -1,28 +1,27 @@
 package main
 
 import (
-	"bufio"
-	"io"
 	"log"
-	"net"
 	"net/http"
-	"strings"
 	"time"
 
+	protobuf "code.google.com/p/goprotobuf/proto"
 	"github.com/sterops/tinkerings/android-remote/proto"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 
-	"bitbucket.org/gdamore/mangos"
 	"bitbucket.org/gdamore/mangos/protocol/pair"
+	transports "bitbucket.org/gdamore/mangos/transport/all"
 )
 
 var (
-	commands chan string
+	commands    chan string
+	hasFrontend bool
 )
 
 func main() {
+	hasFrontend = false
 	commands = make(chan string)
 	go nanomsgListen(commands)
 	websocketListen(commands)
@@ -53,10 +52,10 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	} else {
-        log.Println("Upgrading connection to websocket")
-    }
+		log.Println("Upgrading connection to websocket")
+	}
 	for command := range commands {
-        log.Print("Sending command ", command)
+		log.Print("Sending command ", command)
 		conn.WriteJSON(command)
 	}
 }
@@ -66,5 +65,28 @@ func nanomsgListen(output chan<- string) {
 	if err != nil {
 		panic(err)
 	}
-	pair.Listen("tcp://0.0.0.0:6002")
+	transports.AddTransports(pair)
+	err = pair.Listen("tcp://0.0.0.0:6002")
+	if err != nil {
+		panic(err)
+	}
+	for {
+		msg, err := pair.Recv()
+		if err != nil {
+			panic(err)
+		}
+		cmd := new(proto.Command)
+		protobuf.Unmarshal(msg, cmd)
+		if *cmd.Type == proto.Command_STATUS {
+			response := new(proto.Response)
+			response.FrontendConnected = protobuf.Bool(hasFrontend)
+			data, err := protobuf.Marshal(response)
+			if err != nil {
+				panic(err)
+			}
+			if err = pair.Send(data); err != nil {
+				panic(err)
+			}
+		}
+	}
 }
