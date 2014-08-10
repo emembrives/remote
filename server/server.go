@@ -63,9 +63,9 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 
 	q, err := ch.QueueDeclare(
 		"websocket", // name
-		false,  // durable
+		false,    // durable
 		false,    // delete when usused
-		false,    // exclusive
+		true,     // exclusive
 		false,    // noWait
 		nil,      // arguments
 	)
