@@ -33,6 +33,7 @@ func websocketListen() {
 		WriteTimeout:   30 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	r.HandleFunc("/conn", websocketHandler)
 	h.ListenAndServe()
 }
@@ -65,7 +66,7 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 		"websocket", // name
 		false,    // durable
 		false,    // delete when usused
-		true,     // exclusive
+		false,     // exclusive
 		false,    // noWait
 		nil,      // arguments
 	)

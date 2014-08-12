@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script>
+if(window.MozWebSocket) {
+	window.WebSocket = window.MozWebSocket;
+}
+if(window.WebSocket) {
+	var socket = new WebSocket("ws://127.0.0.1:6001/conn");
+	socket.onmessage = function(message) {
+        	//alert('message reçu : ' + message.data);
+		$("body").append("<p>" + message.data + "</p>");
+	}
+	socket.onerror = function(error) {
+		console.log(error);
+	}
+} else {
+	alert('Votre navigateur ne supporte pas les webSocket!');
+}		
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

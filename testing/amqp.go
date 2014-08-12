@@ -5,6 +5,9 @@ import (
 	"github.com/streadway/amqp"
 	"log"
 	"os"
+
+	protobuf "code.google.com/p/goprotobuf/proto"
+	"github.com/sterops/tinkerings/android-remote/proto"
 )
 
 func failOnError(err error, msg string) {
@@ -25,7 +28,7 @@ func main() {
 	defer ch.Close()
 
 	q, err := ch.QueueDeclare(
-		"mobile", // name
+		"websocket", // name
 		false,    // durable
 		false,    // delete when usused
 		false,    // exclusive
@@ -34,15 +37,20 @@ func main() {
 	)
 	failOnError(err, "Failed to declare a queue")
 
-	body := "hello"
+	cmd := new(proto.Command)
+	cmd.Type = proto.Command_COMMAND.Enum()
+	cmd.Command = protobuf.String("Hello")
+	data, err := protobuf.Marshal(cmd)
+	failOnError(err, "Failed to marshal")
+
 	err = ch.Publish(
 		"",     // exchange
 		q.Name, // routing key
 		false,  // mandatory
 		false,  // immediate
 		amqp.Publishing{
-			ContentType: "text/plain",
-			Body:        []byte(body),
+			ContentType: "application/octet-stream",
+			Body:        data,
 		})
 	failOnError(err, "Failed to publish a message")
 
