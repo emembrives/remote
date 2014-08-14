@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 import fr.membrives.etienne.commandforwarder.service.ForwarderService;
 import fr.membrives.etienne.remote.RemoteProtos;
@@ -25,12 +26,17 @@ public class CommandForwarder extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_command_forwarder);
         ImageView serverCheck = (ImageView) findViewById(R.id.server_img);
+        service = new ForwarderService();
         try {
-            service = new ForwarderService();
-            serverCheck.setImageResource(R.drawable.check);
-        } catch (IOException e) {
-            serverCheck.setImageResource(R.drawable.fail);
-            Log.e(TAG, "Failed to start connection", e);
+            if (service.connect().get()) {
+                serverCheck.setImageResource(R.drawable.check);
+            } else {
+                serverCheck.setImageResource(R.drawable.fail);
+            }
+        } catch (InterruptedException e) {
+            Log.e(TAG, "Interrupted", e);
+        } catch (ExecutionException e) {
+            Log.e(TAG, "Interrupted", e);
         }
     }
 
@@ -53,12 +59,8 @@ public class CommandForwarder extends Activity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         RemoteProtos.Command.Builder commandBuilder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.COMMAND);
-        commandBuilder.setCommand(event.getKeyCode());
-        try {
-            service.sendMessage(commandBuilder.toString());
-        } catch (IOException e) {
-            Log.e(TAG, "Unable to send message", e);
-        }
+        commandBuilder.setCommand(event.getCharacters());
+        service.sendMessage(commandBuilder.getCommandBytes());
         return super.onKeyUp(keyCode, event);
     }
 
@@ -72,13 +74,5 @@ public class CommandForwarder extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void sendHello(View view) {
-        try {
-            service.sendMessage("Hello!");
-        } catch (IOException e) {
-            Log.e(TAG, "Unable to send message", e);
-        }
     }
 }
