@@ -59,8 +59,8 @@ public class CommandForwarder extends Activity {
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         RemoteProtos.Command.Builder commandBuilder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.COMMAND);
-        commandBuilder.setCommand(event.getCharacters());
-        service.sendMessage(commandBuilder.getCommandBytes());
+        commandBuilder.setCommand(String.valueOf((char)event.getUnicodeChar()));
+        service.sendMessage(commandBuilder.build().toByteString());
         return super.onKeyUp(keyCode, event);
     }
 
