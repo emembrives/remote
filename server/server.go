@@ -64,11 +64,11 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 
 	q, err := ch.QueueDeclare(
 		"websocket", // name
-		false,    // durable
-		false,    // delete when usused
-		false,     // exclusive
-		false,    // noWait
-		nil,      // arguments
+		false,       // durable
+		false,       // delete when usused
+		false,       // exclusive
+		false,       // noWait
+		nil,         // arguments
 	)
 	if err != nil {
 		log.Println(err)
@@ -85,12 +85,33 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	for d := range msgs {
-		log.Printf("Received a message: %s", d.Body)
-		cmd := new(proto.Command)
-		protobuf.Unmarshal(d.Body, cmd)
-		if *cmd.Type == proto.Command_COMMAND {
-			websocketConn.WriteJSON(*cmd.Command)
+	websocketErrors := make(chan error)
+	go func(conn *websocket.Conn, errChan chan error) {
+		for {
+			var message interface{}
+			err := conn.ReadJSON(&message)
+			if err != nil {
+				errChan <- err
+				conn.Close()
+				return
+			}
+		}
+	}(websocketConn, websocketErrors)
+
+	for {
+		select {
+		case d := <-msgs:
+			log.Printf("Received a message: %s", d.Body)
+			cmd := new(proto.Command)
+			protobuf.Unmarshal(d.Body, cmd)
+			if *cmd.Type == proto.Command_COMMAND {
+				websocketConn.WriteJSON(*cmd.Command)
+			}
+		case err = <-websocketErrors:
+			if err != nil {
+				return
+			}
 		}
 	}
+	log.Println("Closing websocket and amqp connections")
 }
