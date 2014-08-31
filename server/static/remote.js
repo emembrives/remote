@@ -22,7 +22,7 @@
 	
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
-			var socket = new WebSocket("ws://127.0.0.1:6001/conn");
+			var socket = new WebSocket("ws://etienne.membrives.fr/remote/conn");
 			socket.onmessage = function(message) {
 				if (message.data == "a") {
 					// left

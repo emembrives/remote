@@ -33,7 +33,7 @@ func websocketListen() {
 		WriteTimeout:   30 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	//r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	r.HandleFunc("/conn", websocketHandler)
 	h.ListenAndServe()
 }
@@ -62,15 +62,38 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 
 	defer ch.Close()
 
+	if err = ch.ExchangeDeclare(
+		"remote", // name
+		"topic",  // type
+		true,     // durable
+		true,     // auto-deleted
+		false,    // internal
+		false,    // no-wait
+		nil,      // arguments
+	); err != nil {
+		log.Println(err)
+		return
+	}
+
 	q, err := ch.QueueDeclare(
-		"websocket", // name
-		false,       // durable
-		false,       // delete when usused
-		false,       // exclusive
-		false,       // noWait
-		nil,         // arguments
+		"",    // name
+		true,  // durable
+		true,  // delete when usused
+		false, // exclusive
+		false, // noWait
+		nil,   // arguments
 	)
 	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	if err = ch.QueueBind(
+		q.Name,
+		"webcontrol",
+		"remote",
+		false,
+		nil); err != nil {
 		log.Println(err)
 		return
 	}

@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class CommandForwarder extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_command_forwarder);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         ImageView serverCheck = (ImageView) findViewById(R.id.server_img);
         service = new ForwarderService();
         try {
@@ -60,7 +62,7 @@ public class CommandForwarder extends Activity {
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         RemoteProtos.Command.Builder commandBuilder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.COMMAND);
         commandBuilder.setCommand(String.valueOf((char)event.getUnicodeChar()));
-        service.sendMessage(commandBuilder.build().toByteString());
+        service.sendWebcontrolMessage(commandBuilder.build().toByteString());
         return super.onKeyUp(keyCode, event);
     }
 

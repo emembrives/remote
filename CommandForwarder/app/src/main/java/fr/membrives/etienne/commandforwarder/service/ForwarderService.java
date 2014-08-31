@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  */
 public class ForwarderService {
     private static final String TAG = "fme.c.s.ForwarderService";
-    private static final String QUEUE_NAME = "websocket";
+    private static final String EXCHANGE_NAME = "remote";
 
     private Channel channel;
     private Connection connection;
@@ -42,7 +42,7 @@ public class ForwarderService {
                 try {
                     connection = factory.newConnection();
                     channel = connection.createChannel();
-                    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+                    channel.exchangeDeclare(EXCHANGE_NAME, "topic");
                 } catch (IOException e) {
                     Log.e(TAG, "Not connected to server", e);
                     return false;
@@ -64,12 +64,12 @@ public class ForwarderService {
         return serverConnect;
     }
 
-    public ListenableFuture<Boolean> sendMessage(final ByteString message) {
+    public ListenableFuture<Boolean> sendWebcontrolMessage(final ByteString message) {
         ListenableFuture<Boolean> messageSent = executor.submit(new Callable<Boolean>() {
             @Override
             public Boolean call() {
                 try {
-                    channel.basicPublish("", QUEUE_NAME, null, message.toByteArray());
+                    channel.basicPublish(EXCHANGE_NAME, "webcontrol", null, message.toByteArray());
                     return true;
                 } catch (IOException e) {
                     Log.e(TAG, "Unable to send message", e);
