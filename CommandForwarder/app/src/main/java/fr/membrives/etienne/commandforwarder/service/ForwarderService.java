@@ -1,5 +1,6 @@
 package fr.membrives.etienne.commandforwarder.service;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.google.common.util.concurrent.FutureCallback;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
+import fr.membrives.etienne.commandforwarder.R;
+
 /**
  * Main forwarding service.
  */
@@ -31,18 +34,18 @@ public class ForwarderService {
     public ForwarderService() {
     }
 
-    public ListenableFuture<Boolean> connect() {
+    public ListenableFuture<Boolean> connect(final Context context) {
         ListenableFuture<Boolean> serverConnect = executor.submit(new Callable<Boolean>() {
             @Override
             public Boolean call() {
                 ConnectionFactory factory = new ConnectionFactory();
-                factory.setHost("10.0.2.2");
-                factory.setUsername("guest");
-                factory.setPassword("guest");
+                factory.setHost(context.getString(R.string.amqp_server));
+                factory.setUsername(context.getString(R.string.amqp_user));
+                factory.setPassword(context.getString(R.string.amqp_password));
                 try {
                     connection = factory.newConnection();
                     channel = connection.createChannel();
-                    channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+                    channel.exchangeDeclare(EXCHANGE_NAME, "topic", true, true, false, null);
                 } catch (IOException e) {
                     Log.e(TAG, "Not connected to server", e);
                     return false;

@@ -30,7 +30,7 @@ public class CommandForwarder extends Activity {
         ImageView serverCheck = (ImageView) findViewById(R.id.server_img);
         service = new ForwarderService();
         try {
-            if (service.connect().get()) {
+            if (service.connect(this).get()) {
                 serverCheck.setImageResource(R.drawable.check);
             } else {
                 serverCheck.setImageResource(R.drawable.fail);
