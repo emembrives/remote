@@ -8,7 +8,7 @@
 	if (window.jQuery === undefined || window.jQuery.fn.jquery < vmin) {
 		var done = false;
 		var script = document.createElement("script");
-		script.src = "http://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
+		script.src = "https://ajax.googleapis.com/ajax/libs/jquery/" + v + "/jquery.min.js";
 		script.onload = script.onreadystatechange = function(){
 			if (!done && (!this.readyState || this.readyState == "loaded" || this.readyState == "complete")) {
 				done = true;
@@ -22,7 +22,7 @@
 	
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
-			var socket = new WebSocket("ws://etienne.membrives.fr/remote/conn");
+			var socket = new WebSocket("wss://etienne.membrives.fr/remote/");
 			socket.onmessage = function(message) {
 				if (message.data == "a") {
 					// left

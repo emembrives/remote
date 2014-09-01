@@ -34,7 +34,7 @@ func websocketListen() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	//r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	r.HandleFunc("/conn", websocketHandler)
+	r.HandleFunc("/", websocketHandler)
 	h.ListenAndServe()
 }
 
