@@ -20,16 +20,30 @@
 		initMyBookmarklet();
 	}
 	
+	function dispatchEvent(keyCode) {
+		var eventObj = document.createEventObject ?
+        	document.createEventObject() : document.createEvent("Events");
+		if(eventObj.initEvent){
+			eventObj.initEvent("keydown", true, true);
+		}
+
+		eventObj.keyCode = keyCode;
+		eventObj.which = keyCode;
+
+		document.body.dispatchEvent ? document.body.dispatchEvent(eventObj) : document.body.fireEvent("onkeydown", eventObj);
+	}
+
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
 			var socket = new WebSocket("wss://etienne.membrives.fr/remote/");
 			socket.onmessage = function(message) {
-				if (message.data == "a") {
+				var key = JSON.parse(message.data)
+				if (key == "a") {
 					// left
-					jQuery.event.trigger({ type : 'keypress', which : 37 });
-				} else if (message.data == "d") {
+					dispatchEvent(37);
+				} else if (key == "d") {
 					// right
-					jQuery.event.trigger({ type : 'keypress', which : 39 });
+					dispatchEvent(39);
 				}
 			}
 			socket.onerror = function(error) {
