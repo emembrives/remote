@@ -63,5 +63,27 @@
             android:layout_width="40dp"
             android:layout_height="40dp" />
     </RelativeLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:weightSum="1.0"
+        >
+        <Button
+            android:layout_width="0dip"
+            android:layout_weight="0.5"
+            android:layout_height="fill_parent"
+            android:text="Previous page"
+            android:id="@+id/prev_btn"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            android:layout_width="0dip"
+            android:layout_weight="0.5"
+            android:layout_height="fill_parent"
+            android:text="Next page"
+            android:id="@+id/next_btn"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
 
 </LinearLayout>

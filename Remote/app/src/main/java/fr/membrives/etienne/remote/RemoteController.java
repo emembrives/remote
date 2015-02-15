@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.concurrent.ExecutionException;
@@ -36,6 +38,23 @@ public class RemoteController extends Activity {
         } catch (ExecutionException e) {
             Log.e(TAG, "Interrupted", e);
         }
+
+        final Button prevBtn = (Button) findViewById(R.id.prev_btn);
+        prevBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RemoteProtos.Command.Builder commandBuilder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.COMMAND);
+                commandBuilder.setCommand("p");
+                service.sendWebcontrolMessage(commandBuilder.build());
+            }
+        });
+        final Button nextBtn = (Button) findViewById(R.id.next_btn);
+        nextBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RemoteProtos.Command.Builder commandBuilder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.COMMAND);
+                commandBuilder.setCommand("n");
+                service.sendWebcontrolMessage(commandBuilder.build());
+            }
+        });
     }
 
 
