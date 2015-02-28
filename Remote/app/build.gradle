@@ -32,8 +32,6 @@ android {
 
 
 dependencies {
-    compile 'net.java.dev.jna:jna:4.1.0'
-    compile 'net.java.dev.jna:platform:3.5.2'
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.protobuf:protobuf-java:2.6.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])

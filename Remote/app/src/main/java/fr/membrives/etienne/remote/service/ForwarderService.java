@@ -21,12 +21,17 @@ import nanomsg.reqrep.ReqSocket;
  * Main forwarding service.
  */
 public class ForwarderService {
-    private static final String TAG = "f.m.e.remote.service.ForwarderService";
+    private static final String TAG = "s.ForwarderService";
     private static final String EXCHANGE_NAME = "remote";
 
     private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(1));
     private boolean connectedToServer = false;
     private ReqSocket socket;
+
+    static {
+        String libName = "jnidispatch"; // the module name of the library, without .so
+        System.loadLibrary(libName);
+    }
 
     public ForwarderService() {
     }
@@ -37,7 +42,7 @@ public class ForwarderService {
             public Boolean call() {
                 socket = new ReqSocket();
                 try {
-                    socket.connect("tcp://terra.membrives.fr:7001");
+                    socket.connect("tcp://10.0.2.2:7001");
                 } catch (nanomsg.exceptions.IOException e) {
                     Log.e(TAG, "Unable to connect", e);
                     return false;

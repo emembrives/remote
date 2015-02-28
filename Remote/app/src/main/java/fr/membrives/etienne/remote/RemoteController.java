@@ -17,7 +17,7 @@ import fr.membrives.etienne.remote.service.ForwarderService;
 
 
 public class RemoteController extends Activity {
-    private static final String TAG = "f.m.e.remote.RemoteController";
+    private static final String TAG = "RemoteController";
     private ForwarderService service;
 
     @Override
