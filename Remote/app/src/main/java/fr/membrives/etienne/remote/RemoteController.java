@@ -52,7 +52,19 @@ public class RemoteController extends Activity {
             public void onClick(View v) {
                 RemoteProtos.Command.Builder commandBuilder = RemoteProtos.Command.newBuilder().setType(RemoteProtos.Command.CommandType.COMMAND);
                 commandBuilder.setCommand("n");
-                service.sendWebcontrolMessage(commandBuilder.build());
+                ImageView frontendCheck = (ImageView) findViewById(R.id.frontend_img);
+                try {
+                    boolean status = service.sendWebcontrolMessage(commandBuilder.build()).get();
+                    if (status) {
+                        frontendCheck.setImageResource(R.drawable.check);
+                    } else {
+                        frontendCheck.setImageResource(R.drawable.fail);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
     }

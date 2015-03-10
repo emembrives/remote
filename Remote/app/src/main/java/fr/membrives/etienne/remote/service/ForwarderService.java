@@ -1,7 +1,6 @@
 package fr.membrives.etienne.remote.service;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -9,13 +8,13 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 
+import org.zeromq.ZMQ;
+
 import java.io.IOException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 
-import fr.membrives.etienne.remote.R;
 import fr.membrives.etienne.remote.RemoteProtos;
-import nanomsg.reqrep.ReqSocket;
 
 /**
  * Main forwarding service.
@@ -26,12 +25,9 @@ public class ForwarderService {
 
     private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(1));
     private boolean connectedToServer = false;
-    private ReqSocket socket;
 
-    static {
-        String libName = "jnidispatch"; // the module name of the library, without .so
-        System.loadLibrary(libName);
-    }
+    private ZMQ.Context zmqContext;
+    private ZMQ.Socket socket;
 
     public ForwarderService() {
     }
@@ -40,13 +36,9 @@ public class ForwarderService {
         ListenableFuture<Boolean> serverConnect = executor.submit(new Callable<Boolean>() {
             @Override
             public Boolean call() {
-                socket = new ReqSocket();
-                try {
-                    socket.connect("tcp://10.0.2.2:7001");
-                } catch (nanomsg.exceptions.IOException e) {
-                    Log.e(TAG, "Unable to connect", e);
-                    return false;
-                }
+                zmqContext = ZMQ.context(1);
+                socket = zmqContext.socket(ZMQ.REQ);
+                socket.connect("tcp://10.0.2.2:7002");
                 return true;
             }
         });
@@ -68,13 +60,7 @@ public class ForwarderService {
         ListenableFuture<Boolean> messageSent = executor.submit(new Callable<Boolean>() {
             @Override
             public Boolean call() {
-                try {
-                    socket.sendBytes(message.toByteArray());
-                    return true;
-                } catch (IOException e) {
-                    Log.e(TAG, "Unable to send message", e);
-                    return false;
-                }
+                return socket.send(message.toByteArray(), 0);
             }
         });
         return messageSent;
@@ -82,6 +68,7 @@ public class ForwarderService {
 
     public void stopForwarderService() throws IOException {
         socket.close();
+        zmqContext.term();
         connectedToServer = false;
     }
 }

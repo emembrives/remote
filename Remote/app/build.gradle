@@ -19,8 +19,12 @@ android {
                     "-DNN_HAVE_SEMAPHORE " +
                     "-DNN_HAVE_POLL " +
                     "-DNN_USE_POLL " +
-                    "-DNN_USE_LITERAL_IFADDR "
+                    "-DNN_USE_LITERAL_IFADDR "+
+                    "-Dos.prefix=android-arm"
         }
+    }
+    sourceSets.main {
+        jniLibs.srcDir 'src/main/jniLibs' // <-- Set your folder here!
     }
     buildTypes {
         release {
@@ -32,6 +36,7 @@ android {
 
 
 dependencies {
+    compile 'org.zeromq:jeromq:0.3.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.protobuf:protobuf-java:2.6.1'
     compile fileTree(dir: 'libs', include: ['*.jar'])

@@ -6,23 +6,20 @@ import (
 	"time"
 
 	protobuf "code.google.com/p/goprotobuf/proto"
-	"github.com/sterops/tinkerings/android-remote/proto"
+	"github.com/emembrives/tinkerings/android-remote/proto"
 
 	"github.com/gorilla/mux"
 	"github.com/gorilla/websocket"
 
-	"github.com/gdamore/mangos"
-	"github.com/gdamore/mangos/protocol/pull"
-	"github.com/gdamore/mangos/transport/tcp"
-
+	zmq "github.com/pebbe/zmq4"
 )
 
 const (
-	nanomsgUrl = "tcp://0.0.0.0:7001"
+	zmqUrl = "tcp://0.0.0.0:7001"
 )
 
 var (
-	messages = make(chan *mangos.Message)
+	messages = make(chan []byte)
 )
 
 func main() {
@@ -51,27 +48,25 @@ func websocketListen() {
 }
 
 func setupMessageServer() {
-	var sock mangos.Socket
-	var err error
-	if sock, err = pull.NewSocket(); err != nil {
-		log.Println("can't get new pull socket: %s", err)
-		return
+	responder, err := zmq.NewSocket(zmq.REP)
+	defer responder.Close()
+	if err != nil {
+		panic(err)
 	}
-
-	sock.AddTransport(tcp.NewTransport())
-	if err = sock.Listen(nanomsgUrl); err != nil {
-		log.Println("can't listen on pull socket: %s", err.Error())
-		return
+	err = responder.Bind(zmqUrl)
+	if err != nil {
+		panic(err)
 	}
 
 	for {
-		msg, err := sock.RecvMsg()
+		msg, err := responder.RecvBytes(0)
 		log.Println("Received message: %d", msg)
 		if err != nil {
 			log.Println(err)
 		} else {
 			messages <- msg
 		}
+		responder.Send("OK", 0)
 	}
 }
 
@@ -101,9 +96,9 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 	for {
 		select {
 		case d := <-messages:
-			log.Printf("Received a message: %s", d.Body)
+			log.Printf("Received a message: %s", d)
 			cmd := new(proto.Command)
-			protobuf.Unmarshal(d.Body, cmd)
+			protobuf.Unmarshal(d, cmd)
 			if *cmd.Type == proto.Command_COMMAND {
 				websocketConn.WriteJSON(*cmd.Command)
 			}

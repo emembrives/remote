@@ -6,11 +6,9 @@ import (
 	"os"
 
 	protobuf "code.google.com/p/goprotobuf/proto"
-	"github.com/sterops/tinkerings/android-remote/proto"
+	"github.com/emembrives/tinkerings/android-remote/proto"
 
-	"github.com/gdamore/mangos"
-	"github.com/gdamore/mangos/protocol/push"
-	"github.com/gdamore/mangos/transport/tcp"
+	zmq "github.com/pebbe/zmq4"
 )
 
 const (
@@ -31,19 +29,26 @@ func main() {
 	data, err := protobuf.Marshal(cmd)
 	failOnError(err, "Failed to marshal")
 
-	var sock mangos.Socket
+	requester, err := zmq.NewSocket(zmq.REQ)
+	defer requester.Close()
+	if err != nil {
+		failOnError(err, "Unable to create socket")
+	}
+	if err = requester.Connect(url); err != nil {
+		failOnError(err, "Unable to connect")
+	}
 
-	if sock, err = push.NewSocket(); err != nil {
-		failOnError(err, "can't get new push socket: %s")
-	}
-	sock.AddTransport(tcp.NewTransport())
-	if err = sock.Dial(url); err != nil {
-		failOnError(err, "can't dial on push socket")
-	}
-	if err = sock.Send(data); err != nil {
+	if _, err = requester.SendBytes(data, 0); err != nil {
 		failOnError(err, "can't send message on push socket")
 	}
-	sock.Close()
+
+	reply, err := requester.Recv(0)
+	if err != nil {
+		failOnError(err, "Unable to receive reply")
+	}
+	log.Println(reply)
+	
+	requester.Close()
 
 	os.Exit(0)
 }
