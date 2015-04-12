@@ -1,6 +1,7 @@
 package fr.membrives.etienne.remote.service;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
@@ -38,7 +39,7 @@ public class ForwarderService {
             public Boolean call() {
                 zmqContext = ZMQ.context(1);
                 socket = zmqContext.socket(ZMQ.REQ);
-                socket.connect("tcp://10.0.2.2:7002");
+                socket.connect("tcp://192.168.1.12:7001");
                 return true;
             }
         });
@@ -60,7 +61,12 @@ public class ForwarderService {
         ListenableFuture<Boolean> messageSent = executor.submit(new Callable<Boolean>() {
             @Override
             public Boolean call() {
-                return socket.send(message.toByteArray(), 0);
+                Log.e(TAG, "Sending message");
+                boolean result = socket.send(message.toByteArray(), 0);
+                socket.recv(0);
+                Log.e(TAG, "Response received");
+                return result;
+
             }
         });
         return messageSent;
