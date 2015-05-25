@@ -5,5 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="server_connected">Connected to server</string>
     <string name="frontend_connected">Server has frontend</string>
+    <string name="service_name">Remote Service</string>
 
 </resources>

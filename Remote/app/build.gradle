@@ -10,21 +10,6 @@ android {
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
-
-        ndk {
-            moduleName "nanomsg"
-            cFlags "-DANDROID_NDK -DNN_EXPORTS -Dnanomsg_EXPORTS -fPIC " +
-                    "-DNN_HAVE_MSG_CONTROL " +
-                    "-DNN_HAVE_EVENTFD " +
-                    "-DNN_HAVE_SEMAPHORE " +
-                    "-DNN_HAVE_POLL " +
-                    "-DNN_USE_POLL " +
-                    "-DNN_USE_LITERAL_IFADDR "+
-                    "-Dos.prefix=android-arm"
-        }
-    }
-    sourceSets.main {
-        jniLibs.srcDir 'src/main/jniLibs' // <-- Set your folder here!
     }
     buildTypes {
         release {
@@ -39,5 +24,11 @@ dependencies {
     compile 'org.zeromq:jeromq:0.3.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.google.protobuf:protobuf-java:2.6.1'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.mockito:mockito-core:1.9.5'
+    testCompile('org.robolectric:robolectric:3.+') {
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    }
 }

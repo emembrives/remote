@@ -8,53 +8,296 @@ public final class RemoteProtos {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
-  public interface CommandOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
-
-    // optional .proto.Command.CommandType type = 1;
+  /**
+   * Protobuf enum {@code proto.RequestType}
+   */
+  public enum RequestType
+      implements com.google.protobuf.ProtocolMessageEnum {
     /**
-     * <code>optional .proto.Command.CommandType type = 1;</code>
+     * <code>PING = 1;</code>
+     */
+    PING(0, 1),
+    /**
+     * <code>ROUTING_TABLE = 2;</code>
+     */
+    ROUTING_TABLE(1, 2),
+    /**
+     * <code>SERVICES = 3;</code>
+     */
+    SERVICES(2, 3),
+    /**
+     * <code>RPC = 4;</code>
+     */
+    RPC(3, 4),
+    ;
+
+    /**
+     * <code>PING = 1;</code>
+     */
+    public static final int PING_VALUE = 1;
+    /**
+     * <code>ROUTING_TABLE = 2;</code>
+     */
+    public static final int ROUTING_TABLE_VALUE = 2;
+    /**
+     * <code>SERVICES = 3;</code>
+     */
+    public static final int SERVICES_VALUE = 3;
+    /**
+     * <code>RPC = 4;</code>
+     */
+    public static final int RPC_VALUE = 4;
+
+
+    public final int getNumber() { return value; }
+
+    public static RequestType valueOf(int value) {
+      switch (value) {
+        case 1: return PING;
+        case 2: return ROUTING_TABLE;
+        case 3: return SERVICES;
+        case 4: return RPC;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<RequestType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<RequestType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<RequestType>() {
+            public RequestType findValueByNumber(int number) {
+              return RequestType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final RequestType[] VALUES = values();
+
+    public static RequestType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private RequestType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:proto.RequestType)
+  }
+
+  /**
+   * Protobuf enum {@code proto.ObjectType}
+   */
+  public enum ObjectType
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>NONE = 0;</code>
+     */
+    NONE(0, 0),
+    /**
+     * <code>BOOLEAN = 1;</code>
+     */
+    BOOLEAN(1, 1),
+    /**
+     * <code>INTEGER = 2;</code>
+     */
+    INTEGER(2, 2),
+    /**
+     * <code>FLOAT = 3;</code>
+     */
+    FLOAT(3, 3),
+    /**
+     * <code>STRING = 4;</code>
+     */
+    STRING(4, 4),
+    /**
+     * <code>BYTES = 5;</code>
+     */
+    BYTES(5, 5),
+    ;
+
+    /**
+     * <code>NONE = 0;</code>
+     */
+    public static final int NONE_VALUE = 0;
+    /**
+     * <code>BOOLEAN = 1;</code>
+     */
+    public static final int BOOLEAN_VALUE = 1;
+    /**
+     * <code>INTEGER = 2;</code>
+     */
+    public static final int INTEGER_VALUE = 2;
+    /**
+     * <code>FLOAT = 3;</code>
+     */
+    public static final int FLOAT_VALUE = 3;
+    /**
+     * <code>STRING = 4;</code>
+     */
+    public static final int STRING_VALUE = 4;
+    /**
+     * <code>BYTES = 5;</code>
+     */
+    public static final int BYTES_VALUE = 5;
+
+
+    public final int getNumber() { return value; }
+
+    public static ObjectType valueOf(int value) {
+      switch (value) {
+        case 0: return NONE;
+        case 1: return BOOLEAN;
+        case 2: return INTEGER;
+        case 3: return FLOAT;
+        case 4: return STRING;
+        case 5: return BYTES;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ObjectType>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static com.google.protobuf.Internal.EnumLiteMap<ObjectType>
+        internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ObjectType>() {
+            public ObjectType findValueByNumber(int number) {
+              return ObjectType.valueOf(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      return getDescriptor().getValues().get(index);
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final ObjectType[] VALUES = values();
+
+    public static ObjectType valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int index;
+    private final int value;
+
+    private ObjectType(int index, int value) {
+      this.index = index;
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:proto.ObjectType)
+  }
+
+  public interface RequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.Request)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .proto.RequestType type = 1;</code>
      */
     boolean hasType();
     /**
-     * <code>optional .proto.Command.CommandType type = 1;</code>
+     * <code>optional .proto.RequestType type = 1;</code>
      */
-    fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType();
+    fr.membrives.etienne.remote.RemoteProtos.RequestType getType();
 
-    // optional string command = 2;
     /**
-     * <code>optional string command = 2;</code>
+     * <code>optional string host = 2;</code>
+     *
+     * <pre>
+     * may be null
+     * </pre>
      */
-    boolean hasCommand();
+    boolean hasHost();
     /**
-     * <code>optional string command = 2;</code>
+     * <code>optional string host = 2;</code>
+     *
+     * <pre>
+     * may be null
+     * </pre>
      */
-    java.lang.String getCommand();
+    java.lang.String getHost();
     /**
-     * <code>optional string command = 2;</code>
+     * <code>optional string host = 2;</code>
+     *
+     * <pre>
+     * may be null
+     * </pre>
      */
     com.google.protobuf.ByteString
-        getCommandBytes();
+        getHostBytes();
+
+    /**
+     * <code>optional .proto.RPCRequest call = 3;</code>
+     */
+    boolean hasCall();
+    /**
+     * <code>optional .proto.RPCRequest call = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.RPCRequest getCall();
+    /**
+     * <code>optional .proto.RPCRequest call = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder getCallOrBuilder();
   }
   /**
-   * Protobuf type {@code proto.Command}
+   * Protobuf type {@code proto.Request}
    */
-  public static final class Command extends
-      com.google.protobuf.GeneratedMessage
-      implements CommandOrBuilder {
-    // Use Command.newBuilder() to construct.
-    private Command(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+  public static final class Request extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.Request)
+      RequestOrBuilder {
+    // Use Request.newBuilder() to construct.
+    private Request(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private Command(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    private Request(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final Command defaultInstance;
-    public static Command getDefaultInstance() {
+    private static final Request defaultInstance;
+    public static Request getDefaultInstance() {
       return defaultInstance;
     }
 
-    public Command getDefaultInstanceForType() {
+    public Request getDefaultInstanceForType() {
       return defaultInstance;
     }
 
@@ -64,7 +307,7 @@ public final class RemoteProtos {
         getUnknownFields() {
       return this.unknownFields;
     }
-    private Command(
+    private Request(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -89,7 +332,7 @@ public final class RemoteProtos {
             }
             case 8: {
               int rawValue = input.readEnum();
-              fr.membrives.etienne.remote.RemoteProtos.Command.CommandType value = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.valueOf(rawValue);
+              fr.membrives.etienne.remote.RemoteProtos.RequestType value = fr.membrives.etienne.remote.RemoteProtos.RequestType.valueOf(rawValue);
               if (value == null) {
                 unknownFields.mergeVarintField(1, rawValue);
               } else {
@@ -99,8 +342,22 @@ public final class RemoteProtos {
               break;
             }
             case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
-              command_ = input.readBytes();
+              host_ = bs;
+              break;
+            }
+            case 26: {
+              fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = call_.toBuilder();
+              }
+              call_ = input.readMessage(fr.membrives.etienne.remote.RemoteProtos.RPCRequest.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(call_);
+                call_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
               break;
             }
           }
@@ -117,144 +374,68 @@ public final class RemoteProtos {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_descriptor;
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Request_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_fieldAccessorTable
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Request_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              fr.membrives.etienne.remote.RemoteProtos.Command.class, fr.membrives.etienne.remote.RemoteProtos.Command.Builder.class);
+              fr.membrives.etienne.remote.RemoteProtos.Request.class, fr.membrives.etienne.remote.RemoteProtos.Request.Builder.class);
     }
 
-    public static com.google.protobuf.Parser<Command> PARSER =
-        new com.google.protobuf.AbstractParser<Command>() {
-      public Command parsePartialFrom(
+    public static com.google.protobuf.Parser<Request> PARSER =
+        new com.google.protobuf.AbstractParser<Request>() {
+      public Request parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new Command(input, extensionRegistry);
+        return new Request(input, extensionRegistry);
       }
     };
 
     @java.lang.Override
-    public com.google.protobuf.Parser<Command> getParserForType() {
+    public com.google.protobuf.Parser<Request> getParserForType() {
       return PARSER;
     }
 
-    /**
-     * Protobuf enum {@code proto.Command.CommandType}
-     */
-    public enum CommandType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>COMMAND = 1;</code>
-       */
-      COMMAND(0, 1),
-      /**
-       * <code>STATUS = 2;</code>
-       */
-      STATUS(1, 2),
-      ;
-
-      /**
-       * <code>COMMAND = 1;</code>
-       */
-      public static final int COMMAND_VALUE = 1;
-      /**
-       * <code>STATUS = 2;</code>
-       */
-      public static final int STATUS_VALUE = 2;
-
-
-      public final int getNumber() { return value; }
-
-      public static CommandType valueOf(int value) {
-        switch (value) {
-          case 1: return COMMAND;
-          case 2: return STATUS;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<CommandType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<CommandType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<CommandType>() {
-              public CommandType findValueByNumber(int number) {
-                return CommandType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return fr.membrives.etienne.remote.RemoteProtos.Command.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final CommandType[] VALUES = values();
-
-      public static CommandType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private CommandType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:proto.Command.CommandType)
-    }
-
     private int bitField0_;
-    // optional .proto.Command.CommandType type = 1;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private fr.membrives.etienne.remote.RemoteProtos.Command.CommandType type_;
+    private fr.membrives.etienne.remote.RemoteProtos.RequestType type_;
     /**
-     * <code>optional .proto.Command.CommandType type = 1;</code>
+     * <code>optional .proto.RequestType type = 1;</code>
      */
     public boolean hasType() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional .proto.Command.CommandType type = 1;</code>
+     * <code>optional .proto.RequestType type = 1;</code>
      */
-    public fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType() {
+    public fr.membrives.etienne.remote.RemoteProtos.RequestType getType() {
       return type_;
     }
 
-    // optional string command = 2;
-    public static final int COMMAND_FIELD_NUMBER = 2;
-    private java.lang.Object command_;
+    public static final int HOST_FIELD_NUMBER = 2;
+    private java.lang.Object host_;
     /**
-     * <code>optional string command = 2;</code>
+     * <code>optional string host = 2;</code>
+     *
+     * <pre>
+     * may be null
+     * </pre>
      */
-    public boolean hasCommand() {
+    public boolean hasHost() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>optional string command = 2;</code>
+     * <code>optional string host = 2;</code>
+     *
+     * <pre>
+     * may be null
+     * </pre>
      */
-    public java.lang.String getCommand() {
-      java.lang.Object ref = command_;
+    public java.lang.String getHost() {
+      java.lang.Object ref = host_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
@@ -262,36 +443,63 @@ public final class RemoteProtos {
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
-          command_ = s;
+          host_ = s;
         }
         return s;
       }
     }
     /**
-     * <code>optional string command = 2;</code>
+     * <code>optional string host = 2;</code>
+     *
+     * <pre>
+     * may be null
+     * </pre>
      */
     public com.google.protobuf.ByteString
-        getCommandBytes() {
-      java.lang.Object ref = command_;
+        getHostBytes() {
+      java.lang.Object ref = host_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        command_ = b;
+        host_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
 
+    public static final int CALL_FIELD_NUMBER = 3;
+    private fr.membrives.etienne.remote.RemoteProtos.RPCRequest call_;
+    /**
+     * <code>optional .proto.RPCRequest call = 3;</code>
+     */
+    public boolean hasCall() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .proto.RPCRequest call = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.RPCRequest getCall() {
+      return call_;
+    }
+    /**
+     * <code>optional .proto.RPCRequest call = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder getCallOrBuilder() {
+      return call_;
+    }
+
     private void initFields() {
-      type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
-      command_ = "";
+      type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
+      host_ = "";
+      call_ = fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -304,7 +512,10 @@ public final class RemoteProtos {
         output.writeEnum(1, type_.getNumber());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getCommandBytes());
+        output.writeBytes(2, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, call_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -321,7 +532,11 @@ public final class RemoteProtos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getCommandBytes());
+          .computeBytesSize(2, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, call_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -335,53 +550,53 @@ public final class RemoteProtos {
       return super.writeReplace();
     }
 
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(byte[] data)
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(java.io.InputStream input)
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseFrom(input, extensionRegistry);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseDelimitedFrom(java.io.InputStream input)
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseDelimitedFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return PARSER.parseFrom(input);
     }
-    public static fr.membrives.etienne.remote.RemoteProtos.Command parseFrom(
+    public static fr.membrives.etienne.remote.RemoteProtos.Request parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -390,7 +605,7 @@ public final class RemoteProtos {
 
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.Command prototype) {
+    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.Request prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
@@ -402,24 +617,2855 @@ public final class RemoteProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code proto.Command}
+     * Protobuf type {@code proto.Request}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements fr.membrives.etienne.remote.RemoteProtos.CommandOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.Request)
+        fr.membrives.etienne.remote.RemoteProtos.RequestOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_descriptor;
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Request_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_fieldAccessorTable
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Request_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                fr.membrives.etienne.remote.RemoteProtos.Command.class, fr.membrives.etienne.remote.RemoteProtos.Command.Builder.class);
+                fr.membrives.etienne.remote.RemoteProtos.Request.class, fr.membrives.etienne.remote.RemoteProtos.Request.Builder.class);
       }
 
-      // Construct using fr.membrives.etienne.remote.RemoteProtos.Command.newBuilder()
+      // Construct using fr.membrives.etienne.remote.RemoteProtos.Request.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getCallFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        host_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (callBuilder_ == null) {
+          call_ = fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance();
+        } else {
+          callBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Request_descriptor;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Request getDefaultInstanceForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.Request.getDefaultInstance();
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Request build() {
+        fr.membrives.etienne.remote.RemoteProtos.Request result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Request buildPartial() {
+        fr.membrives.etienne.remote.RemoteProtos.Request result = new fr.membrives.etienne.remote.RemoteProtos.Request(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.host_ = host_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (callBuilder_ == null) {
+          result.call_ = call_;
+        } else {
+          result.call_ = callBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.Request) {
+          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.Request)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.Request other) {
+        if (other == fr.membrives.etienne.remote.RemoteProtos.Request.getDefaultInstance()) return this;
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasHost()) {
+          bitField0_ |= 0x00000002;
+          host_ = other.host_;
+          onChanged();
+        }
+        if (other.hasCall()) {
+          mergeCall(other.getCall());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        fr.membrives.etienne.remote.RemoteProtos.Request parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.Request) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fr.membrives.etienne.remote.RemoteProtos.RequestType type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
+      /**
+       * <code>optional .proto.RequestType type = 1;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .proto.RequestType type = 1;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.RequestType getType() {
+        return type_;
+      }
+      /**
+       * <code>optional .proto.RequestType type = 1;</code>
+       */
+      public Builder setType(fr.membrives.etienne.remote.RemoteProtos.RequestType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .proto.RequestType type = 1;</code>
+       */
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object host_ = "";
+      /**
+       * <code>optional string host = 2;</code>
+       *
+       * <pre>
+       * may be null
+       * </pre>
+       */
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       *
+       * <pre>
+       * may be null
+       * </pre>
+       */
+      public java.lang.String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            host_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       *
+       * <pre>
+       * may be null
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getHostBytes() {
+        java.lang.Object ref = host_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          host_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       *
+       * <pre>
+       * may be null
+       * </pre>
+       */
+      public Builder setHost(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       *
+       * <pre>
+       * may be null
+       * </pre>
+       */
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       *
+       * <pre>
+       * may be null
+       * </pre>
+       */
+      public Builder setHostBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+
+      private fr.membrives.etienne.remote.RemoteProtos.RPCRequest call_ = fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.RPCRequest, fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder, fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder> callBuilder_;
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public boolean hasCall() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.RPCRequest getCall() {
+        if (callBuilder_ == null) {
+          return call_;
+        } else {
+          return callBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public Builder setCall(fr.membrives.etienne.remote.RemoteProtos.RPCRequest value) {
+        if (callBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          call_ = value;
+          onChanged();
+        } else {
+          callBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public Builder setCall(
+          fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder builderForValue) {
+        if (callBuilder_ == null) {
+          call_ = builderForValue.build();
+          onChanged();
+        } else {
+          callBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public Builder mergeCall(fr.membrives.etienne.remote.RemoteProtos.RPCRequest value) {
+        if (callBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              call_ != fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance()) {
+            call_ =
+              fr.membrives.etienne.remote.RemoteProtos.RPCRequest.newBuilder(call_).mergeFrom(value).buildPartial();
+          } else {
+            call_ = value;
+          }
+          onChanged();
+        } else {
+          callBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public Builder clearCall() {
+        if (callBuilder_ == null) {
+          call_ = fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance();
+          onChanged();
+        } else {
+          callBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder getCallBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getCallFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder getCallOrBuilder() {
+        if (callBuilder_ != null) {
+          return callBuilder_.getMessageOrBuilder();
+        } else {
+          return call_;
+        }
+      }
+      /**
+       * <code>optional .proto.RPCRequest call = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.RPCRequest, fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder, fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder> 
+          getCallFieldBuilder() {
+        if (callBuilder_ == null) {
+          callBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              fr.membrives.etienne.remote.RemoteProtos.RPCRequest, fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder, fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder>(
+                  getCall(),
+                  getParentForChildren(),
+                  isClean());
+          call_ = null;
+        }
+        return callBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:proto.Request)
+    }
+
+    static {
+      defaultInstance = new Request(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.Request)
+  }
+
+  public interface RPCRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.RPCRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    boolean hasService();
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    java.lang.String getService();
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getServiceBytes();
+
+    /**
+     * <code>optional string method = 2;</code>
+     */
+    boolean hasMethod();
+    /**
+     * <code>optional string method = 2;</code>
+     */
+    java.lang.String getMethod();
+    /**
+     * <code>optional string method = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getMethodBytes();
+
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> 
+        getArgumentsList();
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.Object getArguments(int index);
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    int getArgumentsCount();
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+        getArgumentsOrBuilderList();
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder getArgumentsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code proto.RPCRequest}
+   */
+  public static final class RPCRequest extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.RPCRequest)
+      RPCRequestOrBuilder {
+    // Use RPCRequest.newBuilder() to construct.
+    private RPCRequest(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private RPCRequest(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final RPCRequest defaultInstance;
+    public static RPCRequest getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public RPCRequest getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RPCRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              service_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              method_ = bs;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                arguments_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.Object>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              arguments_.add(input.readMessage(fr.membrives.etienne.remote.RemoteProtos.Object.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          arguments_ = java.util.Collections.unmodifiableList(arguments_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_RPCRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_RPCRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              fr.membrives.etienne.remote.RemoteProtos.RPCRequest.class, fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<RPCRequest> PARSER =
+        new com.google.protobuf.AbstractParser<RPCRequest>() {
+      public RPCRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RPCRequest(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RPCRequest> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int SERVICE_FIELD_NUMBER = 1;
+    private java.lang.Object service_;
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    public boolean hasService() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    public java.lang.String getService() {
+      java.lang.Object ref = service_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          service_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getServiceBytes() {
+      java.lang.Object ref = service_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        service_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int METHOD_FIELD_NUMBER = 2;
+    private java.lang.Object method_;
+    /**
+     * <code>optional string method = 2;</code>
+     */
+    public boolean hasMethod() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string method = 2;</code>
+     */
+    public java.lang.String getMethod() {
+      java.lang.Object ref = method_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          method_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string method = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMethodBytes() {
+      java.lang.Object ref = method_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        method_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ARGUMENTS_FIELD_NUMBER = 3;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> arguments_;
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> getArgumentsList() {
+      return arguments_;
+    }
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+        getArgumentsOrBuilderList() {
+      return arguments_;
+    }
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    public int getArgumentsCount() {
+      return arguments_.size();
+    }
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.Object getArguments(int index) {
+      return arguments_.get(index);
+    }
+    /**
+     * <code>repeated .proto.Object arguments = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder getArgumentsOrBuilder(
+        int index) {
+      return arguments_.get(index);
+    }
+
+    private void initFields() {
+      service_ = "";
+      method_ = "";
+      arguments_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getServiceBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getMethodBytes());
+      }
+      for (int i = 0; i < arguments_.size(); i++) {
+        output.writeMessage(3, arguments_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getServiceBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getMethodBytes());
+      }
+      for (int i = 0; i < arguments_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, arguments_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.RPCRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.RPCRequest prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code proto.RPCRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.RPCRequest)
+        fr.membrives.etienne.remote.RemoteProtos.RPCRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_RPCRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_RPCRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                fr.membrives.etienne.remote.RemoteProtos.RPCRequest.class, fr.membrives.etienne.remote.RemoteProtos.RPCRequest.Builder.class);
+      }
+
+      // Construct using fr.membrives.etienne.remote.RemoteProtos.RPCRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getArgumentsFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        service_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        method_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (argumentsBuilder_ == null) {
+          arguments_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          argumentsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_RPCRequest_descriptor;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.RPCRequest getDefaultInstanceForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance();
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.RPCRequest build() {
+        fr.membrives.etienne.remote.RemoteProtos.RPCRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.RPCRequest buildPartial() {
+        fr.membrives.etienne.remote.RemoteProtos.RPCRequest result = new fr.membrives.etienne.remote.RemoteProtos.RPCRequest(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.service_ = service_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.method_ = method_;
+        if (argumentsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            arguments_ = java.util.Collections.unmodifiableList(arguments_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.arguments_ = arguments_;
+        } else {
+          result.arguments_ = argumentsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.RPCRequest) {
+          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.RPCRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.RPCRequest other) {
+        if (other == fr.membrives.etienne.remote.RemoteProtos.RPCRequest.getDefaultInstance()) return this;
+        if (other.hasService()) {
+          bitField0_ |= 0x00000001;
+          service_ = other.service_;
+          onChanged();
+        }
+        if (other.hasMethod()) {
+          bitField0_ |= 0x00000002;
+          method_ = other.method_;
+          onChanged();
+        }
+        if (argumentsBuilder_ == null) {
+          if (!other.arguments_.isEmpty()) {
+            if (arguments_.isEmpty()) {
+              arguments_ = other.arguments_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureArgumentsIsMutable();
+              arguments_.addAll(other.arguments_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.arguments_.isEmpty()) {
+            if (argumentsBuilder_.isEmpty()) {
+              argumentsBuilder_.dispose();
+              argumentsBuilder_ = null;
+              arguments_ = other.arguments_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              argumentsBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getArgumentsFieldBuilder() : null;
+            } else {
+              argumentsBuilder_.addAllMessages(other.arguments_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        fr.membrives.etienne.remote.RemoteProtos.RPCRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.RPCRequest) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object service_ = "";
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public boolean hasService() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public java.lang.String getService() {
+        java.lang.Object ref = service_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            service_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getServiceBytes() {
+        java.lang.Object ref = service_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          service_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public Builder setService(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        service_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public Builder clearService() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        service_ = getDefaultInstance().getService();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public Builder setServiceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        service_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object method_ = "";
+      /**
+       * <code>optional string method = 2;</code>
+       */
+      public boolean hasMethod() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string method = 2;</code>
+       */
+      public java.lang.String getMethod() {
+        java.lang.Object ref = method_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            method_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string method = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMethodBytes() {
+        java.lang.Object ref = method_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          method_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string method = 2;</code>
+       */
+      public Builder setMethod(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        method_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string method = 2;</code>
+       */
+      public Builder clearMethod() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        method_ = getDefaultInstance().getMethod();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string method = 2;</code>
+       */
+      public Builder setMethodBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        method_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> arguments_ =
+        java.util.Collections.emptyList();
+      private void ensureArgumentsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          arguments_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.Object>(arguments_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.Object, fr.membrives.etienne.remote.RemoteProtos.Object.Builder, fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> argumentsBuilder_;
+
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> getArgumentsList() {
+        if (argumentsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(arguments_);
+        } else {
+          return argumentsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public int getArgumentsCount() {
+        if (argumentsBuilder_ == null) {
+          return arguments_.size();
+        } else {
+          return argumentsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object getArguments(int index) {
+        if (argumentsBuilder_ == null) {
+          return arguments_.get(index);
+        } else {
+          return argumentsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder setArguments(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object value) {
+        if (argumentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureArgumentsIsMutable();
+          arguments_.set(index, value);
+          onChanged();
+        } else {
+          argumentsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder setArguments(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object.Builder builderForValue) {
+        if (argumentsBuilder_ == null) {
+          ensureArgumentsIsMutable();
+          arguments_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          argumentsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder addArguments(fr.membrives.etienne.remote.RemoteProtos.Object value) {
+        if (argumentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureArgumentsIsMutable();
+          arguments_.add(value);
+          onChanged();
+        } else {
+          argumentsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder addArguments(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object value) {
+        if (argumentsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureArgumentsIsMutable();
+          arguments_.add(index, value);
+          onChanged();
+        } else {
+          argumentsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder addArguments(
+          fr.membrives.etienne.remote.RemoteProtos.Object.Builder builderForValue) {
+        if (argumentsBuilder_ == null) {
+          ensureArgumentsIsMutable();
+          arguments_.add(builderForValue.build());
+          onChanged();
+        } else {
+          argumentsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder addArguments(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object.Builder builderForValue) {
+        if (argumentsBuilder_ == null) {
+          ensureArgumentsIsMutable();
+          arguments_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          argumentsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder addAllArguments(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.Object> values) {
+        if (argumentsBuilder_ == null) {
+          ensureArgumentsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, arguments_);
+          onChanged();
+        } else {
+          argumentsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder clearArguments() {
+        if (argumentsBuilder_ == null) {
+          arguments_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          argumentsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public Builder removeArguments(int index) {
+        if (argumentsBuilder_ == null) {
+          ensureArgumentsIsMutable();
+          arguments_.remove(index);
+          onChanged();
+        } else {
+          argumentsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object.Builder getArgumentsBuilder(
+          int index) {
+        return getArgumentsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder getArgumentsOrBuilder(
+          int index) {
+        if (argumentsBuilder_ == null) {
+          return arguments_.get(index);  } else {
+          return argumentsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+           getArgumentsOrBuilderList() {
+        if (argumentsBuilder_ != null) {
+          return argumentsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(arguments_);
+        }
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object.Builder addArgumentsBuilder() {
+        return getArgumentsFieldBuilder().addBuilder(
+            fr.membrives.etienne.remote.RemoteProtos.Object.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object.Builder addArgumentsBuilder(
+          int index) {
+        return getArgumentsFieldBuilder().addBuilder(
+            index, fr.membrives.etienne.remote.RemoteProtos.Object.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.Object arguments = 3;</code>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object.Builder> 
+           getArgumentsBuilderList() {
+        return getArgumentsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.Object, fr.membrives.etienne.remote.RemoteProtos.Object.Builder, fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+          getArgumentsFieldBuilder() {
+        if (argumentsBuilder_ == null) {
+          argumentsBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              fr.membrives.etienne.remote.RemoteProtos.Object, fr.membrives.etienne.remote.RemoteProtos.Object.Builder, fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder>(
+                  arguments_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          arguments_ = null;
+        }
+        return argumentsBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:proto.RPCRequest)
+    }
+
+    static {
+      defaultInstance = new RPCRequest(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.RPCRequest)
+  }
+
+  public interface ServiceDefinitionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.ServiceDefinition)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    boolean hasHost();
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    java.lang.String getHost();
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getHostBytes();
+
+    /**
+     * <code>optional string service_name = 2;</code>
+     */
+    boolean hasServiceName();
+    /**
+     * <code>optional string service_name = 2;</code>
+     */
+    java.lang.String getServiceName();
+    /**
+     * <code>optional string service_name = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getServiceNameBytes();
+
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition> 
+        getMethodList();
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.MethodDefinition getMethod(int index);
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    int getMethodCount();
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder> 
+        getMethodOrBuilderList();
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder getMethodOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code proto.ServiceDefinition}
+   */
+  public static final class ServiceDefinition extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.ServiceDefinition)
+      ServiceDefinitionOrBuilder {
+    // Use ServiceDefinition.newBuilder() to construct.
+    private ServiceDefinition(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ServiceDefinition(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ServiceDefinition defaultInstance;
+    public static ServiceDefinition getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ServiceDefinition getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ServiceDefinition(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              host_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              serviceName_ = bs;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                method_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              method_.add(input.readMessage(fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          method_ = java.util.Collections.unmodifiableList(method_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_ServiceDefinition_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_ServiceDefinition_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.class, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ServiceDefinition> PARSER =
+        new com.google.protobuf.AbstractParser<ServiceDefinition>() {
+      public ServiceDefinition parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ServiceDefinition(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ServiceDefinition> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HOST_FIELD_NUMBER = 1;
+    private java.lang.Object host_;
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    public java.lang.String getHost() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          host_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHostBytes() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        host_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SERVICE_NAME_FIELD_NUMBER = 2;
+    private java.lang.Object serviceName_;
+    /**
+     * <code>optional string service_name = 2;</code>
+     */
+    public boolean hasServiceName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string service_name = 2;</code>
+     */
+    public java.lang.String getServiceName() {
+      java.lang.Object ref = serviceName_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          serviceName_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string service_name = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getServiceNameBytes() {
+      java.lang.Object ref = serviceName_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        serviceName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int METHOD_FIELD_NUMBER = 3;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition> method_;
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition> getMethodList() {
+      return method_;
+    }
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder> 
+        getMethodOrBuilderList() {
+      return method_;
+    }
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    public int getMethodCount() {
+      return method_.size();
+    }
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition getMethod(int index) {
+      return method_.get(index);
+    }
+    /**
+     * <code>repeated .proto.MethodDefinition method = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder getMethodOrBuilder(
+        int index) {
+      return method_.get(index);
+    }
+
+    private void initFields() {
+      host_ = "";
+      serviceName_ = "";
+      method_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getServiceNameBytes());
+      }
+      for (int i = 0; i < method_.size(); i++) {
+        output.writeMessage(3, method_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getServiceNameBytes());
+      }
+      for (int i = 0; i < method_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, method_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code proto.ServiceDefinition}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.ServiceDefinition)
+        fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_ServiceDefinition_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_ServiceDefinition_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.class, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder.class);
+      }
+
+      // Construct using fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getMethodFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        host_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        serviceName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (methodBuilder_ == null) {
+          method_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          methodBuilder_.clear();
+        }
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_ServiceDefinition_descriptor;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition getDefaultInstanceForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.getDefaultInstance();
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition build() {
+        fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition buildPartial() {
+        fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition result = new fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.host_ = host_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.serviceName_ = serviceName_;
+        if (methodBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            method_ = java.util.Collections.unmodifiableList(method_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.method_ = method_;
+        } else {
+          result.method_ = methodBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition) {
+          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition other) {
+        if (other == fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.getDefaultInstance()) return this;
+        if (other.hasHost()) {
+          bitField0_ |= 0x00000001;
+          host_ = other.host_;
+          onChanged();
+        }
+        if (other.hasServiceName()) {
+          bitField0_ |= 0x00000002;
+          serviceName_ = other.serviceName_;
+          onChanged();
+        }
+        if (methodBuilder_ == null) {
+          if (!other.method_.isEmpty()) {
+            if (method_.isEmpty()) {
+              method_ = other.method_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureMethodIsMutable();
+              method_.addAll(other.method_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.method_.isEmpty()) {
+            if (methodBuilder_.isEmpty()) {
+              methodBuilder_.dispose();
+              methodBuilder_ = null;
+              method_ = other.method_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              methodBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getMethodFieldBuilder() : null;
+            } else {
+              methodBuilder_.addAllMessages(other.method_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object host_ = "";
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public java.lang.String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            host_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHostBytes() {
+        java.lang.Object ref = host_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          host_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public Builder setHost(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public Builder setHostBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object serviceName_ = "";
+      /**
+       * <code>optional string service_name = 2;</code>
+       */
+      public boolean hasServiceName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string service_name = 2;</code>
+       */
+      public java.lang.String getServiceName() {
+        java.lang.Object ref = serviceName_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            serviceName_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string service_name = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getServiceNameBytes() {
+        java.lang.Object ref = serviceName_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          serviceName_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string service_name = 2;</code>
+       */
+      public Builder setServiceName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        serviceName_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string service_name = 2;</code>
+       */
+      public Builder clearServiceName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        serviceName_ = getDefaultInstance().getServiceName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string service_name = 2;</code>
+       */
+      public Builder setServiceNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        serviceName_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition> method_ =
+        java.util.Collections.emptyList();
+      private void ensureMethodIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          method_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition>(method_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.MethodDefinition, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder, fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder> methodBuilder_;
+
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition> getMethodList() {
+        if (methodBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(method_);
+        } else {
+          return methodBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public int getMethodCount() {
+        if (methodBuilder_ == null) {
+          return method_.size();
+        } else {
+          return methodBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition getMethod(int index) {
+        if (methodBuilder_ == null) {
+          return method_.get(index);
+        } else {
+          return methodBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder setMethod(
+          int index, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition value) {
+        if (methodBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMethodIsMutable();
+          method_.set(index, value);
+          onChanged();
+        } else {
+          methodBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder setMethod(
+          int index, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder builderForValue) {
+        if (methodBuilder_ == null) {
+          ensureMethodIsMutable();
+          method_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          methodBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder addMethod(fr.membrives.etienne.remote.RemoteProtos.MethodDefinition value) {
+        if (methodBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMethodIsMutable();
+          method_.add(value);
+          onChanged();
+        } else {
+          methodBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder addMethod(
+          int index, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition value) {
+        if (methodBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureMethodIsMutable();
+          method_.add(index, value);
+          onChanged();
+        } else {
+          methodBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder addMethod(
+          fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder builderForValue) {
+        if (methodBuilder_ == null) {
+          ensureMethodIsMutable();
+          method_.add(builderForValue.build());
+          onChanged();
+        } else {
+          methodBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder addMethod(
+          int index, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder builderForValue) {
+        if (methodBuilder_ == null) {
+          ensureMethodIsMutable();
+          method_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          methodBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder addAllMethod(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.MethodDefinition> values) {
+        if (methodBuilder_ == null) {
+          ensureMethodIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, method_);
+          onChanged();
+        } else {
+          methodBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder clearMethod() {
+        if (methodBuilder_ == null) {
+          method_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          methodBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public Builder removeMethod(int index) {
+        if (methodBuilder_ == null) {
+          ensureMethodIsMutable();
+          method_.remove(index);
+          onChanged();
+        } else {
+          methodBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder getMethodBuilder(
+          int index) {
+        return getMethodFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder getMethodOrBuilder(
+          int index) {
+        if (methodBuilder_ == null) {
+          return method_.get(index);  } else {
+          return methodBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder> 
+           getMethodOrBuilderList() {
+        if (methodBuilder_ != null) {
+          return methodBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(method_);
+        }
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder addMethodBuilder() {
+        return getMethodFieldBuilder().addBuilder(
+            fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder addMethodBuilder(
+          int index) {
+        return getMethodFieldBuilder().addBuilder(
+            index, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.MethodDefinition method = 3;</code>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder> 
+           getMethodBuilderList() {
+        return getMethodFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.MethodDefinition, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder, fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder> 
+          getMethodFieldBuilder() {
+        if (methodBuilder_ == null) {
+          methodBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              fr.membrives.etienne.remote.RemoteProtos.MethodDefinition, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder, fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder>(
+                  method_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          method_ = null;
+        }
+        return methodBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:proto.ServiceDefinition)
+    }
+
+    static {
+      defaultInstance = new ServiceDefinition(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.ServiceDefinition)
+  }
+
+  public interface MethodDefinitionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.MethodDefinition)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>repeated .proto.ObjectType argument = 2;</code>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> getArgumentList();
+    /**
+     * <code>repeated .proto.ObjectType argument = 2;</code>
+     */
+    int getArgumentCount();
+    /**
+     * <code>repeated .proto.ObjectType argument = 2;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.ObjectType getArgument(int index);
+
+    /**
+     * <code>repeated .proto.ObjectType return = 3;</code>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> getReturnList();
+    /**
+     * <code>repeated .proto.ObjectType return = 3;</code>
+     */
+    int getReturnCount();
+    /**
+     * <code>repeated .proto.ObjectType return = 3;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.ObjectType getReturn(int index);
+  }
+  /**
+   * Protobuf type {@code proto.MethodDefinition}
+   */
+  public static final class MethodDefinition extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.MethodDefinition)
+      MethodDefinitionOrBuilder {
+    // Use MethodDefinition.newBuilder() to construct.
+    private MethodDefinition(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private MethodDefinition(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final MethodDefinition defaultInstance;
+    public static MethodDefinition getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public MethodDefinition getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private MethodDefinition(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              name_ = bs;
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              fr.membrives.etienne.remote.RemoteProtos.ObjectType value = fr.membrives.etienne.remote.RemoteProtos.ObjectType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+                } else {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  argument_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ObjectType>();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                argument_.add(value);
+              }
+              break;
+            }
+            case 18: {
+              int length = input.readRawVarint32();
+              int oldLimit = input.pushLimit(length);
+              while(input.getBytesUntilLimit() > 0) {
+                int rawValue = input.readEnum();
+                fr.membrives.etienne.remote.RemoteProtos.ObjectType value = fr.membrives.etienne.remote.RemoteProtos.ObjectType.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(2, rawValue);
+                  } else {
+                  if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                    argument_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ObjectType>();
+                    mutable_bitField0_ |= 0x00000002;
+                  }
+                  argument_.add(value);
+                }
+              }
+              input.popLimit(oldLimit);
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              fr.membrives.etienne.remote.RemoteProtos.ObjectType value = fr.membrives.etienne.remote.RemoteProtos.ObjectType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+                } else {
+                if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                  return_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ObjectType>();
+                  mutable_bitField0_ |= 0x00000004;
+                }
+                return_.add(value);
+              }
+              break;
+            }
+            case 26: {
+              int length = input.readRawVarint32();
+              int oldLimit = input.pushLimit(length);
+              while(input.getBytesUntilLimit() > 0) {
+                int rawValue = input.readEnum();
+                fr.membrives.etienne.remote.RemoteProtos.ObjectType value = fr.membrives.etienne.remote.RemoteProtos.ObjectType.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(3, rawValue);
+                  } else {
+                  if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                    return_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ObjectType>();
+                    mutable_bitField0_ |= 0x00000004;
+                  }
+                  return_.add(value);
+                }
+              }
+              input.popLimit(oldLimit);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          argument_ = java.util.Collections.unmodifiableList(argument_);
+        }
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          return_ = java.util.Collections.unmodifiableList(return_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_MethodDefinition_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_MethodDefinition_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.class, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<MethodDefinition> PARSER =
+        new com.google.protobuf.AbstractParser<MethodDefinition>() {
+      public MethodDefinition parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new MethodDefinition(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<MethodDefinition> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private java.lang.Object name_;
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ARGUMENT_FIELD_NUMBER = 2;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> argument_;
+    /**
+     * <code>repeated .proto.ObjectType argument = 2;</code>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> getArgumentList() {
+      return argument_;
+    }
+    /**
+     * <code>repeated .proto.ObjectType argument = 2;</code>
+     */
+    public int getArgumentCount() {
+      return argument_.size();
+    }
+    /**
+     * <code>repeated .proto.ObjectType argument = 2;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ObjectType getArgument(int index) {
+      return argument_.get(index);
+    }
+
+    public static final int RETURN_FIELD_NUMBER = 3;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> return_;
+    /**
+     * <code>repeated .proto.ObjectType return = 3;</code>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> getReturnList() {
+      return return_;
+    }
+    /**
+     * <code>repeated .proto.ObjectType return = 3;</code>
+     */
+    public int getReturnCount() {
+      return return_.size();
+    }
+    /**
+     * <code>repeated .proto.ObjectType return = 3;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ObjectType getReturn(int index) {
+      return return_.get(index);
+    }
+
+    private void initFields() {
+      name_ = "";
+      argument_ = java.util.Collections.emptyList();
+      return_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getNameBytes());
+      }
+      for (int i = 0; i < argument_.size(); i++) {
+        output.writeEnum(2, argument_.get(i).getNumber());
+      }
+      for (int i = 0; i < return_.size(); i++) {
+        output.writeEnum(3, return_.get(i).getNumber());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getNameBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < argument_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeEnumSizeNoTag(argument_.get(i).getNumber());
+        }
+        size += dataSize;
+        size += 1 * argument_.size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < return_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeEnumSizeNoTag(return_.get(i).getNumber());
+        }
+        size += dataSize;
+        size += 1 * return_.size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.MethodDefinition prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code proto.MethodDefinition}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.MethodDefinition)
+        fr.membrives.etienne.remote.RemoteProtos.MethodDefinitionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_MethodDefinition_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_MethodDefinition_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.class, fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.Builder.class);
+      }
+
+      // Construct using fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -439,10 +3485,12 @@ public final class RemoteProtos {
 
       public Builder clear() {
         super.clear();
-        type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
+        name_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        command_ = "";
+        argument_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
+        return_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -452,55 +3500,78 @@ public final class RemoteProtos {
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Command_descriptor;
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_MethodDefinition_descriptor;
       }
 
-      public fr.membrives.etienne.remote.RemoteProtos.Command getDefaultInstanceForType() {
-        return fr.membrives.etienne.remote.RemoteProtos.Command.getDefaultInstance();
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition getDefaultInstanceForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.getDefaultInstance();
       }
 
-      public fr.membrives.etienne.remote.RemoteProtos.Command build() {
-        fr.membrives.etienne.remote.RemoteProtos.Command result = buildPartial();
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition build() {
+        fr.membrives.etienne.remote.RemoteProtos.MethodDefinition result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public fr.membrives.etienne.remote.RemoteProtos.Command buildPartial() {
-        fr.membrives.etienne.remote.RemoteProtos.Command result = new fr.membrives.etienne.remote.RemoteProtos.Command(this);
+      public fr.membrives.etienne.remote.RemoteProtos.MethodDefinition buildPartial() {
+        fr.membrives.etienne.remote.RemoteProtos.MethodDefinition result = new fr.membrives.etienne.remote.RemoteProtos.MethodDefinition(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.type_ = type_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
+        result.name_ = name_;
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          argument_ = java.util.Collections.unmodifiableList(argument_);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
-        result.command_ = command_;
+        result.argument_ = argument_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          return_ = java.util.Collections.unmodifiableList(return_);
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.return_ = return_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
 
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.Command) {
-          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.Command)other);
+        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.MethodDefinition) {
+          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.MethodDefinition)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.Command other) {
-        if (other == fr.membrives.etienne.remote.RemoteProtos.Command.getDefaultInstance()) return this;
-        if (other.hasType()) {
-          setType(other.getType());
+      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.MethodDefinition other) {
+        if (other == fr.membrives.etienne.remote.RemoteProtos.MethodDefinition.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          bitField0_ |= 0x00000001;
+          name_ = other.name_;
+          onChanged();
         }
-        if (other.hasCommand()) {
-          bitField0_ |= 0x00000002;
-          command_ = other.command_;
+        if (!other.argument_.isEmpty()) {
+          if (argument_.isEmpty()) {
+            argument_ = other.argument_;
+            bitField0_ = (bitField0_ & ~0x00000002);
+          } else {
+            ensureArgumentIsMutable();
+            argument_.addAll(other.argument_);
+          }
+          onChanged();
+        }
+        if (!other.return_.isEmpty()) {
+          if (return_.isEmpty()) {
+            return_ = other.return_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureReturnIsMutable();
+            return_.addAll(other.return_);
+          }
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -515,11 +3586,11 @@ public final class RemoteProtos {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        fr.membrives.etienne.remote.RemoteProtos.Command parsedMessage = null;
+        fr.membrives.etienne.remote.RemoteProtos.MethodDefinition parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.Command) e.getUnfinishedMessage();
+          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.MethodDefinition) e.getUnfinishedMessage();
           throw e;
         } finally {
           if (parsedMessage != null) {
@@ -530,146 +3601,1304 @@ public final class RemoteProtos {
       }
       private int bitField0_;
 
-      // optional .proto.Command.CommandType type = 1;
-      private fr.membrives.etienne.remote.RemoteProtos.Command.CommandType type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
+      private java.lang.Object name_ = "";
       /**
-       * <code>optional .proto.Command.CommandType type = 1;</code>
+       * <code>optional string name = 1;</code>
        */
-      public boolean hasType() {
+      public boolean hasName() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional .proto.Command.CommandType type = 1;</code>
+       * <code>optional string name = 1;</code>
        */
-      public fr.membrives.etienne.remote.RemoteProtos.Command.CommandType getType() {
-        return type_;
-      }
-      /**
-       * <code>optional .proto.Command.CommandType type = 1;</code>
-       */
-      public Builder setType(fr.membrives.etienne.remote.RemoteProtos.Command.CommandType value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        bitField0_ |= 0x00000001;
-        type_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .proto.Command.CommandType type = 1;</code>
-       */
-      public Builder clearType() {
-        bitField0_ = (bitField0_ & ~0x00000001);
-        type_ = fr.membrives.etienne.remote.RemoteProtos.Command.CommandType.COMMAND;
-        onChanged();
-        return this;
-      }
-
-      // optional string command = 2;
-      private java.lang.Object command_ = "";
-      /**
-       * <code>optional string command = 2;</code>
-       */
-      public boolean hasCommand() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string command = 2;</code>
-       */
-      public java.lang.String getCommand() {
-        java.lang.Object ref = command_;
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
         if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
-          command_ = s;
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            name_ = s;
+          }
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>optional string command = 2;</code>
+       * <code>optional string name = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getCommandBytes() {
-        java.lang.Object ref = command_;
+          getNameBytes() {
+        java.lang.Object ref = name_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          command_ = b;
+          name_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>optional string command = 2;</code>
+       * <code>optional string name = 1;</code>
        */
-      public Builder setCommand(
+      public Builder setName(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
-        command_ = value;
+  bitField0_ |= 0x00000001;
+        name_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string command = 2;</code>
+       * <code>optional string name = 1;</code>
        */
-      public Builder clearCommand() {
-        bitField0_ = (bitField0_ & ~0x00000002);
-        command_ = getDefaultInstance().getCommand();
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = getDefaultInstance().getName();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string command = 2;</code>
+       * <code>optional string name = 1;</code>
        */
-      public Builder setCommandBytes(
+      public Builder setNameBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
-        command_ = value;
+  bitField0_ |= 0x00000001;
+        name_ = value;
         onChanged();
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:proto.Command)
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> argument_ =
+        java.util.Collections.emptyList();
+      private void ensureArgumentIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          argument_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ObjectType>(argument_);
+          bitField0_ |= 0x00000002;
+        }
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> getArgumentList() {
+        return java.util.Collections.unmodifiableList(argument_);
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public int getArgumentCount() {
+        return argument_.size();
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ObjectType getArgument(int index) {
+        return argument_.get(index);
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public Builder setArgument(
+          int index, fr.membrives.etienne.remote.RemoteProtos.ObjectType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureArgumentIsMutable();
+        argument_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public Builder addArgument(fr.membrives.etienne.remote.RemoteProtos.ObjectType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureArgumentIsMutable();
+        argument_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public Builder addAllArgument(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectType> values) {
+        ensureArgumentIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, argument_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ObjectType argument = 2;</code>
+       */
+      public Builder clearArgument() {
+        argument_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000002);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> return_ =
+        java.util.Collections.emptyList();
+      private void ensureReturnIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          return_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ObjectType>(return_);
+          bitField0_ |= 0x00000004;
+        }
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ObjectType> getReturnList() {
+        return java.util.Collections.unmodifiableList(return_);
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public int getReturnCount() {
+        return return_.size();
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ObjectType getReturn(int index) {
+        return return_.get(index);
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public Builder setReturn(
+          int index, fr.membrives.etienne.remote.RemoteProtos.ObjectType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureReturnIsMutable();
+        return_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public Builder addReturn(fr.membrives.etienne.remote.RemoteProtos.ObjectType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        ensureReturnIsMutable();
+        return_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public Builder addAllReturn(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectType> values) {
+        ensureReturnIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, return_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ObjectType return = 3;</code>
+       */
+      public Builder clearReturn() {
+        return_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:proto.MethodDefinition)
     }
 
     static {
-      defaultInstance = new Command(true);
+      defaultInstance = new MethodDefinition(true);
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:proto.Command)
+    // @@protoc_insertion_point(class_scope:proto.MethodDefinition)
   }
 
-  public interface ResponseOrBuilder
-      extends com.google.protobuf.MessageOrBuilder {
+  public interface ObjectOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.Object)
+      com.google.protobuf.MessageOrBuilder {
 
-    // optional bool frontend_connected = 1;
     /**
-     * <code>optional bool frontend_connected = 1;</code>
+     * <code>optional .proto.ObjectType object_type = 1;</code>
      */
-    boolean hasFrontendConnected();
+    boolean hasObjectType();
     /**
-     * <code>optional bool frontend_connected = 1;</code>
+     * <code>optional .proto.ObjectType object_type = 1;</code>
      */
-    boolean getFrontendConnected();
+    fr.membrives.etienne.remote.RemoteProtos.ObjectType getObjectType();
+
+    /**
+     * <code>optional bool boolean = 2;</code>
+     */
+    boolean hasBoolean();
+    /**
+     * <code>optional bool boolean = 2;</code>
+     */
+    boolean getBoolean();
+
+    /**
+     * <code>optional int64 integer = 3;</code>
+     */
+    boolean hasInteger();
+    /**
+     * <code>optional int64 integer = 3;</code>
+     */
+    long getInteger();
+
+    /**
+     * <code>optional double float = 4;</code>
+     */
+    boolean hasFloat();
+    /**
+     * <code>optional double float = 4;</code>
+     */
+    double getFloat();
+
+    /**
+     * <code>optional string string = 5;</code>
+     */
+    boolean hasString();
+    /**
+     * <code>optional string string = 5;</code>
+     */
+    java.lang.String getString();
+    /**
+     * <code>optional string string = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getStringBytes();
+
+    /**
+     * <code>optional bytes bytes = 6;</code>
+     */
+    boolean hasBytes();
+    /**
+     * <code>optional bytes bytes = 6;</code>
+     */
+    com.google.protobuf.ByteString getBytes();
+  }
+  /**
+   * Protobuf type {@code proto.Object}
+   */
+  public static final class Object extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.Object)
+      ObjectOrBuilder {
+    // Use Object.newBuilder() to construct.
+    private Object(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Object(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Object defaultInstance;
+    public static Object getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Object getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Object(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+              int rawValue = input.readEnum();
+              fr.membrives.etienne.remote.RemoteProtos.ObjectType value = fr.membrives.etienne.remote.RemoteProtos.ObjectType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                objectType_ = value;
+              }
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              boolean_ = input.readBool();
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              integer_ = input.readInt64();
+              break;
+            }
+            case 33: {
+              bitField0_ |= 0x00000008;
+              float_ = input.readDouble();
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              string_ = bs;
+              break;
+            }
+            case 50: {
+              bitField0_ |= 0x00000020;
+              bytes_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Object_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Object_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              fr.membrives.etienne.remote.RemoteProtos.Object.class, fr.membrives.etienne.remote.RemoteProtos.Object.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Object> PARSER =
+        new com.google.protobuf.AbstractParser<Object>() {
+      public Object parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Object(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Object> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int OBJECT_TYPE_FIELD_NUMBER = 1;
+    private fr.membrives.etienne.remote.RemoteProtos.ObjectType objectType_;
+    /**
+     * <code>optional .proto.ObjectType object_type = 1;</code>
+     */
+    public boolean hasObjectType() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional .proto.ObjectType object_type = 1;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ObjectType getObjectType() {
+      return objectType_;
+    }
+
+    public static final int BOOLEAN_FIELD_NUMBER = 2;
+    private boolean boolean_;
+    /**
+     * <code>optional bool boolean = 2;</code>
+     */
+    public boolean hasBoolean() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional bool boolean = 2;</code>
+     */
+    public boolean getBoolean() {
+      return boolean_;
+    }
+
+    public static final int INTEGER_FIELD_NUMBER = 3;
+    private long integer_;
+    /**
+     * <code>optional int64 integer = 3;</code>
+     */
+    public boolean hasInteger() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int64 integer = 3;</code>
+     */
+    public long getInteger() {
+      return integer_;
+    }
+
+    public static final int FLOAT_FIELD_NUMBER = 4;
+    private double float_;
+    /**
+     * <code>optional double float = 4;</code>
+     */
+    public boolean hasFloat() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional double float = 4;</code>
+     */
+    public double getFloat() {
+      return float_;
+    }
+
+    public static final int STRING_FIELD_NUMBER = 5;
+    private java.lang.Object string_;
+    /**
+     * <code>optional string string = 5;</code>
+     */
+    public boolean hasString() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    /**
+     * <code>optional string string = 5;</code>
+     */
+    public java.lang.String getString() {
+      java.lang.Object ref = string_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          string_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string string = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getStringBytes() {
+      java.lang.Object ref = string_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        string_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BYTES_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString bytes_;
+    /**
+     * <code>optional bytes bytes = 6;</code>
+     */
+    public boolean hasBytes() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional bytes bytes = 6;</code>
+     */
+    public com.google.protobuf.ByteString getBytes() {
+      return bytes_;
+    }
+
+    private void initFields() {
+      objectType_ = fr.membrives.etienne.remote.RemoteProtos.ObjectType.NONE;
+      boolean_ = false;
+      integer_ = 0L;
+      float_ = 0D;
+      string_ = "";
+      bytes_ = com.google.protobuf.ByteString.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeEnum(1, objectType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, boolean_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt64(3, integer_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeDouble(4, float_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(5, getStringBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, bytes_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, objectType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, boolean_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, integer_);
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, float_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, getStringBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, bytes_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Object parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.Object prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code proto.Object}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.Object)
+        fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Object_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Object_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                fr.membrives.etienne.remote.RemoteProtos.Object.class, fr.membrives.etienne.remote.RemoteProtos.Object.Builder.class);
+      }
+
+      // Construct using fr.membrives.etienne.remote.RemoteProtos.Object.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        objectType_ = fr.membrives.etienne.remote.RemoteProtos.ObjectType.NONE;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        boolean_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        integer_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        float_ = 0D;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        string_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
+        bytes_ = com.google.protobuf.ByteString.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Object_descriptor;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Object getDefaultInstanceForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.Object.getDefaultInstance();
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Object build() {
+        fr.membrives.etienne.remote.RemoteProtos.Object result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Object buildPartial() {
+        fr.membrives.etienne.remote.RemoteProtos.Object result = new fr.membrives.etienne.remote.RemoteProtos.Object(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.objectType_ = objectType_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.boolean_ = boolean_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.integer_ = integer_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.float_ = float_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.string_ = string_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.bytes_ = bytes_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.Object) {
+          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.Object)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.Object other) {
+        if (other == fr.membrives.etienne.remote.RemoteProtos.Object.getDefaultInstance()) return this;
+        if (other.hasObjectType()) {
+          setObjectType(other.getObjectType());
+        }
+        if (other.hasBoolean()) {
+          setBoolean(other.getBoolean());
+        }
+        if (other.hasInteger()) {
+          setInteger(other.getInteger());
+        }
+        if (other.hasFloat()) {
+          setFloat(other.getFloat());
+        }
+        if (other.hasString()) {
+          bitField0_ |= 0x00000010;
+          string_ = other.string_;
+          onChanged();
+        }
+        if (other.hasBytes()) {
+          setBytes(other.getBytes());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        fr.membrives.etienne.remote.RemoteProtos.Object parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.Object) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private fr.membrives.etienne.remote.RemoteProtos.ObjectType objectType_ = fr.membrives.etienne.remote.RemoteProtos.ObjectType.NONE;
+      /**
+       * <code>optional .proto.ObjectType object_type = 1;</code>
+       */
+      public boolean hasObjectType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional .proto.ObjectType object_type = 1;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ObjectType getObjectType() {
+        return objectType_;
+      }
+      /**
+       * <code>optional .proto.ObjectType object_type = 1;</code>
+       */
+      public Builder setObjectType(fr.membrives.etienne.remote.RemoteProtos.ObjectType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        objectType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .proto.ObjectType object_type = 1;</code>
+       */
+      public Builder clearObjectType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        objectType_ = fr.membrives.etienne.remote.RemoteProtos.ObjectType.NONE;
+        onChanged();
+        return this;
+      }
+
+      private boolean boolean_ ;
+      /**
+       * <code>optional bool boolean = 2;</code>
+       */
+      public boolean hasBoolean() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional bool boolean = 2;</code>
+       */
+      public boolean getBoolean() {
+        return boolean_;
+      }
+      /**
+       * <code>optional bool boolean = 2;</code>
+       */
+      public Builder setBoolean(boolean value) {
+        bitField0_ |= 0x00000002;
+        boolean_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool boolean = 2;</code>
+       */
+      public Builder clearBoolean() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        boolean_ = false;
+        onChanged();
+        return this;
+      }
+
+      private long integer_ ;
+      /**
+       * <code>optional int64 integer = 3;</code>
+       */
+      public boolean hasInteger() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int64 integer = 3;</code>
+       */
+      public long getInteger() {
+        return integer_;
+      }
+      /**
+       * <code>optional int64 integer = 3;</code>
+       */
+      public Builder setInteger(long value) {
+        bitField0_ |= 0x00000004;
+        integer_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 integer = 3;</code>
+       */
+      public Builder clearInteger() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        integer_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private double float_ ;
+      /**
+       * <code>optional double float = 4;</code>
+       */
+      public boolean hasFloat() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>optional double float = 4;</code>
+       */
+      public double getFloat() {
+        return float_;
+      }
+      /**
+       * <code>optional double float = 4;</code>
+       */
+      public Builder setFloat(double value) {
+        bitField0_ |= 0x00000008;
+        float_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional double float = 4;</code>
+       */
+      public Builder clearFloat() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        float_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object string_ = "";
+      /**
+       * <code>optional string string = 5;</code>
+       */
+      public boolean hasString() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      /**
+       * <code>optional string string = 5;</code>
+       */
+      public java.lang.String getString() {
+        java.lang.Object ref = string_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            string_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string string = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getStringBytes() {
+        java.lang.Object ref = string_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          string_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string string = 5;</code>
+       */
+      public Builder setString(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        string_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string string = 5;</code>
+       */
+      public Builder clearString() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        string_ = getDefaultInstance().getString();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string string = 5;</code>
+       */
+      public Builder setStringBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        string_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString bytes_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>optional bytes bytes = 6;</code>
+       */
+      public boolean hasBytes() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional bytes bytes = 6;</code>
+       */
+      public com.google.protobuf.ByteString getBytes() {
+        return bytes_;
+      }
+      /**
+       * <code>optional bytes bytes = 6;</code>
+       */
+      public Builder setBytes(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        bytes_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bytes bytes = 6;</code>
+       */
+      public Builder clearBytes() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        bytes_ = getDefaultInstance().getBytes();
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:proto.Object)
+    }
+
+    static {
+      defaultInstance = new Object(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.Object)
+  }
+
+  public interface ResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.Response)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional .proto.RequestType type = 1;</code>
+     */
+    boolean hasType();
+    /**
+     * <code>optional .proto.RequestType type = 1;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.RequestType getType();
+
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    boolean hasHost();
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    java.lang.String getHost();
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getHostBytes();
+
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.Peer> 
+        getKnownPeersList();
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.Peer getKnownPeers(int index);
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    int getKnownPeersCount();
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder> 
+        getKnownPeersOrBuilderList();
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder getKnownPeersOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition> 
+        getServicesList();
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition getServices(int index);
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    int getServicesCount();
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder> 
+        getServicesOrBuilderList();
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder getServicesOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> 
+        getResultList();
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.Object getResult(int index);
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    int getResultCount();
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+        getResultOrBuilderList();
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder getResultOrBuilder(
+        int index);
+
+    /**
+     * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+     */
+    boolean hasErrorType();
+    /**
+     * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+     */
+    fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType getErrorType();
+
+    /**
+     * <code>optional string error_message = 7;</code>
+     */
+    boolean hasErrorMessage();
+    /**
+     * <code>optional string error_message = 7;</code>
+     */
+    java.lang.String getErrorMessage();
+    /**
+     * <code>optional string error_message = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getErrorMessageBytes();
   }
   /**
    * Protobuf type {@code proto.Response}
    */
   public static final class Response extends
-      com.google.protobuf.GeneratedMessage
-      implements ResponseOrBuilder {
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.Response)
+      ResponseOrBuilder {
     // Use Response.newBuilder() to construct.
     private Response(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
@@ -716,8 +4945,61 @@ public final class RemoteProtos {
               break;
             }
             case 8: {
-              bitField0_ |= 0x00000001;
-              frontendConnected_ = input.readBool();
+              int rawValue = input.readEnum();
+              fr.membrives.etienne.remote.RemoteProtos.RequestType value = fr.membrives.etienne.remote.RemoteProtos.RequestType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(1, rawValue);
+              } else {
+                bitField0_ |= 0x00000001;
+                type_ = value;
+              }
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              host_ = bs;
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                knownPeers_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.Peer>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              knownPeers_.add(input.readMessage(fr.membrives.etienne.remote.RemoteProtos.Peer.PARSER, extensionRegistry));
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                services_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              services_.add(input.readMessage(fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.PARSER, extensionRegistry));
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                result_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.Object>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              result_.add(input.readMessage(fr.membrives.etienne.remote.RemoteProtos.Object.PARSER, extensionRegistry));
+              break;
+            }
+            case 48: {
+              int rawValue = input.readEnum();
+              fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType value = fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(6, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                errorType_ = value;
+              }
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000008;
+              errorMessage_ = bs;
               break;
             }
           }
@@ -728,6 +5010,15 @@ public final class RemoteProtos {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e.getMessage()).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          knownPeers_ = java.util.Collections.unmodifiableList(knownPeers_);
+        }
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          services_ = java.util.Collections.unmodifiableList(services_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          result_ = java.util.Collections.unmodifiableList(result_);
+        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -759,30 +5050,418 @@ public final class RemoteProtos {
       return PARSER;
     }
 
-    private int bitField0_;
-    // optional bool frontend_connected = 1;
-    public static final int FRONTEND_CONNECTED_FIELD_NUMBER = 1;
-    private boolean frontendConnected_;
     /**
-     * <code>optional bool frontend_connected = 1;</code>
+     * Protobuf enum {@code proto.Response.ErrorType}
      */
-    public boolean hasFrontendConnected() {
+    public enum ErrorType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      UNKNOWN(0, 0),
+      /**
+       * <code>UNKNOWN_HOST = 1;</code>
+       */
+      UNKNOWN_HOST(1, 1),
+      /**
+       * <code>DISCONNECTED = 2;</code>
+       */
+      DISCONNECTED(2, 2),
+      /**
+       * <code>UNKNOWN_SERVICE = 3;</code>
+       */
+      UNKNOWN_SERVICE(3, 3),
+      /**
+       * <code>UNKNOWN_METHOD = 4;</code>
+       */
+      UNKNOWN_METHOD(4, 4),
+      /**
+       * <code>INVALID_ARGUMENTS = 5;</code>
+       */
+      INVALID_ARGUMENTS(5, 5),
+      ;
+
+      /**
+       * <code>UNKNOWN = 0;</code>
+       */
+      public static final int UNKNOWN_VALUE = 0;
+      /**
+       * <code>UNKNOWN_HOST = 1;</code>
+       */
+      public static final int UNKNOWN_HOST_VALUE = 1;
+      /**
+       * <code>DISCONNECTED = 2;</code>
+       */
+      public static final int DISCONNECTED_VALUE = 2;
+      /**
+       * <code>UNKNOWN_SERVICE = 3;</code>
+       */
+      public static final int UNKNOWN_SERVICE_VALUE = 3;
+      /**
+       * <code>UNKNOWN_METHOD = 4;</code>
+       */
+      public static final int UNKNOWN_METHOD_VALUE = 4;
+      /**
+       * <code>INVALID_ARGUMENTS = 5;</code>
+       */
+      public static final int INVALID_ARGUMENTS_VALUE = 5;
+
+
+      public final int getNumber() { return value; }
+
+      public static ErrorType valueOf(int value) {
+        switch (value) {
+          case 0: return UNKNOWN;
+          case 1: return UNKNOWN_HOST;
+          case 2: return DISCONNECTED;
+          case 3: return UNKNOWN_SERVICE;
+          case 4: return UNKNOWN_METHOD;
+          case 5: return INVALID_ARGUMENTS;
+          default: return null;
+        }
+      }
+
+      public static com.google.protobuf.Internal.EnumLiteMap<ErrorType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<ErrorType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<ErrorType>() {
+              public ErrorType findValueByNumber(int number) {
+                return ErrorType.valueOf(number);
+              }
+            };
+
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return fr.membrives.etienne.remote.RemoteProtos.Response.getDescriptor().getEnumTypes().get(0);
+      }
+
+      private static final ErrorType[] VALUES = values();
+
+      public static ErrorType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+
+      private final int index;
+      private final int value;
+
+      private ErrorType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+
+      // @@protoc_insertion_point(enum_scope:proto.Response.ErrorType)
+    }
+
+    private int bitField0_;
+    public static final int TYPE_FIELD_NUMBER = 1;
+    private fr.membrives.etienne.remote.RemoteProtos.RequestType type_;
+    /**
+     * <code>optional .proto.RequestType type = 1;</code>
+     */
+    public boolean hasType() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional bool frontend_connected = 1;</code>
+     * <code>optional .proto.RequestType type = 1;</code>
      */
-    public boolean getFrontendConnected() {
-      return frontendConnected_;
+    public fr.membrives.etienne.remote.RemoteProtos.RequestType getType() {
+      return type_;
+    }
+
+    public static final int HOST_FIELD_NUMBER = 2;
+    private java.lang.Object host_;
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    public java.lang.String getHost() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          host_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string host = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHostBytes() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        host_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KNOWN_PEERS_FIELD_NUMBER = 3;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.Peer> knownPeers_;
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Peer> getKnownPeersList() {
+      return knownPeers_;
+    }
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder> 
+        getKnownPeersOrBuilderList() {
+      return knownPeers_;
+    }
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    public int getKnownPeersCount() {
+      return knownPeers_.size();
+    }
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.Peer getKnownPeers(int index) {
+      return knownPeers_.get(index);
+    }
+    /**
+     * <code>repeated .proto.Peer known_peers = 3;</code>
+     *
+     * <pre>
+     * Routing table
+     * </pre>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder getKnownPeersOrBuilder(
+        int index) {
+      return knownPeers_.get(index);
+    }
+
+    public static final int SERVICES_FIELD_NUMBER = 4;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition> services_;
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition> getServicesList() {
+      return services_;
+    }
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder> 
+        getServicesOrBuilderList() {
+      return services_;
+    }
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    public int getServicesCount() {
+      return services_.size();
+    }
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition getServices(int index) {
+      return services_.get(index);
+    }
+    /**
+     * <code>repeated .proto.ServiceDefinition services = 4;</code>
+     *
+     * <pre>
+     * Service list
+     * </pre>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder getServicesOrBuilder(
+        int index) {
+      return services_.get(index);
+    }
+
+    public static final int RESULT_FIELD_NUMBER = 5;
+    private java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> result_;
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> getResultList() {
+      return result_;
+    }
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+        getResultOrBuilderList() {
+      return result_;
+    }
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    public int getResultCount() {
+      return result_.size();
+    }
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.Object getResult(int index) {
+      return result_.get(index);
+    }
+    /**
+     * <code>repeated .proto.Object result = 5;</code>
+     *
+     * <pre>
+     * RPC result
+     * </pre>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder getResultOrBuilder(
+        int index) {
+      return result_.get(index);
+    }
+
+    public static final int ERROR_TYPE_FIELD_NUMBER = 6;
+    private fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType errorType_;
+    /**
+     * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+     */
+    public boolean hasErrorType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+     */
+    public fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType getErrorType() {
+      return errorType_;
+    }
+
+    public static final int ERROR_MESSAGE_FIELD_NUMBER = 7;
+    private java.lang.Object errorMessage_;
+    /**
+     * <code>optional string error_message = 7;</code>
+     */
+    public boolean hasErrorMessage() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    /**
+     * <code>optional string error_message = 7;</code>
+     */
+    public java.lang.String getErrorMessage() {
+      java.lang.Object ref = errorMessage_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          errorMessage_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string error_message = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getErrorMessageBytes() {
+      java.lang.Object ref = errorMessage_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        errorMessage_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
     }
 
     private void initFields() {
-      frontendConnected_ = false;
+      type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
+      host_ = "";
+      knownPeers_ = java.util.Collections.emptyList();
+      services_ = java.util.Collections.emptyList();
+      result_ = java.util.Collections.emptyList();
+      errorType_ = fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType.UNKNOWN;
+      errorMessage_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
 
       memoizedIsInitialized = 1;
       return true;
@@ -792,7 +5471,25 @@ public final class RemoteProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBool(1, frontendConnected_);
+        output.writeEnum(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getHostBytes());
+      }
+      for (int i = 0; i < knownPeers_.size(); i++) {
+        output.writeMessage(3, knownPeers_.get(i));
+      }
+      for (int i = 0; i < services_.size(); i++) {
+        output.writeMessage(4, services_.get(i));
+      }
+      for (int i = 0; i < result_.size(); i++) {
+        output.writeMessage(5, result_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(6, errorType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(7, getErrorMessageBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -805,7 +5502,31 @@ public final class RemoteProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(1, frontendConnected_);
+          .computeEnumSize(1, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getHostBytes());
+      }
+      for (int i = 0; i < knownPeers_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, knownPeers_.get(i));
+      }
+      for (int i = 0; i < services_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, services_.get(i));
+      }
+      for (int i = 0; i < result_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, result_.get(i));
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, errorType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getErrorMessageBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -889,8 +5610,9 @@ public final class RemoteProtos {
      * Protobuf type {@code proto.Response}
      */
     public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements fr.membrives.etienne.remote.RemoteProtos.ResponseOrBuilder {
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.Response)
+        fr.membrives.etienne.remote.RemoteProtos.ResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Response_descriptor;
@@ -915,6 +5637,9 @@ public final class RemoteProtos {
       }
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getKnownPeersFieldBuilder();
+          getServicesFieldBuilder();
+          getResultFieldBuilder();
         }
       }
       private static Builder create() {
@@ -923,8 +5648,32 @@ public final class RemoteProtos {
 
       public Builder clear() {
         super.clear();
-        frontendConnected_ = false;
+        type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
         bitField0_ = (bitField0_ & ~0x00000001);
+        host_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (knownPeersBuilder_ == null) {
+          knownPeers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          knownPeersBuilder_.clear();
+        }
+        if (servicesBuilder_ == null) {
+          services_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+        } else {
+          servicesBuilder_.clear();
+        }
+        if (resultBuilder_ == null) {
+          result_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          resultBuilder_.clear();
+        }
+        errorType_ = fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType.UNKNOWN;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        errorMessage_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -956,7 +5705,46 @@ public final class RemoteProtos {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.frontendConnected_ = frontendConnected_;
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.host_ = host_;
+        if (knownPeersBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            knownPeers_ = java.util.Collections.unmodifiableList(knownPeers_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.knownPeers_ = knownPeers_;
+        } else {
+          result.knownPeers_ = knownPeersBuilder_.build();
+        }
+        if (servicesBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008)) {
+            services_ = java.util.Collections.unmodifiableList(services_);
+            bitField0_ = (bitField0_ & ~0x00000008);
+          }
+          result.services_ = services_;
+        } else {
+          result.services_ = servicesBuilder_.build();
+        }
+        if (resultBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            result_ = java.util.Collections.unmodifiableList(result_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.result_ = result_;
+        } else {
+          result.result_ = resultBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.errorType_ = errorType_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.errorMessage_ = errorMessage_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -973,8 +5761,99 @@ public final class RemoteProtos {
 
       public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.Response other) {
         if (other == fr.membrives.etienne.remote.RemoteProtos.Response.getDefaultInstance()) return this;
-        if (other.hasFrontendConnected()) {
-          setFrontendConnected(other.getFrontendConnected());
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasHost()) {
+          bitField0_ |= 0x00000002;
+          host_ = other.host_;
+          onChanged();
+        }
+        if (knownPeersBuilder_ == null) {
+          if (!other.knownPeers_.isEmpty()) {
+            if (knownPeers_.isEmpty()) {
+              knownPeers_ = other.knownPeers_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureKnownPeersIsMutable();
+              knownPeers_.addAll(other.knownPeers_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.knownPeers_.isEmpty()) {
+            if (knownPeersBuilder_.isEmpty()) {
+              knownPeersBuilder_.dispose();
+              knownPeersBuilder_ = null;
+              knownPeers_ = other.knownPeers_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              knownPeersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getKnownPeersFieldBuilder() : null;
+            } else {
+              knownPeersBuilder_.addAllMessages(other.knownPeers_);
+            }
+          }
+        }
+        if (servicesBuilder_ == null) {
+          if (!other.services_.isEmpty()) {
+            if (services_.isEmpty()) {
+              services_ = other.services_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+            } else {
+              ensureServicesIsMutable();
+              services_.addAll(other.services_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.services_.isEmpty()) {
+            if (servicesBuilder_.isEmpty()) {
+              servicesBuilder_.dispose();
+              servicesBuilder_ = null;
+              services_ = other.services_;
+              bitField0_ = (bitField0_ & ~0x00000008);
+              servicesBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getServicesFieldBuilder() : null;
+            } else {
+              servicesBuilder_.addAllMessages(other.services_);
+            }
+          }
+        }
+        if (resultBuilder_ == null) {
+          if (!other.result_.isEmpty()) {
+            if (result_.isEmpty()) {
+              result_ = other.result_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureResultIsMutable();
+              result_.addAll(other.result_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.result_.isEmpty()) {
+            if (resultBuilder_.isEmpty()) {
+              resultBuilder_.dispose();
+              resultBuilder_ = null;
+              result_ = other.result_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              resultBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getResultFieldBuilder() : null;
+            } else {
+              resultBuilder_.addAllMessages(other.result_);
+            }
+          }
+        }
+        if (other.hasErrorType()) {
+          setErrorType(other.getErrorType());
+        }
+        if (other.hasErrorMessage()) {
+          bitField0_ |= 0x00000040;
+          errorMessage_ = other.errorMessage_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1003,35 +5882,1160 @@ public final class RemoteProtos {
       }
       private int bitField0_;
 
-      // optional bool frontend_connected = 1;
-      private boolean frontendConnected_ ;
+      private fr.membrives.etienne.remote.RemoteProtos.RequestType type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
       /**
-       * <code>optional bool frontend_connected = 1;</code>
+       * <code>optional .proto.RequestType type = 1;</code>
        */
-      public boolean hasFrontendConnected() {
+      public boolean hasType() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional bool frontend_connected = 1;</code>
+       * <code>optional .proto.RequestType type = 1;</code>
        */
-      public boolean getFrontendConnected() {
-        return frontendConnected_;
+      public fr.membrives.etienne.remote.RemoteProtos.RequestType getType() {
+        return type_;
       }
       /**
-       * <code>optional bool frontend_connected = 1;</code>
+       * <code>optional .proto.RequestType type = 1;</code>
        */
-      public Builder setFrontendConnected(boolean value) {
+      public Builder setType(fr.membrives.etienne.remote.RemoteProtos.RequestType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
         bitField0_ |= 0x00000001;
-        frontendConnected_ = value;
+        type_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional bool frontend_connected = 1;</code>
+       * <code>optional .proto.RequestType type = 1;</code>
        */
-      public Builder clearFrontendConnected() {
+      public Builder clearType() {
         bitField0_ = (bitField0_ & ~0x00000001);
-        frontendConnected_ = false;
+        type_ = fr.membrives.etienne.remote.RemoteProtos.RequestType.PING;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object host_ = "";
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public java.lang.String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            host_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHostBytes() {
+        java.lang.Object ref = host_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          host_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public Builder setHost(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 2;</code>
+       */
+      public Builder setHostBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.Peer> knownPeers_ =
+        java.util.Collections.emptyList();
+      private void ensureKnownPeersIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          knownPeers_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.Peer>(knownPeers_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.Peer, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder, fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder> knownPeersBuilder_;
+
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Peer> getKnownPeersList() {
+        if (knownPeersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(knownPeers_);
+        } else {
+          return knownPeersBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public int getKnownPeersCount() {
+        if (knownPeersBuilder_ == null) {
+          return knownPeers_.size();
+        } else {
+          return knownPeersBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Peer getKnownPeers(int index) {
+        if (knownPeersBuilder_ == null) {
+          return knownPeers_.get(index);
+        } else {
+          return knownPeersBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder setKnownPeers(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Peer value) {
+        if (knownPeersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureKnownPeersIsMutable();
+          knownPeers_.set(index, value);
+          onChanged();
+        } else {
+          knownPeersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder setKnownPeers(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder builderForValue) {
+        if (knownPeersBuilder_ == null) {
+          ensureKnownPeersIsMutable();
+          knownPeers_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          knownPeersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder addKnownPeers(fr.membrives.etienne.remote.RemoteProtos.Peer value) {
+        if (knownPeersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureKnownPeersIsMutable();
+          knownPeers_.add(value);
+          onChanged();
+        } else {
+          knownPeersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder addKnownPeers(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Peer value) {
+        if (knownPeersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureKnownPeersIsMutable();
+          knownPeers_.add(index, value);
+          onChanged();
+        } else {
+          knownPeersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder addKnownPeers(
+          fr.membrives.etienne.remote.RemoteProtos.Peer.Builder builderForValue) {
+        if (knownPeersBuilder_ == null) {
+          ensureKnownPeersIsMutable();
+          knownPeers_.add(builderForValue.build());
+          onChanged();
+        } else {
+          knownPeersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder addKnownPeers(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder builderForValue) {
+        if (knownPeersBuilder_ == null) {
+          ensureKnownPeersIsMutable();
+          knownPeers_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          knownPeersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder addAllKnownPeers(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.Peer> values) {
+        if (knownPeersBuilder_ == null) {
+          ensureKnownPeersIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, knownPeers_);
+          onChanged();
+        } else {
+          knownPeersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder clearKnownPeers() {
+        if (knownPeersBuilder_ == null) {
+          knownPeers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          knownPeersBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public Builder removeKnownPeers(int index) {
+        if (knownPeersBuilder_ == null) {
+          ensureKnownPeersIsMutable();
+          knownPeers_.remove(index);
+          onChanged();
+        } else {
+          knownPeersBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Peer.Builder getKnownPeersBuilder(
+          int index) {
+        return getKnownPeersFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder getKnownPeersOrBuilder(
+          int index) {
+        if (knownPeersBuilder_ == null) {
+          return knownPeers_.get(index);  } else {
+          return knownPeersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder> 
+           getKnownPeersOrBuilderList() {
+        if (knownPeersBuilder_ != null) {
+          return knownPeersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(knownPeers_);
+        }
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Peer.Builder addKnownPeersBuilder() {
+        return getKnownPeersFieldBuilder().addBuilder(
+            fr.membrives.etienne.remote.RemoteProtos.Peer.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Peer.Builder addKnownPeersBuilder(
+          int index) {
+        return getKnownPeersFieldBuilder().addBuilder(
+            index, fr.membrives.etienne.remote.RemoteProtos.Peer.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.Peer known_peers = 3;</code>
+       *
+       * <pre>
+       * Routing table
+       * </pre>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Peer.Builder> 
+           getKnownPeersBuilderList() {
+        return getKnownPeersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.Peer, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder, fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder> 
+          getKnownPeersFieldBuilder() {
+        if (knownPeersBuilder_ == null) {
+          knownPeersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              fr.membrives.etienne.remote.RemoteProtos.Peer, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder, fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder>(
+                  knownPeers_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          knownPeers_ = null;
+        }
+        return knownPeersBuilder_;
+      }
+
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition> services_ =
+        java.util.Collections.emptyList();
+      private void ensureServicesIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          services_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition>(services_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder> servicesBuilder_;
+
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition> getServicesList() {
+        if (servicesBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(services_);
+        } else {
+          return servicesBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public int getServicesCount() {
+        if (servicesBuilder_ == null) {
+          return services_.size();
+        } else {
+          return servicesBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition getServices(int index) {
+        if (servicesBuilder_ == null) {
+          return services_.get(index);
+        } else {
+          return servicesBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder setServices(
+          int index, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition value) {
+        if (servicesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureServicesIsMutable();
+          services_.set(index, value);
+          onChanged();
+        } else {
+          servicesBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder setServices(
+          int index, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder builderForValue) {
+        if (servicesBuilder_ == null) {
+          ensureServicesIsMutable();
+          services_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          servicesBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder addServices(fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition value) {
+        if (servicesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureServicesIsMutable();
+          services_.add(value);
+          onChanged();
+        } else {
+          servicesBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder addServices(
+          int index, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition value) {
+        if (servicesBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureServicesIsMutable();
+          services_.add(index, value);
+          onChanged();
+        } else {
+          servicesBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder addServices(
+          fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder builderForValue) {
+        if (servicesBuilder_ == null) {
+          ensureServicesIsMutable();
+          services_.add(builderForValue.build());
+          onChanged();
+        } else {
+          servicesBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder addServices(
+          int index, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder builderForValue) {
+        if (servicesBuilder_ == null) {
+          ensureServicesIsMutable();
+          services_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          servicesBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder addAllServices(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition> values) {
+        if (servicesBuilder_ == null) {
+          ensureServicesIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, services_);
+          onChanged();
+        } else {
+          servicesBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder clearServices() {
+        if (servicesBuilder_ == null) {
+          services_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000008);
+          onChanged();
+        } else {
+          servicesBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public Builder removeServices(int index) {
+        if (servicesBuilder_ == null) {
+          ensureServicesIsMutable();
+          services_.remove(index);
+          onChanged();
+        } else {
+          servicesBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder getServicesBuilder(
+          int index) {
+        return getServicesFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder getServicesOrBuilder(
+          int index) {
+        if (servicesBuilder_ == null) {
+          return services_.get(index);  } else {
+          return servicesBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder> 
+           getServicesOrBuilderList() {
+        if (servicesBuilder_ != null) {
+          return servicesBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(services_);
+        }
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder addServicesBuilder() {
+        return getServicesFieldBuilder().addBuilder(
+            fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder addServicesBuilder(
+          int index) {
+        return getServicesFieldBuilder().addBuilder(
+            index, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.ServiceDefinition services = 4;</code>
+       *
+       * <pre>
+       * Service list
+       * </pre>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder> 
+           getServicesBuilderList() {
+        return getServicesFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder> 
+          getServicesFieldBuilder() {
+        if (servicesBuilder_ == null) {
+          servicesBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinition.Builder, fr.membrives.etienne.remote.RemoteProtos.ServiceDefinitionOrBuilder>(
+                  services_,
+                  ((bitField0_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          services_ = null;
+        }
+        return servicesBuilder_;
+      }
+
+      private java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> result_ =
+        java.util.Collections.emptyList();
+      private void ensureResultIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          result_ = new java.util.ArrayList<fr.membrives.etienne.remote.RemoteProtos.Object>(result_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.Object, fr.membrives.etienne.remote.RemoteProtos.Object.Builder, fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> resultBuilder_;
+
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object> getResultList() {
+        if (resultBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(result_);
+        } else {
+          return resultBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public int getResultCount() {
+        if (resultBuilder_ == null) {
+          return result_.size();
+        } else {
+          return resultBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object getResult(int index) {
+        if (resultBuilder_ == null) {
+          return result_.get(index);
+        } else {
+          return resultBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder setResult(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.set(index, value);
+          onChanged();
+        } else {
+          resultBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder setResult(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder addResult(fr.membrives.etienne.remote.RemoteProtos.Object value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.add(value);
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder addResult(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object value) {
+        if (resultBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureResultIsMutable();
+          result_.add(index, value);
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder addResult(
+          fr.membrives.etienne.remote.RemoteProtos.Object.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.add(builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder addResult(
+          int index, fr.membrives.etienne.remote.RemoteProtos.Object.Builder builderForValue) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          resultBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder addAllResult(
+          java.lang.Iterable<? extends fr.membrives.etienne.remote.RemoteProtos.Object> values) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, result_);
+          onChanged();
+        } else {
+          resultBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder clearResult() {
+        if (resultBuilder_ == null) {
+          result_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          resultBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public Builder removeResult(int index) {
+        if (resultBuilder_ == null) {
+          ensureResultIsMutable();
+          result_.remove(index);
+          onChanged();
+        } else {
+          resultBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object.Builder getResultBuilder(
+          int index) {
+        return getResultFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder getResultOrBuilder(
+          int index) {
+        if (resultBuilder_ == null) {
+          return result_.get(index);  } else {
+          return resultBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public java.util.List<? extends fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+           getResultOrBuilderList() {
+        if (resultBuilder_ != null) {
+          return resultBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(result_);
+        }
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object.Builder addResultBuilder() {
+        return getResultFieldBuilder().addBuilder(
+            fr.membrives.etienne.remote.RemoteProtos.Object.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Object.Builder addResultBuilder(
+          int index) {
+        return getResultFieldBuilder().addBuilder(
+            index, fr.membrives.etienne.remote.RemoteProtos.Object.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .proto.Object result = 5;</code>
+       *
+       * <pre>
+       * RPC result
+       * </pre>
+       */
+      public java.util.List<fr.membrives.etienne.remote.RemoteProtos.Object.Builder> 
+           getResultBuilderList() {
+        return getResultFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          fr.membrives.etienne.remote.RemoteProtos.Object, fr.membrives.etienne.remote.RemoteProtos.Object.Builder, fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder> 
+          getResultFieldBuilder() {
+        if (resultBuilder_ == null) {
+          resultBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              fr.membrives.etienne.remote.RemoteProtos.Object, fr.membrives.etienne.remote.RemoteProtos.Object.Builder, fr.membrives.etienne.remote.RemoteProtos.ObjectOrBuilder>(
+                  result_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          result_ = null;
+        }
+        return resultBuilder_;
+      }
+
+      private fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType errorType_ = fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType.UNKNOWN;
+      /**
+       * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+       */
+      public boolean hasErrorType() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+       */
+      public fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType getErrorType() {
+        return errorType_;
+      }
+      /**
+       * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+       */
+      public Builder setErrorType(fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000020;
+        errorType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional .proto.Response.ErrorType error_type = 6;</code>
+       */
+      public Builder clearErrorType() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        errorType_ = fr.membrives.etienne.remote.RemoteProtos.Response.ErrorType.UNKNOWN;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object errorMessage_ = "";
+      /**
+       * <code>optional string error_message = 7;</code>
+       */
+      public boolean hasErrorMessage() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string error_message = 7;</code>
+       */
+      public java.lang.String getErrorMessage() {
+        java.lang.Object ref = errorMessage_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            errorMessage_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string error_message = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getErrorMessageBytes() {
+        java.lang.Object ref = errorMessage_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          errorMessage_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string error_message = 7;</code>
+       */
+      public Builder setErrorMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        errorMessage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string error_message = 7;</code>
+       */
+      public Builder clearErrorMessage() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        errorMessage_ = getDefaultInstance().getErrorMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string error_message = 7;</code>
+       */
+      public Builder setErrorMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        errorMessage_ = value;
         onChanged();
         return this;
       }
@@ -1047,16 +7051,752 @@ public final class RemoteProtos {
     // @@protoc_insertion_point(class_scope:proto.Response)
   }
 
-  private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_proto_Command_descriptor;
+  public interface PeerOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:proto.Peer)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    boolean hasHost();
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    java.lang.String getHost();
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getHostBytes();
+
+    /**
+     * <code>optional string address = 2;</code>
+     */
+    boolean hasAddress();
+    /**
+     * <code>optional string address = 2;</code>
+     */
+    java.lang.String getAddress();
+    /**
+     * <code>optional string address = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAddressBytes();
+
+    /**
+     * <code>optional int32 distance = 3;</code>
+     */
+    boolean hasDistance();
+    /**
+     * <code>optional int32 distance = 3;</code>
+     */
+    int getDistance();
+  }
+  /**
+   * Protobuf type {@code proto.Peer}
+   */
+  public static final class Peer extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:proto.Peer)
+      PeerOrBuilder {
+    // Use Peer.newBuilder() to construct.
+    private Peer(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Peer(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Peer defaultInstance;
+    public static Peer getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Peer getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Peer(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              host_ = bs;
+              break;
+            }
+            case 18: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000002;
+              address_ = bs;
+              break;
+            }
+            case 24: {
+              bitField0_ |= 0x00000004;
+              distance_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Peer_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Peer_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              fr.membrives.etienne.remote.RemoteProtos.Peer.class, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Peer> PARSER =
+        new com.google.protobuf.AbstractParser<Peer>() {
+      public Peer parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Peer(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Peer> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int HOST_FIELD_NUMBER = 1;
+    private java.lang.Object host_;
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    public boolean hasHost() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    public java.lang.String getHost() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          host_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string host = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getHostBytes() {
+      java.lang.Object ref = host_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        host_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ADDRESS_FIELD_NUMBER = 2;
+    private java.lang.Object address_;
+    /**
+     * <code>optional string address = 2;</code>
+     */
+    public boolean hasAddress() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string address = 2;</code>
+     */
+    public java.lang.String getAddress() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          address_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string address = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAddressBytes() {
+      java.lang.Object ref = address_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        address_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int DISTANCE_FIELD_NUMBER = 3;
+    private int distance_;
+    /**
+     * <code>optional int32 distance = 3;</code>
+     */
+    public boolean hasDistance() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>optional int32 distance = 3;</code>
+     */
+    public int getDistance() {
+      return distance_;
+    }
+
+    private void initFields() {
+      host_ = "";
+      address_ = "";
+      distance_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getAddressBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeInt32(3, distance_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getHostBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getAddressBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, distance_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static fr.membrives.etienne.remote.RemoteProtos.Peer parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(fr.membrives.etienne.remote.RemoteProtos.Peer prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code proto.Peer}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:proto.Peer)
+        fr.membrives.etienne.remote.RemoteProtos.PeerOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Peer_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Peer_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                fr.membrives.etienne.remote.RemoteProtos.Peer.class, fr.membrives.etienne.remote.RemoteProtos.Peer.Builder.class);
+      }
+
+      // Construct using fr.membrives.etienne.remote.RemoteProtos.Peer.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        host_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        address_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        distance_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.internal_static_proto_Peer_descriptor;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Peer getDefaultInstanceForType() {
+        return fr.membrives.etienne.remote.RemoteProtos.Peer.getDefaultInstance();
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Peer build() {
+        fr.membrives.etienne.remote.RemoteProtos.Peer result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public fr.membrives.etienne.remote.RemoteProtos.Peer buildPartial() {
+        fr.membrives.etienne.remote.RemoteProtos.Peer result = new fr.membrives.etienne.remote.RemoteProtos.Peer(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.host_ = host_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.address_ = address_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.distance_ = distance_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof fr.membrives.etienne.remote.RemoteProtos.Peer) {
+          return mergeFrom((fr.membrives.etienne.remote.RemoteProtos.Peer)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.Peer other) {
+        if (other == fr.membrives.etienne.remote.RemoteProtos.Peer.getDefaultInstance()) return this;
+        if (other.hasHost()) {
+          bitField0_ |= 0x00000001;
+          host_ = other.host_;
+          onChanged();
+        }
+        if (other.hasAddress()) {
+          bitField0_ |= 0x00000002;
+          address_ = other.address_;
+          onChanged();
+        }
+        if (other.hasDistance()) {
+          setDistance(other.getDistance());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        fr.membrives.etienne.remote.RemoteProtos.Peer parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (fr.membrives.etienne.remote.RemoteProtos.Peer) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object host_ = "";
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public boolean hasHost() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public java.lang.String getHost() {
+        java.lang.Object ref = host_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            host_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getHostBytes() {
+        java.lang.Object ref = host_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          host_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public Builder setHost(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public Builder clearHost() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        host_ = getDefaultInstance().getHost();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string host = 1;</code>
+       */
+      public Builder setHostBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        host_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object address_ = "";
+      /**
+       * <code>optional string address = 2;</code>
+       */
+      public boolean hasAddress() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string address = 2;</code>
+       */
+      public java.lang.String getAddress() {
+        java.lang.Object ref = address_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            address_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string address = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAddressBytes() {
+        java.lang.Object ref = address_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          address_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string address = 2;</code>
+       */
+      public Builder setAddress(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        address_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string address = 2;</code>
+       */
+      public Builder clearAddress() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        address_ = getDefaultInstance().getAddress();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string address = 2;</code>
+       */
+      public Builder setAddressBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        address_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int distance_ ;
+      /**
+       * <code>optional int32 distance = 3;</code>
+       */
+      public boolean hasDistance() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>optional int32 distance = 3;</code>
+       */
+      public int getDistance() {
+        return distance_;
+      }
+      /**
+       * <code>optional int32 distance = 3;</code>
+       */
+      public Builder setDistance(int value) {
+        bitField0_ |= 0x00000004;
+        distance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 distance = 3;</code>
+       */
+      public Builder clearDistance() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        distance_ = 0;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:proto.Peer)
+    }
+
+    static {
+      defaultInstance = new Peer(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:proto.Peer)
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_Request_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_proto_Command_fieldAccessorTable;
-  private static com.google.protobuf.Descriptors.Descriptor
+      internal_static_proto_Request_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_RPCRequest_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_proto_RPCRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_ServiceDefinition_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_proto_ServiceDefinition_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_MethodDefinition_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_proto_MethodDefinition_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_Object_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_proto_Object_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_proto_Response_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_proto_Response_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_proto_Peer_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_proto_Peer_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1066,37 +7806,90 @@ public final class RemoteProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmessage.proto\022\005proto\"l\n\007Command\022(\n\004typ" +
-      "e\030\001 \001(\0162\032.proto.Command.CommandType\022\017\n\007c" +
-      "ommand\030\002 \001(\t\"&\n\013CommandType\022\013\n\007COMMAND\020\001" +
-      "\022\n\n\006STATUS\020\002\"&\n\010Response\022\032\n\022frontend_con" +
-      "nected\030\001 \001(\010B+\n\033fr.membrives.etienne.rem" +
-      "oteB\014RemoteProtos"
+      "\n\rmessage.proto\022\005proto\"Z\n\007Request\022 \n\004typ" +
+      "e\030\001 \001(\0162\022.proto.RequestType\022\014\n\004host\030\002 \001(" +
+      "\t\022\037\n\004call\030\003 \001(\0132\021.proto.RPCRequest\"O\n\nRP" +
+      "CRequest\022\017\n\007service\030\001 \001(\t\022\016\n\006method\030\002 \001(" +
+      "\t\022 \n\targuments\030\003 \003(\0132\r.proto.Object\"`\n\021S" +
+      "erviceDefinition\022\014\n\004host\030\001 \001(\t\022\024\n\014servic" +
+      "e_name\030\002 \001(\t\022\'\n\006method\030\003 \003(\0132\027.proto.Met" +
+      "hodDefinition\"h\n\020MethodDefinition\022\014\n\004nam" +
+      "e\030\001 \001(\t\022#\n\010argument\030\002 \003(\0162\021.proto.Object" +
+      "Type\022!\n\006return\030\003 \003(\0162\021.proto.ObjectType\"",
+      "\200\001\n\006Object\022&\n\013object_type\030\001 \001(\0162\021.proto." +
+      "ObjectType\022\017\n\007boolean\030\002 \001(\010\022\017\n\007integer\030\003" +
+      " \001(\003\022\r\n\005float\030\004 \001(\001\022\016\n\006string\030\005 \001(\t\022\r\n\005b" +
+      "ytes\030\006 \001(\014\"\353\002\n\010Response\022 \n\004type\030\001 \001(\0162\022." +
+      "proto.RequestType\022\014\n\004host\030\002 \001(\t\022 \n\013known" +
+      "_peers\030\003 \003(\0132\013.proto.Peer\022*\n\010services\030\004 " +
+      "\003(\0132\030.proto.ServiceDefinition\022\035\n\006result\030" +
+      "\005 \003(\0132\r.proto.Object\022-\n\nerror_type\030\006 \001(\016" +
+      "2\031.proto.Response.ErrorType\022\025\n\rerror_mes" +
+      "sage\030\007 \001(\t\"|\n\tErrorType\022\013\n\007UNKNOWN\020\000\022\020\n\014",
+      "UNKNOWN_HOST\020\001\022\020\n\014DISCONNECTED\020\002\022\023\n\017UNKN" +
+      "OWN_SERVICE\020\003\022\022\n\016UNKNOWN_METHOD\020\004\022\025\n\021INV" +
+      "ALID_ARGUMENTS\020\005\"7\n\004Peer\022\014\n\004host\030\001 \001(\t\022\017" +
+      "\n\007address\030\002 \001(\t\022\020\n\010distance\030\003 \001(\005*A\n\013Req" +
+      "uestType\022\010\n\004PING\020\001\022\021\n\rROUTING_TABLE\020\002\022\014\n" +
+      "\010SERVICES\020\003\022\007\n\003RPC\020\004*R\n\nObjectType\022\010\n\004NO" +
+      "NE\020\000\022\013\n\007BOOLEAN\020\001\022\013\n\007INTEGER\020\002\022\t\n\005FLOAT\020" +
+      "\003\022\n\n\006STRING\020\004\022\t\n\005BYTES\020\005B+\n\033fr.membrives" +
+      ".etienne.remoteB\014RemoteProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-      new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
-        public com.google.protobuf.ExtensionRegistry assignDescriptors(
-            com.google.protobuf.Descriptors.FileDescriptor root) {
-          descriptor = root;
-          internal_static_proto_Command_descriptor =
-            getDescriptor().getMessageTypes().get(0);
-          internal_static_proto_Command_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_proto_Command_descriptor,
-              new java.lang.String[] { "Type", "Command", });
-          internal_static_proto_Response_descriptor =
-            getDescriptor().getMessageTypes().get(1);
-          internal_static_proto_Response_fieldAccessorTable = new
-            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_proto_Response_descriptor,
-              new java.lang.String[] { "FrontendConnected", });
-          return null;
-        }
-      };
+        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
+          public com.google.protobuf.ExtensionRegistry assignDescriptors(
+              com.google.protobuf.Descriptors.FileDescriptor root) {
+            descriptor = root;
+            return null;
+          }
+        };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
+    internal_static_proto_Request_descriptor =
+      getDescriptor().getMessageTypes().get(0);
+    internal_static_proto_Request_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_Request_descriptor,
+        new java.lang.String[] { "Type", "Host", "Call", });
+    internal_static_proto_RPCRequest_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_proto_RPCRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_RPCRequest_descriptor,
+        new java.lang.String[] { "Service", "Method", "Arguments", });
+    internal_static_proto_ServiceDefinition_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_proto_ServiceDefinition_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_ServiceDefinition_descriptor,
+        new java.lang.String[] { "Host", "ServiceName", "Method", });
+    internal_static_proto_MethodDefinition_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_proto_MethodDefinition_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_MethodDefinition_descriptor,
+        new java.lang.String[] { "Name", "Argument", "Return", });
+    internal_static_proto_Object_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_proto_Object_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_Object_descriptor,
+        new java.lang.String[] { "ObjectType", "Boolean", "Integer", "Float", "String", "Bytes", });
+    internal_static_proto_Response_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_proto_Response_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_Response_descriptor,
+        new java.lang.String[] { "Type", "Host", "KnownPeers", "Services", "Result", "ErrorType", "ErrorMessage", });
+    internal_static_proto_Peer_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_proto_Peer_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_proto_Peer_descriptor,
+        new java.lang.String[] { "Host", "Address", "Distance", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

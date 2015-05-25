@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	url = "tcp://127.0.0.1:7001"
+	url = "tcp://192.168.1.31:7001"
 )
 
 func failOnError(err error, msg string) {

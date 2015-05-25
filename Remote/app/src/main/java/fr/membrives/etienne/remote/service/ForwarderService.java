@@ -1,18 +1,20 @@
 package fr.membrives.etienne.remote.service;
 
-import android.content.Context;
+import android.app.Service;
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
 import android.util.Log;
 
-import com.google.common.util.concurrent.FutureCallback;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.util.concurrent.ListeningExecutorService;
-import com.google.common.util.concurrent.MoreExecutors;
+import com.google.common.collect.Lists;
+import com.google.protobuf.InvalidProtocolBufferException;
 
 import org.zeromq.ZMQ;
 
-import java.io.IOException;
-import java.util.concurrent.Callable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import fr.membrives.etienne.remote.RemoteProtos;
@@ -20,61 +22,98 @@ import fr.membrives.etienne.remote.RemoteProtos;
 /**
  * Main forwarding service.
  */
-public class ForwarderService {
+public class ForwarderService extends Service implements IDiscoverer.Handler {
     private static final String TAG = "s.ForwarderService";
-    private static final String EXCHANGE_NAME = "remote";
-
-    private ListeningExecutorService executor = MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(1));
-    private boolean connectedToServer = false;
-
+    private final IBinder mBinder = new ForwarderServiceBinder();
     private ZMQ.Context zmqContext;
-    private ZMQ.Socket socket;
-
+    private List<IDiscoverer> discovererList = Lists.newArrayList();
+    private Executor executor = Executors.newSingleThreadExecutor();
+    private Map<String, ZMQPeer> peers = new HashMap<String, ZMQPeer>();
     public ForwarderService() {
     }
 
-    public ListenableFuture<Boolean> connect(final Context context) {
-        ListenableFuture<Boolean> serverConnect = executor.submit(new Callable<Boolean>() {
-            @Override
-            public Boolean call() {
-                zmqContext = ZMQ.context(1);
-                socket = zmqContext.socket(ZMQ.REQ);
-                socket.connect("tcp://192.168.1.12:7001");
-                return true;
-            }
-        });
-        Futures.addCallback(serverConnect, new FutureCallback<Boolean>() {
-            @Override
-            public void onSuccess(Boolean result) {
-                connectedToServer = result;
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                connectedToServer = false;
-            }
-        });
-        return serverConnect;
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        zmqContext = ZMQ.context(1);
+        discovererList
+                .add(new IPDiscoverer.Builder().setAndroidContext(this).setZMQContext(zmqContext)
+                        .setHandler(this).setCallerExecutor(executor).createDiscoverer());
+        discoverPeers();
+        return Service.START_NOT_STICKY;
     }
 
-    public ListenableFuture<Boolean> sendWebcontrolMessage(final RemoteProtos.Command message) {
-        ListenableFuture<Boolean> messageSent = executor.submit(new Callable<Boolean>() {
-            @Override
-            public Boolean call() {
-                Log.e(TAG, "Sending message");
-                boolean result = socket.send(message.toByteArray(), 0);
-                socket.recv(0);
-                Log.e(TAG, "Response received");
-                return result;
-
-            }
-        });
-        return messageSent;
-    }
-
-    public void stopForwarderService() throws IOException {
-        socket.close();
+    @Override
+    public void onDestroy() {
+        for (IDiscoverer discoverer : discovererList) {
+            discoverer.stopDiscovery();
+        }
         zmqContext.term();
-        connectedToServer = false;
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
+
+    public void discoverPeers() {
+        for (IDiscoverer discoverer : discovererList) {
+            discoverer.startDiscovery();
+        }
+    }
+
+    @Override
+    public void newPeer(String host, String id) {
+        if (peers.containsKey(id)) {
+            return;
+        }
+        ZMQ.Socket socket = zmqContext.socket(ZMQ.REQ);
+        socket.connect(id);
+        ZMQPeer peer = new ZMQPeer(socket, host, id);
+        peers.put(id, peer);
+    }
+
+    @Override
+    public void disconnectedPeer(String id) {
+        if (peers.containsKey(id)) {
+            ZMQPeer peer = peers.get(id);
+            peer.socket.close();
+            peers.remove(id);
+        }
+    }
+
+    public static class ZMQPeer {
+        private final ZMQ.Socket socket;
+        private final String host;
+        private final String id;
+
+        private List<RemoteProtos.ServiceDefinition> services = Lists.newArrayList();
+
+        private ZMQPeer(ZMQ.Socket socket, String host, String id) {
+            this.socket = socket;
+            this.host = host;
+            this.id = id;
+        }
+
+        public void getServices() {
+            RemoteProtos.Request.Builder builder = RemoteProtos.Request.newBuilder();
+            builder.setHost(host);
+            builder.setType(RemoteProtos.RequestType.SERVICES);
+            this.socket.send(builder.build().toByteArray());
+            byte[] responseBytes = this.socket.recv();
+            RemoteProtos.Response response;
+            try {
+                response = RemoteProtos.Response.parseFrom(responseBytes);
+            } catch (InvalidProtocolBufferException e) {
+                Log.e("ForwarderService", "Unable to parse services response for host " + host, e);
+                return;
+            }
+            services = response.getServicesList();
+        }
+    }
+
+    public class ForwarderServiceBinder extends Binder {
+        ForwarderService getService() {
+            return ForwarderService.this;
+        }
     }
 }

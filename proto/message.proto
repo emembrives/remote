@@ -3,16 +3,82 @@ package proto;
 option java_package = "fr.membrives.etienne.remote";
 option java_outer_classname = "RemoteProtos";
 
-message Command {
-	enum CommandType {
-		COMMAND = 1;
-		STATUS = 2;
-	}
-	
-	optional CommandType type = 1;
-	optional string command = 2;
+enum RequestType {
+    PING = 1;
+    ROUTING_TABLE = 2;
+    SERVICES = 3;
+    RPC = 4;
+}
+
+message Request {
+    optional RequestType type = 1;
+    optional string host = 2;  // may be null
+    optional RPCRequest call = 3;
+}
+
+message RPCRequest {
+    optional string service = 1;
+    optional string method = 2;
+    repeated Object arguments = 3;
+}
+
+message ServiceDefinition {
+    optional string host = 1;
+    optional string service_name = 2;
+    repeated MethodDefinition method = 3;
+}
+
+message MethodDefinition {
+    optional string name = 1;
+    repeated ObjectType argument = 2;
+    repeated ObjectType return = 3;
+}
+
+enum ObjectType {
+    NONE = 0;
+    BOOLEAN = 1;
+    INTEGER = 2;
+    FLOAT = 3;
+    STRING = 4;
+    BYTES = 5;
+}
+
+message Object {
+    optional ObjectType object_type = 1;
+    optional bool boolean = 2;
+    optional int64 integer = 3;
+    optional double float = 4;
+    optional string string = 5;
+    optional bytes bytes = 6;
 }
 
 message Response {
-	optional bool frontend_connected = 1;
+	optional RequestType type = 1;
+    optional string host = 2;
+
+    // Routing table
+    repeated Peer known_peers = 3;
+
+    // Service list
+    repeated ServiceDefinition services = 4;
+
+    // RPC result
+    repeated Object result = 5;
+
+    enum ErrorType {
+        UNKNOWN = 0;
+        UNKNOWN_HOST = 1;
+        DISCONNECTED = 2;
+        UNKNOWN_SERVICE = 3;
+        UNKNOWN_METHOD = 4;
+        INVALID_ARGUMENTS = 5;
+    }
+    optional ErrorType error_type = 6;
+    optional string error_message = 7;
+}
+
+message Peer {
+    optional string host = 1;
+    optional string address = 2;
+    optional int32  distance = 3;
 }
