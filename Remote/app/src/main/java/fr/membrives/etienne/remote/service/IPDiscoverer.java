@@ -43,8 +43,8 @@ public class IPDiscoverer implements IDiscoverer {
         this.callerExecutor = callerExecutor;
     }
 
-    private static String formatId(String... parameters) {
-        return new Formatter().format(ID_FORMAT, parameters).out().toString();
+    private static String formatId(String id) {
+        return new Formatter().format(ID_FORMAT, id).out().toString();
     }
 
     @Override
@@ -167,7 +167,7 @@ public class IPDiscoverer implements IDiscoverer {
                 netmask = Integer.reverseBytes(netmask);
             }
 
-            return IPUtils.getIpsInSubnet(ipAddress, netmask, 0);
+            return IPUtils.getIpsInSubnet(ipAddress, netmask);
         }
     }
 }

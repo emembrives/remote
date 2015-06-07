@@ -12,27 +12,20 @@ import java.util.Set;
  * Created by etienne on 23/05/15.
  */
 public class IPUtils {
-    public static Set<String> getIpsInSubnet(int ip, int netmask, int index) {
-        if (index == 32) {
-            Set<String> set = new HashSet<>();
-            byte localComponent = BigInteger.valueOf(ip).toByteArray()[3];
-            if (localComponent != (byte) 255) {
-                // Remove the broadcast address
-                set.add(ipToString(ip));
+    public static Set<String> getIpsInSubnet(int ip, int netmask) {
+        int minIp = ip & netmask;
+        int maxIp = ip | ~netmask;
+
+        Set<String> ips = new HashSet();
+
+        for (int i = minIp; i <= maxIp; i++) {
+            if ((i & 0xFF) == 0x00 || (i & 0xFF) == 0xFF) {
+                continue;
             }
-            return set;
+            ips.add(ipToString(i));
         }
 
-        if (((netmask >> 31 - index) & 1) == 1) {
-            return getIpsInSubnet(ip, netmask, index + 1);
-        }
-
-        int zeroIp = ip & ~(1 << (31 - index));
-        Set<String> zeroIps = getIpsInSubnet(zeroIp, netmask, index + 1);
-        int oneIp = ip | (1 << (31 - index));
-        Set<String> oneIps = getIpsInSubnet(oneIp, netmask, index + 1);
-        zeroIps.addAll(oneIps);
-        return zeroIps;
+        return ips;
     }
 
     private static String ipToString(int ipAddress) {

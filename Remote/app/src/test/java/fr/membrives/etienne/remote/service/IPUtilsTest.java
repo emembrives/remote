@@ -23,11 +23,11 @@ public class IPUtilsTest {
         byte[] ipAddress = {(byte) 192, (byte) 168, 1, 0};
         byte[] netmask = {(byte) 255, (byte) 255, (byte) 255, 0};
         Set<String> ips = IPUtils.getIpsInSubnet(new BigInteger(1, ipAddress).intValue(),
-                new BigInteger(1, netmask).intValue(), 0);
-        Assert.assertThat(255, is(ips.size()));
-        Assert.assertThat(ips, hasItem("192.168.1.0"));
+                new BigInteger(1, netmask).intValue());
+        Assert.assertThat(254, is(ips.size()));
         Assert.assertThat(ips, hasItem("192.168.1.42"));
         Assert.assertThat(ips, hasItem("192.168.1.199"));
+        Assert.assertThat(ips, not(hasItem("192.168.1.0")));
         Assert.assertThat(ips, not(hasItem("192.168.1.255")));
         Assert.assertThat(ips, not(hasItem("192.168.0.0")));
     }

@@ -2,14 +2,9 @@ package main
 
 import (
 	"log"
-	"net/http"
-	"time"
 
-	protobuf "code.google.com/p/goprotobuf/proto"
 	"github.com/emembrives/tinkerings/android-remote/proto"
-
-	"github.com/gorilla/mux"
-	"github.com/gorilla/websocket"
+	protobuf "github.com/golang/protobuf/proto"
 
 	zmq "github.com/pebbe/zmq4"
 )
@@ -24,27 +19,7 @@ var (
 
 func main() {
 	go setupMessageServer()
-	websocketListen()
-}
-
-var upgrader = websocket.Upgrader{
-	ReadBufferSize:  1024,
-	WriteBufferSize: 1024,
-	CheckOrigin:     func(r *http.Request) bool { return true },
-}
-
-func websocketListen() {
-	r := mux.NewRouter()
-	h := &http.Server{
-		Addr:           ":6001",
-		Handler:        r,
-		ReadTimeout:    30 * time.Second,
-		WriteTimeout:   30 * time.Second,
-		MaxHeaderBytes: 1 << 20,
-	}
-	//r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	r.HandleFunc("/conn", websocketHandler)
-	h.ListenAndServe()
+	//websocketListen()
 }
 
 func setupMessageServer() {
@@ -60,53 +35,49 @@ func setupMessageServer() {
 
 	for {
 		msg, err := responder.RecvBytes(0)
-		log.Println("Received message: %d", msg)
 		if err != nil {
 			log.Println(err)
-		} else {
-			messages <- msg
+			errorMsg := &proto.Response{
+				ErrorType:    proto.Response_UNKNOWN.Enum(),
+				ErrorMessage: protobuf.String(err.Error()),
+			}
+			data, err := protobuf.Marshal(errorMsg)
+			logFatalOnError(err)
+			responder.SendBytes(data, 0)
+			continue
 		}
-		responder.Send("OK", 0)
+
+		incomingRequest := new(proto.Request)
+		err = protobuf.Unmarshal(msg, incomingRequest)
+
+		if err != nil {
+			log.Println(err)
+			errorMsg := &proto.Response{
+				ErrorType:    proto.Response_UNKNOWN.Enum(),
+				ErrorMessage: protobuf.String(err.Error()),
+			}
+			data, err := protobuf.Marshal(errorMsg)
+			logFatalOnError(err)
+			responder.SendBytes(data, 0)
+			continue
+		}
+
+		response := processRequest(incomingRequest)
+		data, err := protobuf.Marshal(&response)
+		logFatalOnError(err)
+		responder.SendBytes(data, 0)
 	}
 }
 
-func websocketHandler(w http.ResponseWriter, r *http.Request) {
-	websocketConn, err := upgrader.Upgrade(w, r, nil)
-	if err != nil {
-		log.Println(err)
+func processRequest(request *proto.Request) (response proto.Response) {
+	response.Type = request.Type
+	response.Host = protobuf.String("luna")
+	switch *request.Type {
+	case proto.RequestType_PING:
 		return
-	} else {
-		defer websocketConn.Close()
-		log.Println("Upgrading connection to websocket")
+	case proto.RequestType_SERVICES:
+		// List services
+		return
 	}
-
-	websocketErrors := make(chan error)
-	go func(conn *websocket.Conn, errChan chan error) {
-		for {
-			var message interface{}
-			err := conn.ReadJSON(&message)
-			if err != nil {
-				errChan <- err
-				conn.Close()
-				return
-			}
-		}
-	}(websocketConn, websocketErrors)
-
-	for {
-		select {
-		case d := <-messages:
-			log.Printf("Received a message: %s", d)
-			cmd := new(proto.Command)
-			protobuf.Unmarshal(d, cmd)
-			if *cmd.Type == proto.Command_COMMAND {
-				websocketConn.WriteJSON(*cmd.Command)
-			}
-		case err = <-websocketErrors:
-			if err != nil {
-				return
-			}
-		}
-	}
-	log.Println("Closing websocket and amqp connections")
+	return
 }
