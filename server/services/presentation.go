@@ -1,8 +1,13 @@
 package services
 
 import (
-	"github.com/gorilla/websocket"
+	"errors"
+	"log"
 	"net/http"
+	"time"
+
+	"github.com/gorilla/mux"
+	"github.com/gorilla/websocket"
 
 	"github.com/emembrives/tinkerings/android-remote/proto"
 	protobuf "github.com/golang/protobuf/proto"
@@ -10,6 +15,7 @@ import (
 
 type PresentationServiceFactory struct {
 	upgrader websocket.Upgrader
+	conn     *websocket.Conn
 
 	services map[string]*PresentationService
 }
@@ -39,14 +45,14 @@ func (f *PresentationServiceFactory) websocketListen() {
 }
 
 func (f *PresentationServiceFactory) websocketHandler(w http.ResponseWriter, r *http.Request) {
-	websocketConn, err := upgrader.Upgrade(w, r, nil)
+	websocketConn, err := f.upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	serviceOrigin := r.URL.Host + "/" + r.URL.Path
-	if _, ok := f.services; ok {
+	if _, ok := f.services[serviceOrigin]; ok {
 		log.Println(serviceOrigin, "is already connected")
 		websocketConn.Close()
 		return
@@ -67,6 +73,7 @@ func NewPresentationService(origin string, websocketConn *websocket.Conn) *Prese
 	ps.origin = origin
 	ps.conn = websocketConn
 	ps.Messages = make(chan string)
+	return ps
 }
 
 func (ps *PresentationService) Run() {
@@ -80,17 +87,13 @@ func (ps *PresentationService) Run() {
 				return
 			}
 		}
-	}(ps.Conn)
+	}(ps.conn)
 
 	for {
 		select {
 		case d := <-ps.Messages:
 			log.Printf("Received a message: %s", d)
-			websocketConn.WriteJSON(d)
-		case err = <-websocketErrors:
-			if err != nil {
-				return
-			}
+			ps.conn.WriteJSON(d)
 		}
 	}
 }
@@ -111,5 +114,5 @@ func (s *PresentationService) GetDescription() *proto.ServiceDefinition {
 
 func (s *PresentationService) MakeCall(call *proto.RPCRequest) ([]*proto.ObjectType, error) {
 
-	return nil, error("")
+	return nil, errors.New("")
 }
