@@ -10,25 +10,38 @@ import (
 )
 
 const (
-	zmqUrl = "tcp://0.0.0.0:7001"
+	zmqURL = "tcp://0.0.0.0:7001"
 )
 
 var (
 	messages = make(chan []byte)
 )
 
-func main() {
-	go setupMessageServer()
-	//websocketListen()
+// ServiceProvider exposes endpoints to the ZMQ network.
+type ServiceProvider interface {
+	Endpoints() []string
+	ReadEndpoint(name string) string
+	WriteEndpoint(name, value string) string
 }
 
-func setupMessageServer() {
+// ZMQServer holds service providers.
+type ZMQServer struct {
+	Services []ServiceProvider
+}
+
+func main() {
+	server := ZMQServer{}
+	go setupMessageServer(&server)
+	websocketListen(&server)
+}
+
+func setupMessageServer(server *ZMQServer) {
 	responder, err := zmq.NewSocket(zmq.REP)
 	defer responder.Close()
 	if err != nil {
 		panic(err)
 	}
-	err = responder.Bind(zmqUrl)
+	err = responder.Bind(zmqURL)
 	if err != nil {
 		panic(err)
 	}
@@ -38,7 +51,6 @@ func setupMessageServer() {
 		if err != nil {
 			log.Println(err)
 			errorMsg := &proto.Response{
-				ErrorType:    proto.Response_UNKNOWN.Enum(),
 				ErrorMessage: protobuf.String(err.Error()),
 			}
 			data, err := protobuf.Marshal(errorMsg)
@@ -53,7 +65,6 @@ func setupMessageServer() {
 		if err != nil {
 			log.Println(err)
 			errorMsg := &proto.Response{
-				ErrorType:    proto.Response_UNKNOWN.Enum(),
 				ErrorMessage: protobuf.String(err.Error()),
 			}
 			data, err := protobuf.Marshal(errorMsg)
@@ -62,20 +73,28 @@ func setupMessageServer() {
 			continue
 		}
 
-		response := processRequest(incomingRequest)
+		response := processRequest(incomingRequest, server)
 		data, err := protobuf.Marshal(&response)
 		logFatalOnError(err)
 		responder.SendBytes(data, 0)
 	}
 }
 
-func processRequest(request *proto.Request) (response proto.Response) {
-	response.Type = request.Type
-	response.Host = protobuf.String("luna")
+func processRequest(request *proto.Request, server *ZMQServer) (response proto.Response) {
 	switch *request.Type {
-	case proto.RequestType_PING:
-		return
-	case proto.RequestType_SERVICES:
+	case proto.RequestType_SERVICE_DISCOVERY:
+		for _, service := range server.Services {
+			for _, endpoint := range service.Endpoints() {
+				value := service.ReadEndpoint(endpoint)
+				endpointValue := proto.Endpoint{
+					Endpoint: protobuf.String(endpoint),
+					Value:    protobuf.String(value),
+				}
+				response.Endpoints = append(response.Endpoints, &endpointValue)
+			}
+		}
+		return response
+	case proto.RequestType_WRITE_ENDPOINT:
 		// List services
 		return
 	}

@@ -15,7 +15,7 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin:     func(r *http.Request) bool { return true },
 }
 
-func websocketListen() {
+func websocketListen(server *ZMQServer) {
 	r := mux.NewRouter()
 	h := &http.Server{
 		Addr:           ":6001",

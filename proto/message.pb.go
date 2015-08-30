@@ -4,7 +4,7 @@
 
 package proto
 
-import proto1 "github.com/golang/protobuf/proto"
+import proto1 "code.google.com/p/goprotobuf/proto"
 import json "encoding/json"
 import math "math"
 
@@ -16,23 +16,17 @@ var _ = math.Inf
 type RequestType int32
 
 const (
-	RequestType_PING          RequestType = 1
-	RequestType_ROUTING_TABLE RequestType = 2
-	RequestType_SERVICES      RequestType = 3
-	RequestType_RPC           RequestType = 4
+	RequestType_SERVICE_DISCOVERY RequestType = 1
+	RequestType_WRITE_ENDPOINT    RequestType = 2
 )
 
 var RequestType_name = map[int32]string{
-	1: "PING",
-	2: "ROUTING_TABLE",
-	3: "SERVICES",
-	4: "RPC",
+	1: "SERVICE_DISCOVERY",
+	2: "WRITE_ENDPOINT",
 }
 var RequestType_value = map[string]int32{
-	"PING":          1,
-	"ROUTING_TABLE": 2,
-	"SERVICES":      3,
-	"RPC":           4,
+	"SERVICE_DISCOVERY": 1,
+	"WRITE_ENDPOINT":    2,
 }
 
 func (x RequestType) Enum() *RequestType {
@@ -55,106 +49,9 @@ func (x *RequestType) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-type ObjectType int32
-
-const (
-	ObjectType_NONE    ObjectType = 0
-	ObjectType_BOOLEAN ObjectType = 1
-	ObjectType_INTEGER ObjectType = 2
-	ObjectType_FLOAT   ObjectType = 3
-	ObjectType_STRING  ObjectType = 4
-	ObjectType_BYTES   ObjectType = 5
-)
-
-var ObjectType_name = map[int32]string{
-	0: "NONE",
-	1: "BOOLEAN",
-	2: "INTEGER",
-	3: "FLOAT",
-	4: "STRING",
-	5: "BYTES",
-}
-var ObjectType_value = map[string]int32{
-	"NONE":    0,
-	"BOOLEAN": 1,
-	"INTEGER": 2,
-	"FLOAT":   3,
-	"STRING":  4,
-	"BYTES":   5,
-}
-
-func (x ObjectType) Enum() *ObjectType {
-	p := new(ObjectType)
-	*p = x
-	return p
-}
-func (x ObjectType) String() string {
-	return proto1.EnumName(ObjectType_name, int32(x))
-}
-func (x ObjectType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(x.String())
-}
-func (x *ObjectType) UnmarshalJSON(data []byte) error {
-	value, err := proto1.UnmarshalJSONEnum(ObjectType_value, data, "ObjectType")
-	if err != nil {
-		return err
-	}
-	*x = ObjectType(value)
-	return nil
-}
-
-type Response_ErrorType int32
-
-const (
-	Response_UNKNOWN           Response_ErrorType = 0
-	Response_UNKNOWN_HOST      Response_ErrorType = 1
-	Response_DISCONNECTED      Response_ErrorType = 2
-	Response_UNKNOWN_SERVICE   Response_ErrorType = 3
-	Response_UNKNOWN_METHOD    Response_ErrorType = 4
-	Response_INVALID_ARGUMENTS Response_ErrorType = 5
-)
-
-var Response_ErrorType_name = map[int32]string{
-	0: "UNKNOWN",
-	1: "UNKNOWN_HOST",
-	2: "DISCONNECTED",
-	3: "UNKNOWN_SERVICE",
-	4: "UNKNOWN_METHOD",
-	5: "INVALID_ARGUMENTS",
-}
-var Response_ErrorType_value = map[string]int32{
-	"UNKNOWN":           0,
-	"UNKNOWN_HOST":      1,
-	"DISCONNECTED":      2,
-	"UNKNOWN_SERVICE":   3,
-	"UNKNOWN_METHOD":    4,
-	"INVALID_ARGUMENTS": 5,
-}
-
-func (x Response_ErrorType) Enum() *Response_ErrorType {
-	p := new(Response_ErrorType)
-	*p = x
-	return p
-}
-func (x Response_ErrorType) String() string {
-	return proto1.EnumName(Response_ErrorType_name, int32(x))
-}
-func (x Response_ErrorType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(x.String())
-}
-func (x *Response_ErrorType) UnmarshalJSON(data []byte) error {
-	value, err := proto1.UnmarshalJSONEnum(Response_ErrorType_value, data, "Response_ErrorType")
-	if err != nil {
-		return err
-	}
-	*x = Response_ErrorType(value)
-	return nil
-}
-
 type Request struct {
 	Type             *RequestType `protobuf:"varint,1,opt,name=type,enum=proto.RequestType" json:"type,omitempty"`
-	Host             *string      `protobuf:"bytes,2,opt,name=host" json:"host,omitempty"`
-	Call             *RPCRequest  `protobuf:"bytes,3,opt,name=call" json:"call,omitempty"`
+	WriteRequest     []*Endpoint  `protobuf:"bytes,2,rep,name=write_request" json:"write_request,omitempty"`
 	XXX_unrecognized []byte       `json:"-"`
 }
 
@@ -169,231 +66,46 @@ func (m *Request) GetType() RequestType {
 	return 0
 }
 
-func (m *Request) GetHost() string {
-	if m != nil && m.Host != nil {
-		return *m.Host
-	}
-	return ""
-}
-
-func (m *Request) GetCall() *RPCRequest {
+func (m *Request) GetWriteRequest() []*Endpoint {
 	if m != nil {
-		return m.Call
+		return m.WriteRequest
 	}
 	return nil
 }
 
-type RPCRequest struct {
-	Service          *string   `protobuf:"bytes,1,opt,name=service" json:"service,omitempty"`
-	Method           *string   `protobuf:"bytes,2,opt,name=method" json:"method,omitempty"`
-	Arguments        []*Object `protobuf:"bytes,3,rep,name=arguments" json:"arguments,omitempty"`
-	XXX_unrecognized []byte    `json:"-"`
+type Endpoint struct {
+	Endpoint         *string `protobuf:"bytes,1,opt,name=endpoint" json:"endpoint,omitempty"`
+	Value            *string `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
 }
 
-func (m *RPCRequest) Reset()         { *m = RPCRequest{} }
-func (m *RPCRequest) String() string { return proto1.CompactTextString(m) }
-func (*RPCRequest) ProtoMessage()    {}
+func (m *Endpoint) Reset()         { *m = Endpoint{} }
+func (m *Endpoint) String() string { return proto1.CompactTextString(m) }
+func (*Endpoint) ProtoMessage()    {}
 
-func (m *RPCRequest) GetService() string {
-	if m != nil && m.Service != nil {
-		return *m.Service
+func (m *Endpoint) GetEndpoint() string {
+	if m != nil && m.Endpoint != nil {
+		return *m.Endpoint
 	}
 	return ""
 }
 
-func (m *RPCRequest) GetMethod() string {
-	if m != nil && m.Method != nil {
-		return *m.Method
+func (m *Endpoint) GetValue() string {
+	if m != nil && m.Value != nil {
+		return *m.Value
 	}
 	return ""
-}
-
-func (m *RPCRequest) GetArguments() []*Object {
-	if m != nil {
-		return m.Arguments
-	}
-	return nil
-}
-
-type ServiceDefinition struct {
-	Host             *string             `protobuf:"bytes,1,opt,name=host" json:"host,omitempty"`
-	ServiceName      *string             `protobuf:"bytes,2,opt,name=service_name" json:"service_name,omitempty"`
-	Method           []*MethodDefinition `protobuf:"bytes,3,rep,name=method" json:"method,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
-}
-
-func (m *ServiceDefinition) Reset()         { *m = ServiceDefinition{} }
-func (m *ServiceDefinition) String() string { return proto1.CompactTextString(m) }
-func (*ServiceDefinition) ProtoMessage()    {}
-
-func (m *ServiceDefinition) GetHost() string {
-	if m != nil && m.Host != nil {
-		return *m.Host
-	}
-	return ""
-}
-
-func (m *ServiceDefinition) GetServiceName() string {
-	if m != nil && m.ServiceName != nil {
-		return *m.ServiceName
-	}
-	return ""
-}
-
-func (m *ServiceDefinition) GetMethod() []*MethodDefinition {
-	if m != nil {
-		return m.Method
-	}
-	return nil
-}
-
-type MethodDefinition struct {
-	Name             *string      `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
-	Argument         []ObjectType `protobuf:"varint,2,rep,name=argument,enum=proto.ObjectType" json:"argument,omitempty"`
-	Return           []ObjectType `protobuf:"varint,3,rep,name=return,enum=proto.ObjectType" json:"return,omitempty"`
-	XXX_unrecognized []byte       `json:"-"`
-}
-
-func (m *MethodDefinition) Reset()         { *m = MethodDefinition{} }
-func (m *MethodDefinition) String() string { return proto1.CompactTextString(m) }
-func (*MethodDefinition) ProtoMessage()    {}
-
-func (m *MethodDefinition) GetName() string {
-	if m != nil && m.Name != nil {
-		return *m.Name
-	}
-	return ""
-}
-
-func (m *MethodDefinition) GetArgument() []ObjectType {
-	if m != nil {
-		return m.Argument
-	}
-	return nil
-}
-
-func (m *MethodDefinition) GetReturn() []ObjectType {
-	if m != nil {
-		return m.Return
-	}
-	return nil
-}
-
-type Object struct {
-	ObjectType       *ObjectType `protobuf:"varint,1,opt,name=object_type,enum=proto.ObjectType" json:"object_type,omitempty"`
-	Boolean          *bool       `protobuf:"varint,2,opt,name=boolean" json:"boolean,omitempty"`
-	Integer          *int64      `protobuf:"varint,3,opt,name=integer" json:"integer,omitempty"`
-	Float            *float64    `protobuf:"fixed64,4,opt,name=float" json:"float,omitempty"`
-	String_          *string     `protobuf:"bytes,5,opt,name=string" json:"string,omitempty"`
-	Bytes            []byte      `protobuf:"bytes,6,opt,name=bytes" json:"bytes,omitempty"`
-	XXX_unrecognized []byte      `json:"-"`
-}
-
-func (m *Object) Reset()         { *m = Object{} }
-func (m *Object) String() string { return proto1.CompactTextString(m) }
-func (*Object) ProtoMessage()    {}
-
-func (m *Object) GetObjectType() ObjectType {
-	if m != nil && m.ObjectType != nil {
-		return *m.ObjectType
-	}
-	return 0
-}
-
-func (m *Object) GetBoolean() bool {
-	if m != nil && m.Boolean != nil {
-		return *m.Boolean
-	}
-	return false
-}
-
-func (m *Object) GetInteger() int64 {
-	if m != nil && m.Integer != nil {
-		return *m.Integer
-	}
-	return 0
-}
-
-func (m *Object) GetFloat() float64 {
-	if m != nil && m.Float != nil {
-		return *m.Float
-	}
-	return 0
-}
-
-func (m *Object) GetString_() string {
-	if m != nil && m.String_ != nil {
-		return *m.String_
-	}
-	return ""
-}
-
-func (m *Object) GetBytes() []byte {
-	if m != nil {
-		return m.Bytes
-	}
-	return nil
 }
 
 type Response struct {
-	Type *RequestType `protobuf:"varint,1,opt,name=type,enum=proto.RequestType" json:"type,omitempty"`
-	Host *string      `protobuf:"bytes,2,opt,name=host" json:"host,omitempty"`
-	// Routing table
-	KnownPeers []*Peer `protobuf:"bytes,3,rep,name=known_peers" json:"known_peers,omitempty"`
-	// Service list
-	Services []*ServiceDefinition `protobuf:"bytes,4,rep,name=services" json:"services,omitempty"`
-	// RPC result
-	Result           []*Object           `protobuf:"bytes,5,rep,name=result" json:"result,omitempty"`
-	ErrorType        *Response_ErrorType `protobuf:"varint,6,opt,name=error_type,enum=proto.Response_ErrorType" json:"error_type,omitempty"`
-	ErrorMessage     *string             `protobuf:"bytes,7,opt,name=error_message" json:"error_message,omitempty"`
-	XXX_unrecognized []byte              `json:"-"`
+	ErrorMessage     *string     `protobuf:"bytes,1,opt,name=error_message" json:"error_message,omitempty"`
+	Endpoints        []*Endpoint `protobuf:"bytes,2,rep,name=endpoints" json:"endpoints,omitempty"`
+	XXX_unrecognized []byte      `json:"-"`
 }
 
 func (m *Response) Reset()         { *m = Response{} }
 func (m *Response) String() string { return proto1.CompactTextString(m) }
 func (*Response) ProtoMessage()    {}
-
-func (m *Response) GetType() RequestType {
-	if m != nil && m.Type != nil {
-		return *m.Type
-	}
-	return 0
-}
-
-func (m *Response) GetHost() string {
-	if m != nil && m.Host != nil {
-		return *m.Host
-	}
-	return ""
-}
-
-func (m *Response) GetKnownPeers() []*Peer {
-	if m != nil {
-		return m.KnownPeers
-	}
-	return nil
-}
-
-func (m *Response) GetServices() []*ServiceDefinition {
-	if m != nil {
-		return m.Services
-	}
-	return nil
-}
-
-func (m *Response) GetResult() []*Object {
-	if m != nil {
-		return m.Result
-	}
-	return nil
-}
-
-func (m *Response) GetErrorType() Response_ErrorType {
-	if m != nil && m.ErrorType != nil {
-		return *m.ErrorType
-	}
-	return 0
-}
 
 func (m *Response) GetErrorMessage() string {
 	if m != nil && m.ErrorMessage != nil {
@@ -402,40 +114,13 @@ func (m *Response) GetErrorMessage() string {
 	return ""
 }
 
-type Peer struct {
-	Host             *string `protobuf:"bytes,1,opt,name=host" json:"host,omitempty"`
-	Address          *string `protobuf:"bytes,2,opt,name=address" json:"address,omitempty"`
-	Distance         *int32  `protobuf:"varint,3,opt,name=distance" json:"distance,omitempty"`
-	XXX_unrecognized []byte  `json:"-"`
-}
-
-func (m *Peer) Reset()         { *m = Peer{} }
-func (m *Peer) String() string { return proto1.CompactTextString(m) }
-func (*Peer) ProtoMessage()    {}
-
-func (m *Peer) GetHost() string {
-	if m != nil && m.Host != nil {
-		return *m.Host
+func (m *Response) GetEndpoints() []*Endpoint {
+	if m != nil {
+		return m.Endpoints
 	}
-	return ""
-}
-
-func (m *Peer) GetAddress() string {
-	if m != nil && m.Address != nil {
-		return *m.Address
-	}
-	return ""
-}
-
-func (m *Peer) GetDistance() int32 {
-	if m != nil && m.Distance != nil {
-		return *m.Distance
-	}
-	return 0
+	return nil
 }
 
 func init() {
 	proto1.RegisterEnum("proto.RequestType", RequestType_name, RequestType_value)
-	proto1.RegisterEnum("proto.ObjectType", ObjectType_name, ObjectType_value)
-	proto1.RegisterEnum("proto.Response_ErrorType", Response_ErrorType_name, Response_ErrorType_value)
 }
