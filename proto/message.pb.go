@@ -74,14 +74,22 @@ func (m *Request) GetWriteRequest() []*Endpoint {
 }
 
 type Endpoint struct {
-	Endpoint         *string `protobuf:"bytes,1,opt,name=endpoint" json:"endpoint,omitempty"`
-	Value            *string `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	Service          *string `protobuf:"bytes,1,opt,name=service" json:"service,omitempty"`
+	Endpoint         *string `protobuf:"bytes,2,opt,name=endpoint" json:"endpoint,omitempty"`
+	Value            *string `protobuf:"bytes,3,opt,name=value" json:"value,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
 func (m *Endpoint) Reset()         { *m = Endpoint{} }
 func (m *Endpoint) String() string { return proto1.CompactTextString(m) }
 func (*Endpoint) ProtoMessage()    {}
+
+func (m *Endpoint) GetService() string {
+	if m != nil && m.Service != nil {
+		return *m.Service
+	}
+	return ""
+}
 
 func (m *Endpoint) GetEndpoint() string {
 	if m != nil && m.Endpoint != nil {

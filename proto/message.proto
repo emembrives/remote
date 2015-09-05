@@ -14,8 +14,9 @@ message Request {
 }
 
 message Endpoint {
-    optional string endpoint = 1;
-    optional string value = 2;
+    optional string service = 1;
+    optional string endpoint = 2;
+    optional string value = 3;
 }
 
 message Response {

@@ -19,6 +19,7 @@ var (
 
 // ServiceProvider exposes endpoints to the ZMQ network.
 type ServiceProvider interface {
+	Name() string
 	Endpoints() []string
 	ReadEndpoint(name string) string
 	WriteEndpoint(name, value string) string

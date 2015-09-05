@@ -861,29 +861,43 @@ public final class RemoteProtos {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional string endpoint = 1;</code>
+     * <code>optional string service = 1;</code>
+     */
+    boolean hasService();
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    java.lang.String getService();
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getServiceBytes();
+
+    /**
+     * <code>optional string endpoint = 2;</code>
      */
     boolean hasEndpoint();
     /**
-     * <code>optional string endpoint = 1;</code>
+     * <code>optional string endpoint = 2;</code>
      */
     java.lang.String getEndpoint();
     /**
-     * <code>optional string endpoint = 1;</code>
+     * <code>optional string endpoint = 2;</code>
      */
     com.google.protobuf.ByteString
         getEndpointBytes();
 
     /**
-     * <code>optional string value = 2;</code>
+     * <code>optional string value = 3;</code>
      */
     boolean hasValue();
     /**
-     * <code>optional string value = 2;</code>
+     * <code>optional string value = 3;</code>
      */
     java.lang.String getValue();
     /**
-     * <code>optional string value = 2;</code>
+     * <code>optional string value = 3;</code>
      */
     com.google.protobuf.ByteString
         getValueBytes();
@@ -943,12 +957,18 @@ public final class RemoteProtos {
             case 10: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000001;
-              endpoint_ = bs;
+              service_ = bs;
               break;
             }
             case 18: {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000002;
+              endpoint_ = bs;
+              break;
+            }
+            case 26: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000004;
               value_ = bs;
               break;
             }
@@ -992,16 +1012,58 @@ public final class RemoteProtos {
     }
 
     private int bitField0_;
-    public static final int ENDPOINT_FIELD_NUMBER = 1;
-    private java.lang.Object endpoint_;
+    public static final int SERVICE_FIELD_NUMBER = 1;
+    private java.lang.Object service_;
     /**
-     * <code>optional string endpoint = 1;</code>
+     * <code>optional string service = 1;</code>
      */
-    public boolean hasEndpoint() {
+    public boolean hasService() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
     /**
-     * <code>optional string endpoint = 1;</code>
+     * <code>optional string service = 1;</code>
+     */
+    public java.lang.String getService() {
+      java.lang.Object ref = service_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          service_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string service = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getServiceBytes() {
+      java.lang.Object ref = service_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        service_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ENDPOINT_FIELD_NUMBER = 2;
+    private java.lang.Object endpoint_;
+    /**
+     * <code>optional string endpoint = 2;</code>
+     */
+    public boolean hasEndpoint() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>optional string endpoint = 2;</code>
      */
     public java.lang.String getEndpoint() {
       java.lang.Object ref = endpoint_;
@@ -1018,7 +1080,7 @@ public final class RemoteProtos {
       }
     }
     /**
-     * <code>optional string endpoint = 1;</code>
+     * <code>optional string endpoint = 2;</code>
      */
     public com.google.protobuf.ByteString
         getEndpointBytes() {
@@ -1034,16 +1096,16 @@ public final class RemoteProtos {
       }
     }
 
-    public static final int VALUE_FIELD_NUMBER = 2;
+    public static final int VALUE_FIELD_NUMBER = 3;
     private java.lang.Object value_;
     /**
-     * <code>optional string value = 2;</code>
+     * <code>optional string value = 3;</code>
      */
     public boolean hasValue() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
+      return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>optional string value = 2;</code>
+     * <code>optional string value = 3;</code>
      */
     public java.lang.String getValue() {
       java.lang.Object ref = value_;
@@ -1060,7 +1122,7 @@ public final class RemoteProtos {
       }
     }
     /**
-     * <code>optional string value = 2;</code>
+     * <code>optional string value = 3;</code>
      */
     public com.google.protobuf.ByteString
         getValueBytes() {
@@ -1077,6 +1139,7 @@ public final class RemoteProtos {
     }
 
     private void initFields() {
+      service_ = "";
       endpoint_ = "";
       value_ = "";
     }
@@ -1094,10 +1157,13 @@ public final class RemoteProtos {
                         throws java.io.IOException {
       getSerializedSize();
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getEndpointBytes());
+        output.writeBytes(1, getServiceBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, getValueBytes());
+        output.writeBytes(2, getEndpointBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getValueBytes());
       }
       getUnknownFields().writeTo(output);
     }
@@ -1110,11 +1176,15 @@ public final class RemoteProtos {
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getEndpointBytes());
+          .computeBytesSize(1, getServiceBytes());
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getValueBytes());
+          .computeBytesSize(2, getEndpointBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getValueBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -1233,10 +1303,12 @@ public final class RemoteProtos {
 
       public Builder clear() {
         super.clear();
-        endpoint_ = "";
+        service_ = "";
         bitField0_ = (bitField0_ & ~0x00000001);
-        value_ = "";
+        endpoint_ = "";
         bitField0_ = (bitField0_ & ~0x00000002);
+        value_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
 
@@ -1268,9 +1340,13 @@ public final class RemoteProtos {
         if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
           to_bitField0_ |= 0x00000001;
         }
-        result.endpoint_ = endpoint_;
+        result.service_ = service_;
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
+        }
+        result.endpoint_ = endpoint_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
         }
         result.value_ = value_;
         result.bitField0_ = to_bitField0_;
@@ -1289,13 +1365,18 @@ public final class RemoteProtos {
 
       public Builder mergeFrom(fr.membrives.etienne.remote.RemoteProtos.Endpoint other) {
         if (other == fr.membrives.etienne.remote.RemoteProtos.Endpoint.getDefaultInstance()) return this;
-        if (other.hasEndpoint()) {
+        if (other.hasService()) {
           bitField0_ |= 0x00000001;
+          service_ = other.service_;
+          onChanged();
+        }
+        if (other.hasEndpoint()) {
+          bitField0_ |= 0x00000002;
           endpoint_ = other.endpoint_;
           onChanged();
         }
         if (other.hasValue()) {
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
           value_ = other.value_;
           onChanged();
         }
@@ -1326,15 +1407,91 @@ public final class RemoteProtos {
       }
       private int bitField0_;
 
-      private java.lang.Object endpoint_ = "";
+      private java.lang.Object service_ = "";
       /**
-       * <code>optional string endpoint = 1;</code>
+       * <code>optional string service = 1;</code>
        */
-      public boolean hasEndpoint() {
+      public boolean hasService() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
       /**
-       * <code>optional string endpoint = 1;</code>
+       * <code>optional string service = 1;</code>
+       */
+      public java.lang.String getService() {
+        java.lang.Object ref = service_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            service_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getServiceBytes() {
+        java.lang.Object ref = service_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          service_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public Builder setService(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        service_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public Builder clearService() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        service_ = getDefaultInstance().getService();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string service = 1;</code>
+       */
+      public Builder setServiceBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        service_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object endpoint_ = "";
+      /**
+       * <code>optional string endpoint = 2;</code>
+       */
+      public boolean hasEndpoint() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>optional string endpoint = 2;</code>
        */
       public java.lang.String getEndpoint() {
         java.lang.Object ref = endpoint_;
@@ -1351,7 +1508,7 @@ public final class RemoteProtos {
         }
       }
       /**
-       * <code>optional string endpoint = 1;</code>
+       * <code>optional string endpoint = 2;</code>
        */
       public com.google.protobuf.ByteString
           getEndpointBytes() {
@@ -1367,36 +1524,36 @@ public final class RemoteProtos {
         }
       }
       /**
-       * <code>optional string endpoint = 1;</code>
+       * <code>optional string endpoint = 2;</code>
        */
       public Builder setEndpoint(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         endpoint_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string endpoint = 1;</code>
+       * <code>optional string endpoint = 2;</code>
        */
       public Builder clearEndpoint() {
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         endpoint_ = getDefaultInstance().getEndpoint();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string endpoint = 1;</code>
+       * <code>optional string endpoint = 2;</code>
        */
       public Builder setEndpointBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000001;
+  bitField0_ |= 0x00000002;
         endpoint_ = value;
         onChanged();
         return this;
@@ -1404,13 +1561,13 @@ public final class RemoteProtos {
 
       private java.lang.Object value_ = "";
       /**
-       * <code>optional string value = 2;</code>
+       * <code>optional string value = 3;</code>
        */
       public boolean hasValue() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
+        return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>optional string value = 2;</code>
+       * <code>optional string value = 3;</code>
        */
       public java.lang.String getValue() {
         java.lang.Object ref = value_;
@@ -1427,7 +1584,7 @@ public final class RemoteProtos {
         }
       }
       /**
-       * <code>optional string value = 2;</code>
+       * <code>optional string value = 3;</code>
        */
       public com.google.protobuf.ByteString
           getValueBytes() {
@@ -1443,36 +1600,36 @@ public final class RemoteProtos {
         }
       }
       /**
-       * <code>optional string value = 2;</code>
+       * <code>optional string value = 3;</code>
        */
       public Builder setValue(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         value_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string value = 2;</code>
+       * <code>optional string value = 3;</code>
        */
       public Builder clearValue() {
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000004);
         value_ = getDefaultInstance().getValue();
         onChanged();
         return this;
       }
       /**
-       * <code>optional string value = 2;</code>
+       * <code>optional string value = 3;</code>
        */
       public Builder setValueBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  bitField0_ |= 0x00000002;
+  bitField0_ |= 0x00000004;
         value_ = value;
         onChanged();
         return this;
@@ -2351,13 +2508,13 @@ public final class RemoteProtos {
     java.lang.String[] descriptorData = {
       "\n\rmessage.proto\022\005proto\"S\n\007Request\022 \n\004typ" +
       "e\030\001 \001(\0162\022.proto.RequestType\022&\n\rwrite_req" +
-      "uest\030\002 \003(\0132\017.proto.Endpoint\"+\n\010Endpoint\022" +
-      "\020\n\010endpoint\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\"E\n\010Resp" +
-      "onse\022\025\n\rerror_message\030\001 \001(\t\022\"\n\tendpoints" +
-      "\030\002 \003(\0132\017.proto.Endpoint*8\n\013RequestType\022\025" +
-      "\n\021SERVICE_DISCOVERY\020\001\022\022\n\016WRITE_ENDPOINT\020" +
-      "\002B+\n\033fr.membrives.etienne.remoteB\014Remote" +
-      "Protos"
+      "uest\030\002 \003(\0132\017.proto.Endpoint\"<\n\010Endpoint\022" +
+      "\017\n\007service\030\001 \001(\t\022\020\n\010endpoint\030\002 \001(\t\022\r\n\005va" +
+      "lue\030\003 \001(\t\"E\n\010Response\022\025\n\rerror_message\030\001" +
+      " \001(\t\022\"\n\tendpoints\030\002 \003(\0132\017.proto.Endpoint" +
+      "*8\n\013RequestType\022\025\n\021SERVICE_DISCOVERY\020\001\022\022" +
+      "\n\016WRITE_ENDPOINT\020\002B+\n\033fr.membrives.etien" +
+      "ne.remoteB\014RemoteProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2382,7 +2539,7 @@ public final class RemoteProtos {
     internal_static_proto_Endpoint_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_proto_Endpoint_descriptor,
-        new java.lang.String[] { "Endpoint", "Value", });
+        new java.lang.String[] { "Service", "Endpoint", "Value", });
     internal_static_proto_Response_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_proto_Response_fieldAccessorTable = new
