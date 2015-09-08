@@ -88,6 +88,7 @@ func processRequest(request *proto.Request, server *ZMQServer) (response proto.R
 			for _, endpoint := range service.Endpoints() {
 				value := service.ReadEndpoint(endpoint)
 				endpointValue := proto.Endpoint{
+					Service:  protobuf.String(service.Name()),
 					Endpoint: protobuf.String(endpoint),
 					Value:    protobuf.String(value),
 				}
