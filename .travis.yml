@@ -1,0 +1,32 @@
+language: go
+
+go:
+    - 1.4
+
+before_install:
+# Libsodium
+  - wget https://download.libsodium.org/libsodium/releases/libsodium-1.0.3.tar.gz -O /tmp/libsodium-1.0.3.tar.gz
+  - tar -xvf /tmp/libsodium-1.0.3.tar.gz
+  - mkdir /tmp/libsodium
+  - cd libsodium-1.0.3
+  - ./configure --prefix=/tmp/libsodium --exec-prefix=/tmp/libsodium && make && make install && cd ..
+  - export PATH=$PATH:/tmp/libsodium/bin
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/libsodium/lib
+  - export LIBRARY_PATH=$LIBRARY_PATH:/tmp/libsodium/lib
+  - export CPATH=$CPATH:/tmp/libsodium/include
+  - export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/tmp/libsodium/lib/pkgconfig
+# ZeroMQ
+  - wget http://download.zeromq.org/zeromq-4.1.2.tar.gz -O /tmp/zeromq-4.1.2.tar.gz
+  - tar -xvf /tmp/zeromq-4.1.2.tar.gz
+  - mkdir /tmp/zeromq
+  - cd zeromq-4.1.2 && ./configure --prefix=/tmp/zeromq --exec-prefix=/tmp/zeromq && make && make install && cd ..
+  - export PATH=$PATH:/tmp/zeromq/bin
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/zeromq/lib
+  - export LIBRARY_PATH=$LIBRARY_PATH:/tmp/zeromq/lib
+  - export CPATH=$CPATH:/tmp/zeromq/include
+  - export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/tmp/zeromq/lib/pkgconfig
+
+addons:
+  apt:
+    packages:
+      - pkg-config
