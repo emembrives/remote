@@ -27,11 +27,13 @@ type ServiceProvider interface {
 
 // ZMQServer holds service providers.
 type ZMQServer struct {
-	Services []ServiceProvider
+	Services map[string]ServiceProvider
 }
 
 func main() {
-	server := ZMQServer{}
+	server := ZMQServer{
+		Services: make(map[string]ServiceProvider),
+	}
 	go setupMessageServer(&server)
 	websocketListen(&server)
 }
@@ -39,13 +41,10 @@ func main() {
 func setupMessageServer(server *ZMQServer) {
 	responder, err := zmq.NewSocket(zmq.REP)
 	defer responder.Close()
-	if err != nil {
-		panic(err)
-	}
+	logFatalOnError(err)
+
 	err = responder.Bind(zmqURL)
-	if err != nil {
-		panic(err)
-	}
+	logFatalOnError(err)
 
 	for {
 		msg, err := responder.RecvBytes(0)

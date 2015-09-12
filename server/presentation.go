@@ -15,6 +15,10 @@ var upgrader = websocket.Upgrader{
 	CheckOrigin:     func(r *http.Request) bool { return true },
 }
 
+type websocketHandler struct {
+	server *ZMQServer
+}
+
 func websocketListen(server *ZMQServer) {
 	r := mux.NewRouter()
 	h := &http.Server{
@@ -25,19 +29,60 @@ func websocketListen(server *ZMQServer) {
 		MaxHeaderBytes: 1 << 20,
 	}
 	//r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-	r.HandleFunc("/conn", websocketHandler)
+	handler := &websocketHandler{server}
+	r.Handle("/conn", handler)
 	h.ListenAndServe()
 }
 
-func websocketHandler(w http.ResponseWriter, r *http.Request) {
+// Serves the websocket connection
+func (h *websocketHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	websocketConn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
-	} else {
-		defer websocketConn.Close()
-		log.Println("Upgrading connection to websocket")
 	}
+
+	service := &websocketService{
+		conn:     websocketConn,
+		url:      r.Referer(),
+		server:   h.server,
+		messages: make(chan string),
+	}
+
+	h.server.Services[service.url] = service
+	go service.Run()
+}
+
+type websocketService struct {
+	conn     *websocket.Conn
+	url      string
+	server   *ZMQServer
+	messages chan string
+}
+
+func (s *websocketService) Name() string {
+	return s.url
+}
+
+func (s *websocketService) Endpoints() []string {
+	return []string{"next", "prev"}
+}
+
+func (s *websocketService) ReadEndpoint(name string) string {
+	return ""
+}
+
+func (s *websocketService) WriteEndpoint(name, value string) string {
+	if value != "" {
+		s.messages <- name
+	}
+	return value
+}
+
+func (s *websocketService) Run() {
+	defer s.conn.Close()
+	defer s.Quit()
+	log.Println("Upgrading connection to websocket")
 
 	websocketErrors := make(chan error)
 	go func(conn *websocket.Conn, errChan chan error) {
@@ -50,18 +95,22 @@ func websocketHandler(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		}
-	}(websocketConn, websocketErrors)
+	}(s.conn, websocketErrors)
 
 	for {
 		select {
-		case d := <-messages:
+		case d := <-s.messages:
 			log.Printf("Received a message: %s", d)
-			websocketConn.WriteJSON(d)
-		case err = <-websocketErrors:
+			s.conn.WriteJSON(d)
+		case err := <-websocketErrors:
 			if err != nil {
+				log.Println("Closing websocket connection")
 				return
 			}
 		}
 	}
-	log.Println("Closing websocket and amqp connections")
+}
+
+func (s *websocketService) Quit() {
+	delete(s.server.Services, s.url)
 }
