@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/emembrives/tinkerings/android-remote/proto"
+	"github.com/emembrives/remote/proto"
 	protobuf "github.com/golang/protobuf/proto"
 
 	zmq "github.com/pebbe/zmq4"
