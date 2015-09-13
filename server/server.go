@@ -121,8 +121,9 @@ func (server *ZMQServer) processRequest(request proto.Request) (response proto.R
 	case proto.RequestType_WRITE_ENDPOINT:
 		for _, endpoint := range request.WriteRequest {
 			server.services[*endpoint.Service].WriteEndpoint(*endpoint.Endpoint, *endpoint.Value)
+			response.Endpoints = append(response.Endpoints, endpoint)
 		}
-		return
+		return response
 	}
 	return
 }
