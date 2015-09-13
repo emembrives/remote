@@ -44,12 +44,12 @@ func (h *websocketHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	service := &websocketService{
 		conn:     websocketConn,
-		url:      r.Referer(),
+		url:      r.FormValue("url"),
 		server:   h.server,
 		messages: make(chan string),
 	}
 
-	h.server.Services[service.url] = service
+	h.server.AddService <- service
 	go service.Run()
 }
 
@@ -112,5 +112,5 @@ func (s *websocketService) Run() {
 }
 
 func (s *websocketService) Quit() {
-	delete(s.server.Services, s.url)
+	s.server.RemoveService <- s
 }

@@ -30,5 +30,8 @@ func main() {
 
 	reply, err := requester.RecvBytes(0)
 	panicOnErr(err)
-	fmt.Println("Received ", reply)
+	response := new(proto.Response)
+	err = protobuf.Unmarshal(reply, response)
+	panicOnErr(err)
+	fmt.Println("Received ", response.String())
 }

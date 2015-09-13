@@ -13,10 +13,6 @@ const (
 	zmqURL = "tcp://0.0.0.0:7001"
 )
 
-var (
-	messages = make(chan []byte)
-)
-
 // ServiceProvider exposes endpoints to the ZMQ network.
 type ServiceProvider interface {
 	Name() string
@@ -27,18 +23,44 @@ type ServiceProvider interface {
 
 // ZMQServer holds service providers.
 type ZMQServer struct {
-	Services map[string]ServiceProvider
+	services         map[string]ServiceProvider
+	AddService       chan ServiceProvider
+	RemoveService    chan ServiceProvider
+	incomingMessages chan proto.Request
+	outgoingMessages chan proto.Response
 }
 
 func main() {
-	server := ZMQServer{
-		Services: make(map[string]ServiceProvider),
+	server := &ZMQServer{
+		services:         make(map[string]ServiceProvider),
+		AddService:       make(chan ServiceProvider),
+		RemoveService:    make(chan ServiceProvider),
+		incomingMessages: make(chan proto.Request),
+		outgoingMessages: make(chan proto.Response),
 	}
-	go setupMessageServer(&server)
-	websocketListen(&server)
+	go server.setupMessageServer()
+	websocketListen(server)
 }
 
-func setupMessageServer(server *ZMQServer) {
+func (server *ZMQServer) setupMessageServer() {
+	go server.receiveMessages()
+
+	for {
+		select {
+		case message := <-server.incomingMessages:
+			server.outgoingMessages <- server.processRequest(message)
+			break
+		case service := <-server.AddService:
+			server.services[service.Name()] = service
+			break
+		case service := <-server.RemoveService:
+			delete(server.services, service.Name())
+			break
+		}
+	}
+}
+
+func (server *ZMQServer) receiveMessages() {
 	responder, err := zmq.NewSocket(zmq.REP)
 	defer responder.Close()
 	logFatalOnError(err)
@@ -73,17 +95,18 @@ func setupMessageServer(server *ZMQServer) {
 			continue
 		}
 
-		response := processRequest(incomingRequest, server)
+		server.incomingMessages <- *incomingRequest
+		response := <-server.outgoingMessages
 		data, err := protobuf.Marshal(&response)
 		logFatalOnError(err)
 		responder.SendBytes(data, 0)
 	}
 }
 
-func processRequest(request *proto.Request, server *ZMQServer) (response proto.Response) {
+func (server *ZMQServer) processRequest(request proto.Request) (response proto.Response) {
 	switch *request.Type {
 	case proto.RequestType_SERVICE_DISCOVERY:
-		for _, service := range server.Services {
+		for _, service := range server.services {
 			for _, endpoint := range service.Endpoints() {
 				value := service.ReadEndpoint(endpoint)
 				endpointValue := proto.Endpoint{
@@ -96,7 +119,9 @@ func processRequest(request *proto.Request, server *ZMQServer) (response proto.R
 		}
 		return response
 	case proto.RequestType_WRITE_ENDPOINT:
-		// List services
+		for _, endpoint := range request.WriteRequest {
+			server.services[*endpoint.Service].WriteEndpoint(*endpoint.Endpoint, *endpoint.Value)
+		}
 		return
 	}
 	return
