@@ -19,7 +19,7 @@
 	} else {
 		initMyBookmarklet();
 	}
-	
+
 	function dispatchEvent(keyCode) {
 		var eventObj = document.createEventObject ?
         	document.createEventObject() : document.createEvent("Events");
@@ -35,13 +35,13 @@
 
 	function initMyBookmarklet() {
 		(window.myBookmarklet = function() {
-			var socket = new WebSocket("wss://etienne.membrives.fr/remote/");
+			var socket = new WebSocket("wss://etienne.membrives.fr/remote?url=" + window.location);
 			socket.onmessage = function(message) {
-				var key = JSON.parse(message.data)
-				if (key == "a") {
+				var data = JSON.parse(message.data)
+				if (data == "prev") {
 					// left
 					dispatchEvent(37);
-				} else if (key == "d") {
+				} else if (data == "next") {
 					// right
 					dispatchEvent(39);
 				}
@@ -53,4 +53,3 @@
 	}
 
 })();
-
